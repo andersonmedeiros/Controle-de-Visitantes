@@ -33,7 +33,7 @@ public class FiltroPaginas implements Filter{
 	HttpSession sessao = httpServletRequest.getSession();	
 
         boolean logado = false;
-        if(sessao.getAttribute("militarAutenticado") != null){
+        if(sessao.getAttribute("usuarioAutenticado") != null){
             logado = true;
         }
         else if(logado == false){

@@ -82,21 +82,21 @@ public class Autenticador extends HttpServlet {
         
         if(identidade.equals("0107912217") && senha.equals("123")){
             HttpSession sessao = request.getSession();
-            sessao.setAttribute("militarAutenticado", "sti");
+            sessao.setAttribute("usurioAutenticado", "sti");
             response.sendRedirect("/controlevisitantes/restrito/inicial.jsp");
         }else{
-            Usuario mil = new Usuario();
-            UsuarioDAO milDAO = new UsuarioDAO();
+            Usuario usu = new Usuario();
+            UsuarioDAO usuDAO = new UsuarioDAO();
             
             //Militar
-            mil.setIdentidade(identidade);
-            mil.setSenha(senha);
+            usu.setIdentidade(identidade);
+            usu.setSenha(senha);
             
             //Consultas no banco de dados para validação dos dados de acesso     
-            Usuario milAutenticado = milDAO.autenticacao(mil);
-            boolean validaLogin = milDAO.validarLogin(identidade);
-            boolean validaSenha = milDAO.validarSenha(senha);
-            boolean validaLoginSenha = milDAO.validarLoginSenha(identidade, senha);
+            Usuario usuAutenticado = usuDAO.autenticacao(usu);
+            boolean validaLogin = usuDAO.validarLogin(identidade);
+            boolean validaSenha = usuDAO.validarSenha(senha);
+            boolean validaLoginSenha = usuDAO.validarLoginSenha(identidade, senha);
             
             //e=1: login inválido
             if(validaLogin == false && validaSenha == true){
@@ -109,9 +109,9 @@ public class Autenticador extends HttpServlet {
             //e=3: login e senha inválidos
             else if(validaLogin == false && validaSenha == false){
                 response.sendRedirect("/controlevisitantes/index.jsp?e=3");
-            }else if(milAutenticado != null && validaLoginSenha == true){
+            }else if(usuAutenticado != null && validaLoginSenha == true){
                 HttpSession sessao = request.getSession();
-                sessao.setAttribute("militarAutenticado", milAutenticado);
+                sessao.setAttribute("usuarioAutenticado", usuAutenticado);
                 response.sendRedirect("/controlevisitantes/restrito/inicial.jsp");
             }
         }
