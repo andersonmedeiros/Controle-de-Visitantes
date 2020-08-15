@@ -11,9 +11,8 @@ package model.bean;
  */
 public class PostoGraduacao {
     private int id;
-    private String nome, abreviatura, circulohierarquico;
+    private String nome, abreviatura;
     private final Forca forca = new Forca();
-    private final Categoria categoria = new Categoria();
 
     public int getId() {
         return id;
@@ -37,14 +36,6 @@ public class PostoGraduacao {
 
     public void setAbreviatura(String abreviatura) {
         this.abreviatura = abreviatura;
-    }
-
-    public String getCirculohierarquico() {
-        return circulohierarquico;
-    }
-
-    public void setCirculohierarquico(String circulohierarquico) {
-        this.circulohierarquico = circulohierarquico;
     }
     
     public int getIdForca() {
@@ -87,27 +78,4 @@ public class PostoGraduacao {
         forca.setNomeTipoForca(nome);
     }
     
-    public int getIdCategoria() {
-        return categoria.getId();
-    }
-
-    public void setIdCategoria(int id) {
-        categoria.setId(id);
-    }
-
-    public String getNomeCategoria() {
-        return categoria.getNome();
-    }
-
-    public void setNomeCategoria(String nome) {
-        categoria.setNome(nome);
-    }
-
-    public String getDescricaoCategoria() {
-        return categoria.getDescricao();
-    }
-
-    public void setDescricaoCategoria(String descricao) {
-        categoria.setDescricao(descricao);
-    }
 }

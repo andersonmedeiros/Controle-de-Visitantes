@@ -9,12 +9,10 @@ package model.bean;
  *
  * @author anderson
  */
-public class Usuario {
-    String identidade, nome, sobrenome, nomeguerra, senha;
-    int situacao;
-    
+public class Visitante {
+    private String identidade, nome, sobrenome, nomeguerra, email, fone;
     private final PostoGraduacao pg = new PostoGraduacao();
-    private final GrupoAcesso grpacesso = new GrupoAcesso();
+    private final Om om = new Om();
 
     public String getIdentidade() {
         return identidade;
@@ -48,22 +46,22 @@ public class Usuario {
         this.nomeguerra = nomeguerra;
     }
 
-    public String getSenha() {
-        return senha;
+    public String getEmail() {
+        return email;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }   
-
-    public int getSituacao() {
-        return situacao;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public void setSituacao(int situacao) {
-        this.situacao = situacao;
+    public String getFone() {
+        return fone;
     }
-            
+
+    public void setFone(String fone) {
+        this.fone = fone;
+    }
+    
     public int getIdPostoGraduacao() {
         return pg.getId();
     }
@@ -128,19 +126,67 @@ public class Usuario {
         pg.setNomeTipoForca(nome);
     }
     
-    public int getIdGrupoAcesso() {
-        return grpacesso.getId();
+    public int getIdOm() {
+        return om.getId();
     }
 
-    public void setIdGrupoAcesso(int id) {
-        grpacesso.setId(id);
+    public void setIdOm(int id) {
+        om.setId(id);
     }
 
-    public String getNomeGrupoAcesso() {
-        return grpacesso.getNome();
+    public String getNomeOm() {
+        return om.getNome();
     }
 
-    public void setNomeGrupoAcesso(String nome) {
-        grpacesso.setNome(nome);
+    public void setNomeOm(String nome) {
+        om.setNome(nome);
+    }
+
+    public String getAbreviaturaOm() {
+        return om.getAbreviatura();
+    }
+
+    public void setAbreviaturaOm(String abreviatura) {
+        om.setAbreviatura(abreviatura);
+    }
+    
+    public int getIdForcaOm() {
+        return om.getIdForca();
+    }
+
+    public void setIdForcaOm(int idForca) {
+        om.setIdForca(idForca);
+    }
+
+    public String getNomeForcaOm() {
+        return om.getNome();
+    }
+
+    public void setNomeForcaOm(String nomeForca) {
+        om.setNomeForca(nomeForca);
+    }
+
+    public String getSiglaForcaOm() {
+        return om.getSiglaForca();
+    }
+
+    public void setSiglaForcaOm(String siglaForca) {
+        om.setSiglaForca(siglaForca);
+    }
+    
+    public int getIdTipoForcaOm() {
+        return om.getIdTipoForca();
+    }
+
+    public void setIdTipoForcaOm(int id) {
+        om.setIdTipoForca(id);
+    }
+
+    public String getNomeTipoForcaOm() {
+        return om.getNomeTipoForca();
+    }
+
+    public void setNomeTipoForcaOm(String nome) {
+        om.setNomeTipoForca(nome);
     }
 }

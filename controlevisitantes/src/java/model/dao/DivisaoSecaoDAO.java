@@ -11,27 +11,28 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import model.bean.TipoForca;
+import model.bean.DivisaoSecao;
 
 /**
  *
  * @author anderson
  */
-public class TipoForcaDAO {
+public class DivisaoSecaoDAO {
     //Tabela
-    String tabela = "TipoForca";
+    String tabela = "DivisaoSecao";
     
     //Atributos
     String id = "id";
     String nome = "nome";
+    String abreviatura = "abreviatura";
     
     //Insert SQL
-    private final String INSERT = "INSERT INTO " + tabela + "(" + id + "," + nome +  ")" +
-                                  " VALUES(?,?);";
+    private final String INSERT = "INSERT INTO " + tabela + "(" + id + "," + nome + "," + abreviatura + ")" +
+                                  " VALUES(?,?,?);";
     
     //Update SQL
     private final String UPDATE = "UPDATE " + tabela +
-                                  " SET " + nome + "=? " +
+                                  " SET " + nome + "=?, " + abreviatura + "=? " +
                                   "WHERE " + id + "=?;";
         
     //Delete SQL
@@ -43,15 +44,16 @@ public class TipoForcaDAO {
     ResultSet rs = null;
     
     //Insert SQL
-    public void insert(TipoForca tipoforca) {
-        if (tipoforca != null) {
+    public void insert(DivisaoSecao divsec) {
+        if (divsec != null) {
             try {
                 conn = ConnectionFactory.getConnection();
                 
                 pstm = conn.prepareStatement(INSERT);
                 
-                pstm.setInt(1, tipoforca.getId());
-                pstm.setString(2, tipoforca.getNome());
+                pstm.setInt(1, divsec.getId());
+                pstm.setString(2, divsec.getNome());
+                pstm.setString(3, divsec.getAbreviatura());
                 
                 pstm.execute();
                 
@@ -66,14 +68,15 @@ public class TipoForcaDAO {
     }
     
     //Update SQL
-    public void update(TipoForca tipoforca) {
-        if (tipoforca != null) {
+    public void update(DivisaoSecao divsec) {
+        if (divsec != null) {
             try {
                 conn = ConnectionFactory.getConnection();
                 pstm = conn.prepareStatement(UPDATE);
                                 
-                pstm.setString(1, tipoforca.getNome());
-                pstm.setInt(2, tipoforca.getId());
+                pstm.setString(1, divsec.getNome());
+                pstm.setString(2, divsec.getAbreviatura());
+                pstm.setInt(3, divsec.getId());
             
                 pstm.execute();
                 ConnectionFactory.fechaConexao(conn, pstm);
@@ -105,85 +108,88 @@ public class TipoForcaDAO {
         }
     }
     
-    private final String GETTIPOFORCABYID = "SELECT * " +
-                                            "FROM TipoForca " + 
+    private final String GETDIVISAOSECAOBYID = "SELECT * " +
+                                            "FROM DivisaoSecao " + 
                                             "WHERE id = ?;";
        
-    public TipoForca getTipoForcaById(int idTipoForca){
-        TipoForca tipoforca = new TipoForca();
+    public DivisaoSecao getDivisaoSecaoById(int idDivisaoSecao){
+        DivisaoSecao divsec = new DivisaoSecao();
         try {
             conn = ConnectionFactory.getConnection();
-            pstm = conn.prepareStatement(GETTIPOFORCABYID);
-            pstm.setInt(1, idTipoForca);
+            pstm = conn.prepareStatement(GETDIVISAOSECAOBYID);
+            pstm.setInt(1, idDivisaoSecao);
            
             rs = pstm.executeQuery();
             while (rs.next()) {
-                tipoforca.setId(rs.getInt("id"));
-                tipoforca.setNome(rs.getString("nome"));
+                divsec.setId(rs.getInt("id"));
+                divsec.setNome(rs.getString("nome"));
+                divsec.setAbreviatura(rs.getString("abreviatura"));
             }
             ConnectionFactory.fechaConexao(conn, pstm, rs);
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());           
         }
-        return tipoforca;
+        return divsec;
     }
     
     private final String GETTIPOSFORCA = "SELECT * " +
                                          "FROM " + tabela;
        
-    public ArrayList<TipoForca> getTiposForca(){
-        ArrayList<TipoForca> tiposforca = new ArrayList<>();        
+    public ArrayList<DivisaoSecao> getDivisoesSecoes(){
+        ArrayList<DivisaoSecao> divisoessecoes = new ArrayList<>();        
         try {
             conn = ConnectionFactory.getConnection();
             pstm = conn.prepareStatement(GETTIPOSFORCA);
            
             rs = pstm.executeQuery();
             while (rs.next()) {
-                TipoForca tipoforca = new TipoForca();
+                DivisaoSecao divsec = new DivisaoSecao();
                 
-                tipoforca.setId(rs.getInt("id"));
-                tipoforca.setNome(rs.getString("nome"));
+                divsec.setId(rs.getInt("id"));
+                divsec.setNome(rs.getString("nome"));
+                divsec.setAbreviatura(rs.getString("abreviatura"));
                 
-                tiposforca.add(tipoforca);
+                divisoessecoes.add(divsec);
             }
             ConnectionFactory.fechaConexao(conn, pstm, rs);
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());           
         }
-        return tiposforca;
+        return divisoessecoes;
     }
     
-    private final static String GETTIPOFORCABYIDDWR = "SELECT * " +
-                                                      "FROM TipoForca " + 
+    private final static String GETDIVISAOSECAOBYIDDWR = "SELECT * " +
+                                                      "FROM DivisaoSecao " + 
                                                       "WHERE id = ?;";
        
-    public TipoForca getTipoForcaByIdDWR(int idTipoForca){
-        TipoForca tipoforca = new TipoForca();    
+    public DivisaoSecao getDivisaoSecaoByIdDWR(int idDivisaoSecao){
+        DivisaoSecao divsec = new DivisaoSecao();    
         try {
             conn = ConnectionFactory.getConnection();
-            pstm = conn.prepareStatement(GETTIPOFORCABYIDDWR);
-            pstm.setInt(1, idTipoForca);
+            pstm = conn.prepareStatement(GETDIVISAOSECAOBYIDDWR);
+            pstm.setInt(1, idDivisaoSecao);
            
             rs = pstm.executeQuery();
             while (rs.next()) {
-                tipoforca.setId(rs.getInt("id"));
-                tipoforca.setNome(rs.getString("nome"));
+                divsec.setId(rs.getInt("id"));
+                divsec.setNome(rs.getString("nome"));
+                divsec.setAbreviatura(rs.getString("abreviatura"));
             }
             ConnectionFactory.fechaConexao(conn, pstm, rs);
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());           
         }
-        return tipoforca;
+        return divsec;
     }
     
     private final static String GETTIPOSFORCADWR = "SELECT * " +
-                                                   "FROM TipoForca";
+                                                   "FROM DivisaoSecao";
        
-    public static ArrayList<TipoForca> getTiposForcaDWR(){
+    public static ArrayList<DivisaoSecao> getDivisoesSecoesDWR(){
         Connection conn = null;
         PreparedStatement pstm = null;
         ResultSet rs = null;
-        ArrayList<TipoForca> tiposforca = new ArrayList<>();
+        ArrayList<DivisaoSecao> divisoessecoes = new ArrayList<>();
         
         try {
             conn = ConnectionFactory.getConnection();
@@ -191,17 +197,18 @@ public class TipoForcaDAO {
            
             rs = pstm.executeQuery();
             while (rs.next()) {
-                TipoForca tipoforca = new TipoForca();
+                DivisaoSecao divsec = new DivisaoSecao();
                 
-                tipoforca.setId(rs.getInt("id"));
-                tipoforca.setNome(rs.getString("nome"));            
+                divsec.setId(rs.getInt("id"));
+                divsec.setNome(rs.getString("nome")); 
+                divsec.setAbreviatura(rs.getString("abreviatura"));
                 
-                tiposforca.add(tipoforca);
+                divisoessecoes.add(divsec);
             }
             ConnectionFactory.fechaConexao(conn, pstm, rs);
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());           
         }
-        return tiposforca;
+        return divisoessecoes;
     }
 }

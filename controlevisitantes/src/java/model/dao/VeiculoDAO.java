@@ -11,7 +11,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import model.bean.Aluno;
 import model.bean.Veiculo;
 
 /**
@@ -29,15 +28,14 @@ public class VeiculoDAO {
     String modelo = "modelo";
     String cor = "cor";
     String placa = "placa";
-    String idtAluno = "idtAluno";
     
     //Insert SQL
-    private final String INSERT = "INSERT INTO " + tabela + "(" + id + "," + tipo + "," + marca +  "," + modelo +  "," + cor +  "," + placa +  "," + idtAluno + ")" +
-                                  " VALUES(?,?,?,?,?,?,?);";
+    private final String INSERT = "INSERT INTO " + tabela + "(" + id + "," + tipo + "," + marca +  "," + modelo +  "," + cor +  "," + placa + ")" +
+                                  " VALUES(?,?,?,?,?,?);";
     
     //Update SQL
     private final String UPDATE = "UPDATE " + tabela +
-                                  " SET " + tipo + "=?, " + marca + "=?, " + modelo + "=?, " + cor + "=?, " + placa + "=?, " + idtAluno + "=? " +
+                                  " SET " + tipo + "=?, " + marca + "=?, " + modelo + "=?, " + cor + "=?, " + placa + "=?, " + 
                                   "WHERE " + id + "=?;";
         
     //Delete SQL
@@ -84,7 +82,6 @@ public class VeiculoDAO {
                 pstm.setString(4, v.getModelo());
                 pstm.setString(5, v.getCor());
                 pstm.setString(6, v.getPlaca());
-                pstm.setString(7, v.getIdentidadeAluno());
                 
                 pstm.execute();
                 
@@ -110,7 +107,6 @@ public class VeiculoDAO {
                 pstm.setString(3, v.getModelo());
                 pstm.setString(4, v.getCor());
                 pstm.setString(5, v.getPlaca());
-                pstm.setString(6, v.getIdentidadeAluno());
                 pstm.setInt(7, v.getId());
                 
                 pstm.execute();
@@ -149,7 +145,6 @@ public class VeiculoDAO {
        
     public Veiculo getVeiculoById(int id){
         Veiculo v = new Veiculo();
-        AlunoDAO alDAO = new AlunoDAO();
         try {
             conn = ConnectionFactory.getConnection();
             pstm = conn.prepareStatement(GETVEICULOBYID);
@@ -162,42 +157,7 @@ public class VeiculoDAO {
                 v.setMarca(rs.getString("marca"));               
                 v.setModelo(rs.getString("modelo"));               
                 v.setCor(rs.getString("cor"));               
-                v.setPlaca(rs.getString("placa"));              
-                
-                Aluno al = alDAO.getAlunoByIdentidade(rs.getString("idtAluno"));
-                v.setIdentidadeAluno(al.getIdentidade());
-                v.setSituacaoAluno(al.getSituacao());
-                v.setIdPostoGraduacaoAluno(al.getIdPostoGraduacao());
-                v.setIdQasQmsAluno(al.getIdQasQms());
-                v.setIdCmtAluno(al.getIdCmt());
-                v.setDataNascimentoAluno(al.getDataNascimento());
-                v.setNomeAluno(al.getNome());
-                v.setSobrenomeAluno(al.getSobrenome());
-                v.setNomeguerraAluno(al.getNomeguerra());
-                v.setPreccpAluno(al.getPreccp());
-                v.setCpAluno(al.getCp());
-                v.setCpfAluno(al.getCpf());
-                v.setUltDataPracaAluno(al.getUltDataPraca());
-                v.setIdNatCidadeAluno(al.getIdNatCidade());
-                v.setIdEstadoCivilAluno(al.getIdEstadoCivil());
-                v.setTsAluno(al.getTs());
-                v.setFtrhAluno(al.getFtrh());
-                v.setPaiAluno(al.getPai());
-                v.setMaeAluno(al.getMae());
-                v.setEmailAluno(al.getEmail());
-                v.setFumanteAluno(al.getFumante());
-                v.setIdOMAluno(al.getIdOM());
-                v.setIdComportamentoAluno(al.getIdComportamento());
-                v.setIdChImtoAluno(al.getIdChImto());
-                v.setSexoAluno(al.getSexo());
-                v.setUltfuncao1Aluno(al.getUltfuncao1());
-                v.setUltfuncao2Aluno(al.getUltfuncao2());
-                v.setUltfuncao3Aluno(al.getUltfuncao3());
-                v.setIdTafAluno(al.getIdTaf());
-                v.setIdPromocaoAluno(al.getIdPromocao());
-                v.setIdPreparacaoAluno(al.getIdPreparacao());
-                v.setIdUniformeAluno(al.getIdUniforme());
-                v.setEasAluno(al.getEas());
+                v.setPlaca(rs.getString("placa"));          
             }
             ConnectionFactory.fechaConexao(conn, pstm, rs);
         } catch (SQLException e) {
@@ -205,80 +165,12 @@ public class VeiculoDAO {
         }
         return v;
     }
-        
-    private final String GETVEICULOSBYIDTALUNO = "SELECT * " +
-                                            "FROM Veiculo " + 
-                                            "WHERE idtAluno = ?";
-       
-    public ArrayList<Veiculo> getVeiculosByIdtAluno(String idtAluno){
-        ArrayList<Veiculo> veiculos = new ArrayList<>();  
-        AlunoDAO alDAO = new AlunoDAO();
-        try {
-            conn = ConnectionFactory.getConnection();
-            pstm = conn.prepareStatement(GETVEICULOSBYIDTALUNO);
-            pstm.setString(1, idtAluno);
-           
-            rs = pstm.executeQuery();
-            while (rs.next()) {
-                Veiculo v = new Veiculo();
-                
-                v.setId(rs.getInt("id"));
-                v.setTipo(rs.getString("tipo"));
-                v.setMarca(rs.getString("marca"));               
-                v.setModelo(rs.getString("modelo"));               
-                v.setCor(rs.getString("cor"));               
-                v.setPlaca(rs.getString("placa"));    
-                
-                Aluno al = alDAO.getAlunoByIdentidade(rs.getString("idtAluno"));
-                v.setIdentidadeAluno(al.getIdentidade());
-                v.setSituacaoAluno(al.getSituacao());
-                v.setIdPostoGraduacaoAluno(al.getIdPostoGraduacao());
-                v.setIdQasQmsAluno(al.getIdQasQms());
-                v.setIdCmtAluno(al.getIdCmt());
-                v.setDataNascimentoAluno(al.getDataNascimento());
-                v.setNomeAluno(al.getNome());
-                v.setSobrenomeAluno(al.getSobrenome());
-                v.setNomeguerraAluno(al.getNomeguerra());
-                v.setPreccpAluno(al.getPreccp());
-                v.setCpAluno(al.getCp());
-                v.setCpfAluno(al.getCpf());
-                v.setUltDataPracaAluno(al.getUltDataPraca());
-                v.setIdNatCidadeAluno(al.getIdNatCidade());
-                v.setIdEstadoCivilAluno(al.getIdEstadoCivil());
-                v.setTsAluno(al.getTs());
-                v.setFtrhAluno(al.getFtrh());
-                v.setPaiAluno(al.getPai());
-                v.setMaeAluno(al.getMae());
-                v.setEmailAluno(al.getEmail());
-                v.setFumanteAluno(al.getFumante());
-                v.setIdOMAluno(al.getIdOM());
-                v.setIdComportamentoAluno(al.getIdComportamento());
-                v.setIdChImtoAluno(al.getIdChImto());
-                v.setSexoAluno(al.getSexo());
-                v.setUltfuncao1Aluno(al.getUltfuncao1());
-                v.setUltfuncao2Aluno(al.getUltfuncao2());
-                v.setUltfuncao3Aluno(al.getUltfuncao3());
-                v.setIdTafAluno(al.getIdTaf());
-                v.setIdPromocaoAluno(al.getIdPromocao());
-                v.setIdPreparacaoAluno(al.getIdPreparacao());
-                v.setIdUniformeAluno(al.getIdUniforme());
-                v.setEasAluno(al.getEas());
-                
-                veiculos.add(v);
-            }
-            ConnectionFactory.fechaConexao(conn, pstm, rs);
-        } catch (SQLException e) {
-            throw new RuntimeException(e.getMessage());           
-        }
-        return veiculos;
-    }
     
     private final String GETVEICULOS = "SELECT * " +
                                        "FROM " + tabela;
        
     public ArrayList<Veiculo> getVeiculos(){
         ArrayList<Veiculo> veiculos = new ArrayList<>();  
-        AlunoDAO alDAO = new AlunoDAO();
         try {
             conn = ConnectionFactory.getConnection();
             pstm = conn.prepareStatement(GETVEICULOS);
@@ -293,41 +185,6 @@ public class VeiculoDAO {
                 v.setModelo(rs.getString("modelo"));               
                 v.setCor(rs.getString("cor"));               
                 v.setPlaca(rs.getString("placa"));    
-                
-                Aluno al = alDAO.getAlunoByIdentidade(rs.getString("idtAluno"));
-                v.setIdentidadeAluno(al.getIdentidade());
-                v.setSituacaoAluno(al.getSituacao());
-                v.setIdPostoGraduacaoAluno(al.getIdPostoGraduacao());
-                v.setIdQasQmsAluno(al.getIdQasQms());
-                v.setIdCmtAluno(al.getIdCmt());
-                v.setDataNascimentoAluno(al.getDataNascimento());
-                v.setNomeAluno(al.getNome());
-                v.setSobrenomeAluno(al.getSobrenome());
-                v.setNomeguerraAluno(al.getNomeguerra());
-                v.setPreccpAluno(al.getPreccp());
-                v.setCpAluno(al.getCp());
-                v.setCpfAluno(al.getCpf());
-                v.setUltDataPracaAluno(al.getUltDataPraca());
-                v.setIdNatCidadeAluno(al.getIdNatCidade());
-                v.setIdEstadoCivilAluno(al.getIdEstadoCivil());
-                v.setTsAluno(al.getTs());
-                v.setFtrhAluno(al.getFtrh());
-                v.setPaiAluno(al.getPai());
-                v.setMaeAluno(al.getMae());
-                v.setEmailAluno(al.getEmail());
-                v.setFumanteAluno(al.getFumante());
-                v.setIdOMAluno(al.getIdOM());
-                v.setIdComportamentoAluno(al.getIdComportamento());
-                v.setIdChImtoAluno(al.getIdChImto());
-                v.setSexoAluno(al.getSexo());
-                v.setUltfuncao1Aluno(al.getUltfuncao1());
-                v.setUltfuncao2Aluno(al.getUltfuncao2());
-                v.setUltfuncao3Aluno(al.getUltfuncao3());
-                v.setIdTafAluno(al.getIdTaf());
-                v.setIdPromocaoAluno(al.getIdPromocao());
-                v.setIdPreparacaoAluno(al.getIdPreparacao());
-                v.setIdUniformeAluno(al.getIdUniforme());
-                v.setEasAluno(al.getEas());
                 
                 veiculos.add(v);
             }
