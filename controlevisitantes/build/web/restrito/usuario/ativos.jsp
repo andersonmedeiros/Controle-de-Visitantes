@@ -1,20 +1,12 @@
 <%-- 
     Document   : ativos
-    Created on : 01/08/2020, 11:27:37
+    Created on : 16/08/2020, 19:48:37
     Author     : CB Anderson de Paula Andrade Medeiros
 --%>
 
-<%@page import="model.dao.MilitarDAO"%>
-<%@page import="model.dao.GrupoAcessoDAO"%>
-<%@page import="model.bean.GrupoAcesso"%>
-<%@page import="model.dao.MilitarHasGrupoAcessoDAO"%>
-<%@page import="model.bean.Militar"%>
-<%@page import="model.bean.CursoHasCategoria"%>
-<%@page import="model.dao.CursoHasCategoriaDAO"%>
-<%@page import="model.dao.CategoriaDAO"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="model.bean.Curso"%>
-<%@page import="model.dao.CursoDAO"%>
+<%@page import="model.dao.*"%>
+<%@page import="model.bean.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -25,7 +17,7 @@
         <meta name="author" content="Anderson de Paula Andrade Medeiros">
         
         <link rel="icon" type="image/x-icon" href="../../assets/img/logo_sgdis.png" />
-        <title>Usuário</title>
+        <title>Usuários Ativos</title>
         
         <link rel="stylesheet" type="text/css" href="../../assets/node_modules/bootstrap/compiler/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="../../assets/css/estilo_universal.css">
@@ -45,87 +37,53 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarTogglerSgdis">
                     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">          
-                        <li class="nav-item">
-                            <a class="nav-link" href="../../restrito/cursos.jsp">Cursos</a>
-                        </li>
                         <%
                             HttpSession sessao = request.getSession();
-                            Militar militarLogado = (Militar) sessao.getAttribute("militarAutenticado");
-                            MilitarHasGrupoAcessoDAO milgrpacessoDAO = new MilitarHasGrupoAcessoDAO();
-                            ArrayList<GrupoAcesso> grpsacesso = milgrpacessoDAO.getGruposAcesso(militarLogado.getIdentidade());
-                            for(GrupoAcesso ga : grpsacesso){
-                                if(ga.getId() == 1){
-                                    out.println(
-                                                "<li class=\"nav-item dropdown\">"+
-                                                    "<a class=\"nav-link dropdown-toggle active\" href=\"#\" id=\"navbarDropdown\" role=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">"+
-                                                        "Usuários"+
-                                                    "</a>"+
-                                                    "<div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdown\">"+                                
-                                                        "<a class=\"dropdown-item active\" href=\"../../restrito/usuario/ativos.jsp\">Listar Usuários Ativos</a>"+
-                                                        "<a class=\"dropdown-item\" href=\"../../restrito/usuario/inativos.jsp\">Listar Usuários Inativos</a>"+
-                                                        "<div class=\"dropdown-divider\"></div>"+
-                                                        "<a class=\"dropdown-item\" href=\"../../restrito/usuario/cadastro.jsp\">Novo Usuário</a>"+
-                                                    "</div>"+                                                    
-                                                "</li>"
-                                                );
-                                }
+                            Usuario usuarioLogado = (Usuario) sessao.getAttribute("usuarioAutenticado");
+                
+                            if(usuarioLogado.getIdGrupoAcesso()== 1){
+                                out.println(
+                                            "<li class=\"nav-item dropdown\">"+
+                                                "<a class=\"nav-link dropdown-toggle active\" href=\"#\" id=\"navbarDropdown\" role=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">"+
+                                                    "Usuários"+
+                                                "</a>"+
+                                                "<div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdown\">"+                                
+                                                    "<a class=\"dropdown-item active\" href=\"../../restrito/usuario/ativos.jsp\">Listar Usuários Ativos</a>"+
+                                                    "<a class=\"dropdown-item\" href=\"../../restrito/usuario/inativos.jsp\">Listar Usuários Inativos</a>"+
+                                                    "<div class=\"dropdown-divider\"></div>"+
+                                                    "<a class=\"dropdown-item\" href=\"../../restrito/usuario/cadastro.jsp\">Novo Usuário</a>"+
+                                                "</div>"+
+                                            "</li>"+
+                                            
+                                            "<li class=\"nav-item\">"+
+                                                "<a class=\"nav-link\" href=\"../restrito/avaliacao/avpreliminar.jsp\">Divisão/Seção</a>"+
+                                            "</li>"+
+                                                    
+                                            "<li class=\"nav-item\">"+
+                                                "<a class=\"nav-link\" href=\"../restrito/avaliacao/avpreliminar.jsp\">Setores</a>"+
+                                            "</li>"+
+                                            
+                                            "<li class=\"nav-item\">"+
+                                                "<a class=\"nav-link\" href=\"../restrito/avaliacao/avpreliminar.jsp\">Visitantes</a>"+
+                                            "</li>"
+                                            );
+                            }
+                            else if(usuarioLogado.getIdGrupoAcesso() == 2){
+                                out.println(
+                                            "<li class=\"nav-item\">"+
+                                                "<a class=\"nav-link\" href=\"../restrito/avaliacao/avpreliminar.jsp\">Divisão/Seção</a>"+
+                                            "</li>"+
+                                                    
+                                            "<li class=\"nav-item\">"+
+                                                "<a class=\"nav-link\" href=\"../restrito/avaliacao/avpreliminar.jsp\">Setores</a>"+
+                                            "</li>"+
+                                            
+                                            "<li class=\"nav-item\">"+
+                                                "<a class=\"nav-link\" href=\"../restrito/avaliacao/avpreliminar.jsp\">Visitantes</a>"+
+                                            "</li>"
+                                );
                             }
                         %>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Avaliações
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <%
-                                    for(GrupoAcesso ga : grpsacesso){                                        
-                                        if(ga.getId() == 2){
-                                            out.println("<a class=\"dropdown-item\" href=\"../restrito/curso.jsp\">Teste de Conhecimento Militar</a>");
-                                        }
-                                        else if(ga.getId() == 3){                                            
-                                            out.println("<a class=\"dropdown-item\" href=\"../restrito/curso.jsp\">Exame de Aptidão Física</a>");
-                                        }
-                                        else if(ga.getId() == 4){
-                                            out.println("<a class=\"dropdown-item\" href=\"../restrito/avaliacao/psico.jsp\">Avaliação Psicológica</a>");
-                                        }
-                                    }
-                                %>
-                            </div>
-                        </li>
-                        <%
-
-                            for(GrupoAcesso ga : grpsacesso){
-                                if(ga.getId() == 2){
-                                    out.println(
-                                                "<li class=\"nav-item dropdown\">"+
-                                                    "<a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdown\" role=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">"+
-                                                        "STE"+
-                                                    "</a>"+
-                                                    "<div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdown\">"+                                
-                                                        "<a class=\"dropdown-item\" href=\"../restrito/curso.jsp\">Curso</a>"+
-                                                        "<div class=\"dropdown-divider\"></div>"+
-                                                        "<a class=\"dropdown-item\" href=\"../restrito/gradeCurricular.jsp\">Grade Curricular</a>"+
-                                                    "</div>"+
-                                                "</li>");                                        
-                                                    
-                                }
-                                else if(ga.getId() == 3){
-                                    out.println(
-                                                "<li class=\"nav-item dropdown\">"+
-                                                    "<a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdown\" role=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">"+
-                                                        "DivAl"+
-                                                    "</a>"+
-                                                    "<div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdown\">"+
-                                                        "<a class=\"dropdown-item\" href=\"../restrito/curso/curso.jsp\">Curso</a>"+
-                                                        "<a class=\"dropdown-item\" href=\"../restrito/turma/turma.jsp\">Turma</a>"+
-                                                        "<a class=\"dropdown-item\" href=\"../restrito/candidato/precandidatura.jsp\">Cadastrar Candidato</a>"+
-                                                    "</div>"+
-                                                "</li>");                        
-                                }
-                                else if(ga.getId() == 4){
-                                    out.println();
-                                }
-                            }
-                        %>   
                     </ul>
                     <form class="form-inline my-2 my-lg-0" name="formSair" action="Sair" method="POST">                  
                         <button class="btn btn-danger my-2 my-sm-0" type="submit">Sair</button>
@@ -187,34 +145,34 @@
                 <tbody>
                     <%              
                         int i = 1;
-                        MilitarDAO milDAO = new MilitarDAO();
-                        ArrayList<Militar> militaresAtivos = milDAO.getMilitaresAtivos();
+                        UsuarioDAO usuDAO = new UsuarioDAO();
+                        ArrayList<Usuario> usuariosAtivos = usuDAO.getUsuariosAtivos();
                         
-                        if(militaresAtivos.size() == 0){
+                        if(usuariosAtivos.size() == 0){
                             out.println("<div class=\"alert alert-danger shadow-sm text-center\" role=\"alert\">");
                             out.println("       Nenhum usuário cadastrado.");
                             out.println("</div>");
                         }
                         else{
-                            for(Militar mil : militaresAtivos){
+                            for(Usuario usu : usuariosAtivos){
                                 
                                 out.println("<tr>");
                                 out.println("   <th scope=\"row\">"+ (i) +"</th>");
-                                out.println("   <td>"+ mil.getIdentidade() +"</td>");
-                                out.println("   <td>"+ mil.getAbreviaturaPostoGraduacao() + " " + mil.getNomeguerra() +"</td>");
+                                out.println("   <td>"+ usu.getIdentidade() +"</td>");
+                                out.println("   <td>"+ usu.getAbreviaturaPostoGraduacao() + " " + usu.getNomeguerra() +"</td>");
                                 out.println("   <td>");
                                 out.println("       <div class=form-row>");
                                 out.println("           <div class=\"form-group mr-2\">");
                                 out.println("               <form name=\"formExcluir\" method=\"POST\" action=\"controller.usuario/ExcluirUsuario\">");
-                                out.println("                   <input type=\"hidden\" class=\"form-control\" name=\"idtUsuarioExcluir\" id=\"idtUsuarioExcluir\" readonly=\"readonly\" value=\""+mil.getIdentidade()+"\"/>");
-                                out.println("                   <button id="+mil.getIdentidade()+" type=\"submit\" name=\"btnExcluir\" class=\"btn btn-danger\" onclick=\"return confirm('Tem certeza que deseja excluir o registro?');\">Excluir</button>");
+                                out.println("                   <input type=\"hidden\" class=\"form-control\" name=\"idtUsuarioExcluir\" id=\"idtUsuarioExcluir\" readonly=\"readonly\" value=\""+usu.getIdentidade()+"\"/>");
+                                out.println("                   <button id="+usu.getIdentidade()+" type=\"submit\" name=\"btnExcluir\" class=\"btn btn-danger\" onclick=\"return confirm('Tem certeza que deseja excluir o registro?');\">Excluir</button>");
                                 out.println("               </form>");
                                 out.println("           </div>");
                                 out.println("           <div class=\"form-group mr-2\">");                  
-                                out.println("                   <button id="+mil.getIdentidade()+" type=\"submit\" name=\"btnAlterar\" class=\"btn btn-success\" data-toggle=\"modal\" data-target=\"#modalFormAttUsuario\" onclick=\"alteraUsuario("+"'"+mil.getIdentidade()+"'"+");\">Alterar</button>");
+                                out.println("                   <button id="+usu.getIdentidade()+" type=\"submit\" name=\"btnAlterar\" class=\"btn btn-success\" data-toggle=\"modal\" data-target=\"#modalFormAttUsuario\" onclick=\"alteraUsuario("+"'"+usu.getIdentidade()+"'"+");\">Alterar</button>");
                                 out.println("           </div>");
                                 out.println("           <div class=form-group>");                  
-                                out.println("                   <button id="+ mil.getIdentidade() +" type=\"submit\" name=\"btnAlterarSenha\" class=\"btn btn-dark\" data-toggle=\"modal\" data-target=\"#modalFormAttSenhaUsuario\" onclick=\"alteraSenhaUsuario("+"'"+mil.getIdentidade()+"'"+");\">Senha</button>");
+                                out.println("                   <button id="+ usu.getIdentidade() +" type=\"submit\" name=\"btnAlterarSenha\" class=\"btn btn-dark\" data-toggle=\"modal\" data-target=\"#modalFormAttSenhaUsuario\" onclick=\"alteraSenhaUsuario("+"'"+usu.getIdentidade()+"'"+");\">Senha</button>");
                                 out.println("           </div>");
                                 out.println("       </div>");
                                 out.println("   </td>");
@@ -241,39 +199,31 @@
                             <form class="container-fluid" action="controller.usuario/AtualizarUsuario" method="POST" name="formAtualizar">
                                 <input type="hidden" class="form-control" id="txtIdtAtt" name="txtIdtAtt">
                                 <div class="form-row">
-                                    <div class="form-group col-md-12">
+                                    <div class="form-group col-md-6">
                                         <label for="txtPGrad">Posto/Graduação: <span class="campo-obrigatorio">*</span></label>
                                         <select class="form-control" id="txtPGrad" name="txtPGrad">
                                             <option value="0" selected>Selecione um Posto/Graduação...</option>
                                         </select>
                                         <div class="valid-feedback">Selva!</div>
                                         <div class="invalid-feedback">Campo Obrigatório!</div>
-                                    </div>                              
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-4">
+                                    </div>  
+                                    <div class="form-group col-md-6">
                                         <label for="txtNome">Nome: <span class="campo-obrigatorio">*</span></label>
                                         <input type="text" class="form-control" id="txtNome" name="txtNome" placeholder="Ex.: Nome">
                                         <div class="valid-feedback">Selva!</div>
                                         <div class="invalid-feedback">Campo Obrigatório!</div>
-                                    </div>                                    
+                                    </div> 
+                                </div>
+                                <div class="form-row">                                                                       
                                     <div class="form-group col-md-8">
                                         <label for="txtSobrenome">Sobrenome: <span class="campo-obrigatorio">*</span></label>
                                         <input type="text" class="form-control" id="txtSobrenome" name="txtSobrenome" placeholder="Ex.: Sobrenome">
                                         <div class="valid-feedback">Selva!</div>
                                         <div class="invalid-feedback">Campo Obrigatório!</div>
                                     </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-4">
                                         <label for="txtNomeGuerra">Nome de Guerra: <span class="campo-obrigatorio">*</span></label>
                                         <input type="text" class="form-control" id="txtNomeGuerra" name="txtNomeGuerra" placeholder="Ex.: Nome de Guerra">
-                                        <div class="valid-feedback">Selva!</div>
-                                        <div class="invalid-feedback">Campo Obrigatório!</div>
-                                    </div>                                    
-                                    <div class="form-group col-md-6">
-                                        <label for="txtNGS">Guerreiro de Selva Nº: <span class="campo-obrigatorio">*</span></label>
-                                        <input type="text" class="form-control" id="txtNGS" name="txtNGS" placeholder="Ex.: 1000">
                                         <div class="valid-feedback">Selva!</div>
                                         <div class="invalid-feedback">Campo Obrigatório!</div>
                                     </div>
@@ -324,9 +274,10 @@
         </section>
         
         <footer class="container-fluid bg-success text-center fixed-bottom">
-            <b>Anderson de Paula Andrade Medeiros</b><br>
-            <b class="text-center copy">&copy; 2019-2020</b>
+            <b>Desenvolvido por CB Anderson de Paula Andrade Medeiros</b><br>
+            <b class="text-center copy">&copy; 2020</b>
         </footer>
+                
         <script src="../../assets/node_modules/jquery/dist/jquery.js"></script>
         <script src="../../assets/node_modules/popper.js/dist/popper.js"></script>
         <script src="../../assets/node_modules/bootstrap/dist/js/bootstrap.js"></script>
