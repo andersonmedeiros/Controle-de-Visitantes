@@ -35,11 +35,11 @@ public class UsuarioDAO {
     
     //Insert SQL
     private final String INSERT = "INSERT INTO " + tabela + "(" + identidade + "," + nome + "," + sobrenome +  "," + nomeguerra + ","  + senha +  "," + situacao + "," + idPostoGraduacao + "," +idGrupoAcesso + ")" +
-                                  " VALUES(?,?,?,?,?,md5(?),?,?);";
+                                  " VALUES(?,?,?,?,md5(?),?,?,?);";
     
     //Update SQL
     private final String UPDATE = "UPDATE " + tabela +
-                                  " SET " + nome + "=?, " + sobrenome + "=?, " + nomeguerra + "=?, " + idPostoGraduacao + "=? " + idGrupoAcesso + "=? " +
+                                  " SET " + nome + "=?, " + sobrenome + "=?, " + nomeguerra + "=?, " + idPostoGraduacao + "=? " +
                                   "WHERE " + identidade + "=?;";
     
     private final String UPDATESENHA = "UPDATE " + tabela +
@@ -76,8 +76,9 @@ public class UsuarioDAO {
                 pstm.setString(3, usu.getSobrenome());
                 pstm.setString(4, usu.getNomeguerra());
                 pstm.setString(5, usu.getSenha());
-                pstm.setInt(6, usu.getIdPostoGraduacao());
-                pstm.setInt(7, usu.getIdGrupoAcesso());
+                pstm.setInt(6, usu.getSituacao());
+                pstm.setInt(7, usu.getIdPostoGraduacao());
+                pstm.setInt(8, usu.getIdGrupoAcesso());
                 
                 pstm.execute();
                 
@@ -102,8 +103,7 @@ public class UsuarioDAO {
                 pstm.setString(2, usu.getSobrenome());
                 pstm.setString(3, usu.getNomeguerra());
                 pstm.setInt(4, usu.getIdPostoGraduacao());
-                pstm.setInt(5, usu.getIdGrupoAcesso());
-                pstm.setString(6, usu.getIdentidade());
+                pstm.setString(5, usu.getIdentidade());
                 
                 pstm.execute();
                 ConnectionFactory.fechaConexao(conn, pstm);
@@ -327,8 +327,8 @@ public class UsuarioDAO {
         }
         return usuarios;
     }
-    private final String GETUSUARIOESINATIVOS = "SELECT * " +
-                                        "FROM " + tabela + " WHERE idGrupoAcesso = 0";
+    private final String GETUSUARIOSINATIVOS = "SELECT * " +
+                                        "FROM " + tabela + " WHERE situacao = 0";
        
     public ArrayList<Usuario> getUsuarioesInativos(){
         ArrayList<Usuario> usuarios = new ArrayList<>();  
@@ -336,7 +336,7 @@ public class UsuarioDAO {
         GrupoAcessoDAO grpacessoDAO = new GrupoAcessoDAO();
         try {
             conn = ConnectionFactory.getConnection();
-            pstm = conn.prepareStatement(GETUSUARIOESINATIVOS);
+            pstm = conn.prepareStatement(GETUSUARIOSINATIVOS);
            
             rs = pstm.executeQuery();
             while (rs.next()) {
