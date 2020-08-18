@@ -82,7 +82,7 @@ public class Autenticador extends HttpServlet {
         
         if(identidade.equals("0107912217") && senha.equals("123")){
             HttpSession sessao = request.getSession();
-            sessao.setAttribute("usurioAutenticado", "sti");
+            sessao.setAttribute("usuarioAutenticado", "sti");
             response.sendRedirect("/controlevisitantes/restrito/inicial.jsp");
         }else{
             Usuario usu = new Usuario();
