@@ -77,31 +77,30 @@ public class AtualizarUsuario extends HttpServlet {
         
         HttpSession sessao = request.getSession();
         
-        if(sessao.getAttribute("militarAutenticado") != null){
+        if(sessao.getAttribute("usuarioAutenticado") != null){
             try{
-                UsuarioDAO milDAO = new UsuarioDAO();    
+                UsuarioDAO usuDAO = new UsuarioDAO();    
                 
-                Usuario mil = new Usuario();  
-                mil.setIdPostoGraduacao(Integer.parseInt(request.getParameter("txtPGrad")));
-                mil.setIdentidade(String.valueOf(request.getParameter("txtIdtAtt").replace("-", "")));
-                mil.setNome(String.valueOf(request.getParameter("txtNome")).toUpperCase());
-                mil.setSobrenome(String.valueOf(request.getParameter("txtSobrenome")).toUpperCase());
-                mil.setNomeguerra(String.valueOf(request.getParameter("txtNomeGuerra")).toUpperCase());
-                mil.setNgs(Integer.parseInt(request.getParameter("txtNGS")));   
+                Usuario usu = new Usuario();  
+                usu.setIdPostoGraduacao(Integer.parseInt(request.getParameter("txtPGrad")));
+                usu.setIdentidade(String.valueOf(request.getParameter("txtIdtAtt").replace("-", "")));
+                usu.setNome(String.valueOf(request.getParameter("txtNome")).toUpperCase());
+                usu.setSobrenome(String.valueOf(request.getParameter("txtSobrenome")).toUpperCase());
+                usu.setNomeguerra(String.valueOf(request.getParameter("txtNomeGuerra")).toUpperCase());
                 
-                milDAO.update(mil);
+                usuDAO.update(usu);
 
             }catch(Exception ex){
                 //e=2: erro durante realização da atualização
-                response.sendRedirect("/sgdis/restrito/usuario/ativos.jsp?e=6");
+                response.sendRedirect("/controlevisitantes/restrito/usuario/ativos.jsp?e=6");
                 throw new ServletException(ex);
             }
             //e=1: atualização sucesso
-            response.sendRedirect("/sgdis/restrito/usuario/ativos.jsp?e=5");
+            response.sendRedirect("/controlevisitantes/restrito/usuario/ativos.jsp?e=5");
         }
         else{
             //e=4: Sessão Encerrada
-            response.sendRedirect("/sgdis/index.jsp?e=4");
+            response.sendRedirect("/controlevisitantes/index.jsp?e=4");
         }
     }
 

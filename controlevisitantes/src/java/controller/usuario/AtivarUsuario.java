@@ -76,7 +76,7 @@ public class AtivarUsuario extends HttpServlet {
         
         HttpSession sessao = request.getSession();
         
-        if(sessao.getAttribute("militarAutenticado") != null){
+        if(sessao.getAttribute("usuarioAutenticado") != null){
             try{
                 UsuarioDAO milDAO = new UsuarioDAO();    
                 
@@ -86,15 +86,15 @@ public class AtivarUsuario extends HttpServlet {
 
             }catch(Exception ex){
                 //e=2: erro durante realização da atualização da senha
-                response.sendRedirect("/sgdis/restrito/usuario/inativos.jsp?e=2");
+                response.sendRedirect("/controlevisitantes/restrito/usuario/inativos.jsp?e=2");
                 throw new ServletException(ex);
             }
             //e=1: atualização senha sucesso
-            response.sendRedirect("/sgdis/restrito/usuario/inativos.jsp?e=1");
+            response.sendRedirect("/controlevisitantes/restrito/usuario/inativos.jsp?e=1");
         }
         else{
             //e=4: Sessão Encerrada
-            response.sendRedirect("/sgdis/index.jsp?e=4");
+            response.sendRedirect("/controlevisitantes/index.jsp?e=4");
         }
     }
 

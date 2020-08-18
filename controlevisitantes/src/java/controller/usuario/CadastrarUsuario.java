@@ -12,10 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.bean.Usuario;
-import model.bean.MilitarHasGrupoAcesso;
-import model.dao.UsuarioDAO;
-import model.dao.MilitarHasGrupoAcessoDAO;
+import model.bean.*;
+import model.dao.*;
 
 /**
  *
@@ -79,42 +77,33 @@ public class CadastrarUsuario extends HttpServlet {
         
         HttpSession sessao = request.getSession();
         
-        if(sessao.getAttribute("militarAutenticado") != null){
+        if(sessao.getAttribute("usuarioAutenticado") != null){
             try{
-                UsuarioDAO milDAO = new UsuarioDAO();    
+                UsuarioDAO usuDAO = new UsuarioDAO();    
                 
-                Usuario mil = new Usuario();  
-                mil.setIdPostoGraduacao(Integer.parseInt(request.getParameter("txtPGrad")));
-                mil.setIdentidade(String.valueOf(request.getParameter("txtIdentidade").replace("-", "")));
-                mil.setNome(String.valueOf(request.getParameter("txtNome")).toUpperCase());
-                mil.setSobrenome(String.valueOf(request.getParameter("txtSobrenome")).toUpperCase());
-                mil.setNomeguerra(String.valueOf(request.getParameter("txtNomeGuerra")).toUpperCase());
-                mil.setNgs(Integer.parseInt(request.getParameter("txtNGS")));
-                mil.setSenha(String.valueOf(request.getParameter("txtSenha")));          
-                mil.setSituacao(1);   
+                Usuario usu = new Usuario();  
+                usu.setIdPostoGraduacao(Integer.parseInt(request.getParameter("txtPGrad")));
+                usu.setIdentidade(String.valueOf(request.getParameter("txtIdentidade").replace("-", "")));
+                usu.setNome(String.valueOf(request.getParameter("txtNome")).toUpperCase());
+                usu.setSobrenome(String.valueOf(request.getParameter("txtSobrenome")).toUpperCase());
+                usu.setNomeguerra(String.valueOf(request.getParameter("txtNomeGuerra")).toUpperCase());
+                usu.setSenha(String.valueOf(request.getParameter("txtSenha")));   
+                usu.setIdGrupoAcesso(Integer.parseInt(request.getParameter("txtGrupoAcesso")));
+                usu.setSituacao(1);   
                 
-                milDAO.insert(mil);
-                
-                MilitarHasGrupoAcessoDAO milgrpacessoDAO = new MilitarHasGrupoAcessoDAO();
-                String[] gruposAcesso = request.getParameterValues("txtGrupoAcesso");
-                for (String ga : gruposAcesso) {
-                    MilitarHasGrupoAcesso milgrpacesso = new MilitarHasGrupoAcesso();
-                    milgrpacesso.setIdentidadeMilitar(mil.getIdentidade());
-                    milgrpacesso.setIdGrpAcesso(Integer.parseInt(ga));
-                    milgrpacessoDAO.insert(milgrpacesso);
-                }
+                usuDAO.insert(usu);
 
             }catch(Exception ex){
                 //e=2: erro durante realização do cadastro
-                response.sendRedirect("/sgdis/restrito/usuario/cadastro.jsp?e=2");
+                response.sendRedirect("/controlevisitantes/restrito/usuario/cadastro.jsp?e=2");
                 throw new ServletException(ex);
             }
             //e=1: cadastro sucesso
-            response.sendRedirect("/sgdis/restrito/usuario/cadastro.jsp?e=1");
+            response.sendRedirect("/controlevisitantes/restrito/usuario/cadastro.jsp?e=1");
         }
         else{
             //e=4: Sessão Encerrada
-            response.sendRedirect("/sgdis/index.jsp?e=4");
+            response.sendRedirect("/controlevisitantes/index.jsp?e=4");
         }
     }
 
