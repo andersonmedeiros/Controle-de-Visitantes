@@ -44,23 +44,23 @@
                             if(usuarioLogado.getIdGrupoAcesso()== 1){
                                 out.println(
                                             "<li class=\"nav-item dropdown\">"+
-                                                "<a class=\"nav-link dropdown-toggle active\" href=\"#\" id=\"navbarDropdown\" role=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">"+
+                                                "<a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdown\" role=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">"+
                                                     "Usuários"+
                                                 "</a>"+
                                                 "<div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdown\">"+                                
                                                     "<a class=\"dropdown-item\" href=\"../../restrito/usuario/ativos.jsp\">Listar Usuários Ativos</a>"+
                                                     "<a class=\"dropdown-item\" href=\"../../restrito/usuario/inativos.jsp\">Listar Usuários Inativos</a>"+
                                                     "<div class=\"dropdown-divider\"></div>"+
-                                                    "<a class=\"dropdown-item active\" href=\"../../restrito/usuario/cadastro.jsp\">Novo Usuário</a>"+
+                                                    "<a class=\"dropdown-item\" href=\"../../restrito/usuario/cadastro.jsp\">Novo Usuário</a>"+
                                                 "</div>"+
                                             "</li>"+
                                             
                                             "<li class=\"nav-item\">"+
-                                                "<a class=\"nav-link active\" href=\"../restrito/divisaosecao/divisaosecao.jsp\">Divisão/Seção</a>"+
+                                                "<a class=\"nav-link active\" href=\"../../restrito/divisaosecao/divisaosecao.jsp\">Divisão/Seção</a>"+
                                             "</li>"+
                                                     
                                             "<li class=\"nav-item\">"+
-                                                "<a class=\"nav-link\" href=\"../restrito/avaliacao/avpreliminar.jsp\">Setores</a>"+
+                                                "<a class=\"nav-link\" href=\"../../restrito/setor/setor.jsp\">Setores</a>"+
                                             "</li>"+
                                             
                                             "<li class=\"nav-item\">"+
@@ -71,11 +71,11 @@
                             else if(usuarioLogado.getIdGrupoAcesso() == 2){
                                 out.println(
                                             "<li class=\"nav-item\">"+
-                                                "<a class=\"nav-link\" href=\"../restrito/avaliacao/avpreliminar.jsp\">Divisão/Seção</a>"+
+                                                "<a class=\"nav-link\" href=\"../../restrito/divisaosecao/divisaosecao.jsp\">Divisão/Seção</a>"+
                                             "</li>"+
                                                     
                                             "<li class=\"nav-item\">"+
-                                                "<a class=\"nav-link\" href=\"../restrito/avaliacao/avpreliminar.jsp\">Setores</a>"+
+                                                "<a class=\"nav-link\" href=\"../../restrito/setor/setor.jsp\">Setores</a>"+
                                             "</li>"+
                                             
                                             "<li class=\"nav-item\">"+

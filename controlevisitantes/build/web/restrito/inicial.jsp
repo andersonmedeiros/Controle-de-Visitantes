@@ -57,7 +57,7 @@
                                             "</li>"+
                                                     
                                             "<li class=\"nav-item\">"+
-                                                "<a class=\"nav-link\" href=\"../restrito/avaliacao/avpreliminar.jsp\">Setores</a>"+
+                                                "<a class=\"nav-link\" href=\"../restrito/setor/setor.jsp\">Setores</a>"+
                                             "</li>"+
                                             
                                             "<li class=\"nav-item\">"+
@@ -68,11 +68,11 @@
                             else if(usuarioLogado.getIdGrupoAcesso() == 2){
                                 out.println(
                                             "<li class=\"nav-item\">"+
-                                                "<a class=\"nav-link\" href=\"../restrito/avaliacao/avpreliminar.jsp\">Divisão/Seção</a>"+
+                                                "<a class=\"nav-link\" href=\"../restrito/divisaosecao/divisaosecao.jsp\">Divisão/Seção</a>"+
                                             "</li>"+
                                                     
                                             "<li class=\"nav-item\">"+
-                                                "<a class=\"nav-link\" href=\"../restrito/avaliacao/avpreliminar.jsp\">Setores</a>"+
+                                                "<a class=\"nav-link\" href=\"../restrito/setor/setor.jsp\">Setores</a>"+
                                             "</li>"+
                                             
                                             "<li class=\"nav-item\">"+
