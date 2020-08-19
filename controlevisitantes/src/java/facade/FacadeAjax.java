@@ -46,5 +46,8 @@ public class FacadeAjax {
     }
     public DivisaoSecao getDivisaoSecaoByIdDWR(int idDivisaoSecao){
         return DivisaoSecaoDAO.getDivisaoSecaoByIdDWR(idDivisaoSecao);
+    }    
+    public ArrayList<DivisaoSecao> getDivisoesSecoesDWR() throws Throwable, Exception{
+        return DivisaoSecaoDAO.getDivisoesSecoesDWR();
     }
 }

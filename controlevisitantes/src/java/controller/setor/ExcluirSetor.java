@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.divisaosecao;
+package controller.setor;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,14 +12,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.dao.*;
-import model.bean.*;
+import model.dao.SetorDAO;
 
 /**
  *
  * @author anderson
  */
-public class CadastrarDivisaoSecao extends HttpServlet {
+public class ExcluirSetor extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +37,10 @@ public class CadastrarDivisaoSecao extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CadastrarDivisaoSecao</title>");            
+            out.println("<title>Servlet ExcluirSetor</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CadastrarDivisaoSecao at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ExcluirSetor at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -79,22 +78,19 @@ public class CadastrarDivisaoSecao extends HttpServlet {
         
         if(sessao.getAttribute("usuarioAutenticado") != null){
             try{
-                DivisaoSecaoDAO dsDAO = new DivisaoSecaoDAO();    
+                SetorDAO setorDAO = new SetorDAO();
+                                              
+                int idExcluir = Integer.parseInt(request.getParameter("idSetorExcluir"));
                 
-                DivisaoSecao ds = new DivisaoSecao();  
-                ds.setId(dsDAO.proxID());                
-                ds.setNome(String.valueOf(request.getParameter("txtNome")).toUpperCase());
-                ds.setAbreviatura(String.valueOf(request.getParameter("txtAbreviatura")).toUpperCase());
-                
-                dsDAO.insert(ds);
+               setorDAO.delete(idExcluir);
 
             }catch(Exception ex){
-                //e=2: erro durante realização do cadastro
-                response.sendRedirect("/controlevisitantes/restrito/divisaosecao/divisaosecao.jsp?e=2");
+                //e=2: erro durante realização da atualização
+                response.sendRedirect("/controlevisitantes/restrito/setor/setor.jsp?e=3");
                 throw new ServletException(ex);
             }
-            //e=1: cadastro sucesso
-            response.sendRedirect("/controlevisitantes/restrito/divisaosecao/divisaosecao.jsp?e=1");
+            //e=1: atualização sucesso
+            response.sendRedirect("/controlevisitantes/restrito/setor/setor.jsp?e=4");
         }
         else{
             //e=4: Sessão Encerrada

@@ -86,11 +86,6 @@ public class AtualizarDivisaoSecao extends HttpServlet {
                 ds.setNome(String.valueOf(request.getParameter("txtNomeAtt")).toUpperCase());
                 ds.setAbreviatura(String.valueOf(request.getParameter("txtAbreviaturaAtt")).toUpperCase());
                 
-                System.out.println("Divisao/Secao: Cad");
-                System.out.println("id: " + ds.getId());
-                System.out.println("nome: " + ds.getNome());
-                System.out.println("abrev: " + ds.getAbreviatura());
-                
                 dsDAO.update(ds);
 
             }catch(Exception ex){
