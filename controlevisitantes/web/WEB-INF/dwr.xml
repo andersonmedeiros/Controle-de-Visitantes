@@ -24,5 +24,8 @@
     
     <convert converter="bean" match="model.bean.Usuario"/>
     <convert converter="bean" match="model.dao.UsuarioDAO"/>
+    
+    <convert converter="bean" match="model.bean.DivisaoSecao"/>
+    <convert converter="bean" match="model.dao.DivisaoSecaoDAO"/>
   </allow>
 </dwr>

@@ -29,6 +29,18 @@
         <servlet-name>CadastrarAvaliacao</servlet-name>
         <servlet-class>controller.avaliacao.avpreliminar.CadastrarAvaliacao</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CadastrarDivisaoSecao</servlet-name>
+        <servlet-class>controller.divisaosecao.CadastrarDivisaoSecao</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AtualizarDivisaoSecao</servlet-name>
+        <servlet-class>controller.divisaosecao.AtualizarDivisaoSecao</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ExcluirDivisaoSecao</servlet-name>
+        <servlet-class>controller.divisaosecao.ExcluirDivisaoSecao</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>dwr-invoker</servlet-name>
         <url-pattern>/dwr/*</url-pattern>
@@ -217,6 +229,18 @@
     <servlet-mapping>
         <servlet-name>CadastrarAvaliacao</servlet-name>
         <url-pattern>/restrito/avaliacao/controller.avaliacao.avpreliminar/CadastrarAvaliacao</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CadastrarDivisaoSecao</servlet-name>
+        <url-pattern>/restrito/divisaosecao/controller.divisaosecao/CadastrarDivisaoSecao</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AtualizarDivisaoSecao</servlet-name>
+        <url-pattern>/restrito/divisaosecao/controller.divisaosecao/AtualizarDivisaoSecao</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ExcluirDivisaoSecao</servlet-name>
+        <url-pattern>/restrito/divisaosecao/controller.divisaosecao/ExcluirDivisaoSecao</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
