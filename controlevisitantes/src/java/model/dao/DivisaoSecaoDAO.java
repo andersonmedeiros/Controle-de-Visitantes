@@ -208,7 +208,7 @@ public class DivisaoSecaoDAO {
     }
     
     private final static String GETDIVISOESSECOESDWR = "SELECT * " +
-                                                   "FROM DivisaoSecao";
+                                                   "FROM DivisaoSecao ORDER BY nome";
        
     public static ArrayList<DivisaoSecao> getDivisoesSecoesDWR(){
         Connection conn = null;

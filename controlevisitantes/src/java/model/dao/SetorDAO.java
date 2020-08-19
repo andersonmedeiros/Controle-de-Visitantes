@@ -40,10 +40,32 @@ public class SetorDAO {
     //Delete SQL
     private final String DELETE = "DELETE FROM " + tabela + " WHERE " + id + "=?;";
     
-    //Consultas SQL    
+    //Consultas SQL
+    private final String GETUltimoID = "SELECT MAX(" + id + ") as ultimo_id FROM " + tabela + ";";
+    
     Connection conn = null;
     PreparedStatement pstm = null;
     ResultSet rs = null;
+    
+    //Próximo ID a ser inserido
+    public int proxID(){
+        int ultimo_id = 0;
+        try{
+            conn = ConnectionFactory.getConnection();
+            
+            pstm = conn.prepareStatement(GETUltimoID);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                
+                ultimo_id = rs.getInt("ultimo_id");
+            }
+           
+            ConnectionFactory.fechaConexao(conn, pstm);
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());           
+        }
+        return (ultimo_id+1);
+    }
     
     //Insert SQL
     public void insert(Setor setor) {
@@ -56,7 +78,7 @@ public class SetorDAO {
                 pstm.setInt(1, setor.getId());
                 pstm.setString(2, setor.getNome());
                 pstm.setString(3, setor.getAbreviatura());
-                pstm.setInt(3, setor.getIdDivisaoSecao());
+                pstm.setInt(4, setor.getIdDivisaoSecao());
                 
                 pstm.execute();
                 
