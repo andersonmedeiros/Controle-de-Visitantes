@@ -38,10 +38,32 @@ public class DivisaoSecaoDAO {
     //Delete SQL
     private final String DELETE = "DELETE FROM " + tabela + " WHERE " + id + "=?;";
     
-    //Consultas SQL    
+    //Consultas SQL
+    private final String GETUltimoID = "SELECT MAX(" + id + ") as ultimo_id FROM " + tabela + ";";
+    
     Connection conn = null;
     PreparedStatement pstm = null;
     ResultSet rs = null;
+    
+    //Próximo ID a ser inserido
+    public int proxID(){
+        int ultimo_id = 0;
+        try{
+            conn = ConnectionFactory.getConnection();
+            
+            pstm = conn.prepareStatement(GETUltimoID);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                
+                ultimo_id = rs.getInt("ultimo_id");
+            }
+           
+            ConnectionFactory.fechaConexao(conn, pstm);
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());           
+        }
+        return (ultimo_id+1);
+    }
     
     //Insert SQL
     public void insert(DivisaoSecao divsec) {
@@ -132,14 +154,14 @@ public class DivisaoSecaoDAO {
         return divsec;
     }
     
-    private final String GETTIPOSFORCA = "SELECT * " +
-                                         "FROM " + tabela;
+    private final String GETDIVISOESSECOES = "SELECT * " +
+                                         "FROM " + tabela + " ORDER BY nome";
        
     public ArrayList<DivisaoSecao> getDivisoesSecoes(){
         ArrayList<DivisaoSecao> divisoessecoes = new ArrayList<>();        
         try {
             conn = ConnectionFactory.getConnection();
-            pstm = conn.prepareStatement(GETTIPOSFORCA);
+            pstm = conn.prepareStatement(GETDIVISOESSECOES);
            
             rs = pstm.executeQuery();
             while (rs.next()) {
@@ -162,7 +184,10 @@ public class DivisaoSecaoDAO {
                                                       "FROM DivisaoSecao " + 
                                                       "WHERE id = ?;";
        
-    public DivisaoSecao getDivisaoSecaoByIdDWR(int idDivisaoSecao){
+    public static DivisaoSecao getDivisaoSecaoByIdDWR(int idDivisaoSecao){
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
         DivisaoSecao divsec = new DivisaoSecao();    
         try {
             conn = ConnectionFactory.getConnection();
@@ -182,7 +207,7 @@ public class DivisaoSecaoDAO {
         return divsec;
     }
     
-    private final static String GETTIPOSFORCADWR = "SELECT * " +
+    private final static String GETDIVISOESSECOESDWR = "SELECT * " +
                                                    "FROM DivisaoSecao";
        
     public static ArrayList<DivisaoSecao> getDivisoesSecoesDWR(){
@@ -193,7 +218,7 @@ public class DivisaoSecaoDAO {
         
         try {
             conn = ConnectionFactory.getConnection();
-            pstm = conn.prepareStatement(GETTIPOSFORCADWR);
+            pstm = conn.prepareStatement(GETDIVISOESSECOESDWR);
            
             rs = pstm.executeQuery();
             while (rs.next()) {
