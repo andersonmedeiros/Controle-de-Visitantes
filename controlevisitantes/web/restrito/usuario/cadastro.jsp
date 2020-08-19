@@ -57,7 +57,7 @@
                                             "</li>"+
                                             
                                             "<li class=\"nav-item\">"+
-                                                "<a class=\"nav-link\" href=\"../restrito/avaliacao/avpreliminar.jsp\">Divisão/Seção</a>"+
+                                                "<a class=\"nav-link\" href=\"../../restrito/divisaosecao/divisaosecao.jsp\">Divisão/Seção</a>"+
                                             "</li>"+
                                                     
                                             "<li class=\"nav-item\">"+
