@@ -44,4 +44,7 @@ public class FacadeAjax {
     public Usuario getUsuarioByIdentidadeDWR(String identidade){
         return UsuarioDAO.getUsuarioByIdentidadeDWR(identidade);
     }
+    public DivisaoSecao getDivisaoSecaoByIdDWR(int idDivisaoSecao){
+        return DivisaoSecaoDAO.getDivisaoSecaoByIdDWR(idDivisaoSecao);
+    }
 }
