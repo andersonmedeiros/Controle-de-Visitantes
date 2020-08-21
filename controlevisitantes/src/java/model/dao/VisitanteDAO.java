@@ -11,9 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import model.bean.Om;
-import model.bean.PostoGraduacao;
-import model.bean.Visitante;
+import model.bean.*;
 
 /**
  *
@@ -25,6 +23,7 @@ public class VisitanteDAO {
     
     //Atributos
     String identidade = "identidade";
+    String tipo = "tipo";
     String nome = "nome";
     String sobrenome = "sobrenome";
     String nomeguerra = "nomeguerra";
@@ -34,12 +33,12 @@ public class VisitanteDAO {
     String idOrganizacaoMilitar = "idOrganizacaoMilitar";
     
     //Insert SQL
-    private final String INSERT = "INSERT INTO " + tabela + "(" + identidade + "," + nome + "," + sobrenome +  "," + nomeguerra + ","  + email +  "," + fone + "," + idPostoGraduacao + "," +idOrganizacaoMilitar + ")" +
-                                  " VALUES(?,?,?,?,?,?,?,?);";
+    private final String INSERT = "INSERT INTO " + tabela + "(" + identidade + "," + tipo + "," + nome + "," + sobrenome +  "," + nomeguerra + ","  + email +  "," + fone + "," + idPostoGraduacao + "," +idOrganizacaoMilitar + ")" +
+                                  " VALUES(?,?,?,?,?,?,?,?,?);";
     
     //Update SQL
     private final String UPDATE = "UPDATE " + tabela +
-                                  " SET " + nome + "=?, " + sobrenome + "=?, " + nomeguerra + "=?, " + email + "=?, " + fone + "=?, " + idPostoGraduacao + "=? " + idOrganizacaoMilitar + "=? " +
+                                  " SET " + nome + "=?, " + sobrenome + "=?, " + nomeguerra + "=?, " + email + "=?, " + fone + "=?, " + idPostoGraduacao + "=?, " + idOrganizacaoMilitar + "=? " +
                                   "WHERE " + identidade + "=?;";
         
     //Delete SQL
@@ -60,13 +59,24 @@ public class VisitanteDAO {
                 pstm = conn.prepareStatement(INSERT);
                 
                 pstm.setString(1, vis.getIdentidade());
-                pstm.setString(2, vis.getNome());
-                pstm.setString(3, vis.getSobrenome());
-                pstm.setString(4, vis.getNomeguerra());
-                pstm.setString(5, vis.getEmail());
-                pstm.setString(5, vis.getFone());
-                pstm.setInt(6, vis.getIdPostoGraduacao());
-                pstm.setInt(7, vis.getIdOm());
+                pstm.setInt(2, vis.getTipo());
+                pstm.setString(3, vis.getNome());
+                pstm.setString(4, vis.getSobrenome());
+                pstm.setString(5, vis.getNomeguerra());
+                pstm.setString(6, vis.getEmail());
+                pstm.setString(7, vis.getFone());
+                
+                if(vis.getIdPostoGraduacao() == 0){
+                    pstm.setNull(8, java.sql.Types.INTEGER);
+                }else{
+                    pstm.setInt(8, vis.getIdPostoGraduacao());
+                }
+                
+                if(vis.getIdOm() == 0){
+                    pstm.setNull(9, java.sql.Types.INTEGER);
+                }else{
+                    pstm.setInt(9, vis.getIdOm());
+                }
                 
                 pstm.execute();
                 
@@ -92,8 +102,19 @@ public class VisitanteDAO {
                 pstm.setString(3, vis.getNomeguerra());
                 pstm.setString(4, vis.getEmail());
                 pstm.setString(5, vis.getFone());
-                pstm.setInt(6, vis.getIdPostoGraduacao());
-                pstm.setInt(7, vis.getIdOm());
+                
+                if(vis.getIdPostoGraduacao() == 0){
+                    pstm.setNull(6, java.sql.Types.INTEGER);
+                }else{
+                    pstm.setInt(6, vis.getIdPostoGraduacao());
+                }
+                
+                if(vis.getIdOm() == 0){
+                    pstm.setNull(7, java.sql.Types.INTEGER);
+                }else{
+                    pstm.setInt(7, vis.getIdOm());
+                }
+                
                 pstm.setString(8, vis.getIdentidade());
                 
                 pstm.execute();
@@ -142,6 +163,7 @@ public class VisitanteDAO {
             rs = pstm.executeQuery();
             while (rs.next()) {
                 vis.setIdentidade(rs.getString("identidade"));
+                vis.setTipo(rs.getInt("tipo"));
                 vis.setNome(rs.getString("nome"));
                 vis.setSobrenome(rs.getString("sobrenome"));                         
                 vis.setNomeguerra(rs.getString("nomeguerra"));            
@@ -178,7 +200,7 @@ public class VisitanteDAO {
     private final String GETVISITANTES = "SELECT * " +
                                         "FROM " + tabela;
        
-    public ArrayList<Visitante> getVisitantees(){
+    public ArrayList<Visitante> getVisitantes(){
         ArrayList<Visitante> visitantes = new ArrayList<>();  
         PostoGraduacaoDAO pgDAO = new PostoGraduacaoDAO();
         OmDAO omDAO = new OmDAO();
@@ -191,6 +213,60 @@ public class VisitanteDAO {
                 Visitante vis = new Visitante();
                 
                 vis.setIdentidade(rs.getString("identidade"));
+                vis.setTipo(rs.getInt("tipo"));
+                vis.setNome(rs.getString("nome"));
+                vis.setSobrenome(rs.getString("sobrenome"));                         
+                vis.setNomeguerra(rs.getString("nomeguerra"));            
+                vis.setEmail(rs.getString("email"));     
+                vis.setFone(rs.getString("fone"));   
+                
+                PostoGraduacao pg = pgDAO.getPostoGraduacaoById(rs.getInt("idPostoGraduacao"));
+                vis.setIdPostoGraduacao(pg.getId());
+                vis.setNomePostoGraduacao(pg.getNome());
+                vis.setAbreviaturaPostoGraduacao(pg.getAbreviatura());               
+                vis.setIdForcaPostoGraduacao(pg.getIdForca());
+                vis.setNomeForcaPostoGraduacao(pg.getNomeForca());
+                vis.setSiglaForcaPostoGraduacao(pg.getSiglaForca());
+                vis.setIdTipoForcaPostoGraduacao(pg.getIdTipoForca());
+                vis.setNomeTipoForcaPostoGraduacao(pg.getNomeTipoForca());
+                
+                Om om = omDAO.getOmById(rs.getInt("idOrganizacaoMilitar"));
+                vis.setIdOm(om.getId());
+                vis.setNomeOm(om.getNome());
+                vis.setAbreviaturaOm(om.getAbreviatura());
+                vis.setIdForcaOm(om.getIdForca());
+                vis.setNomeForcaOm(om.getNomeForca());
+                vis.setSiglaForcaOm(om.getSiglaForca());
+                vis.setIdTipoForcaOm(om.getIdTipoForca());
+                vis.setNomeTipoForcaOm(om.getNomeTipoForca()); 
+                
+                visitantes.add(vis);
+            }
+            ConnectionFactory.fechaConexao(conn, pstm, rs);
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());           
+        }
+        return visitantes;
+    }
+    
+    private final String GETVISITANTESBYTIPO = "SELECT * " +
+                                        "FROM " + tabela + " WHERE tipo = ?;";
+       
+    public ArrayList<Visitante> getVisitantesByTipo(int tipo){
+        ArrayList<Visitante> visitantes = new ArrayList<>();  
+        PostoGraduacaoDAO pgDAO = new PostoGraduacaoDAO();
+        OmDAO omDAO = new OmDAO();
+        try {
+            conn = ConnectionFactory.getConnection();
+            pstm = conn.prepareStatement(GETVISITANTESBYTIPO);
+            pstm.setInt(1, tipo);
+           
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                Visitante vis = new Visitante();
+                
+                vis.setIdentidade(rs.getString("identidade"));
+                vis.setTipo(rs.getInt("tipo"));
                 vis.setNome(rs.getString("nome"));
                 vis.setSobrenome(rs.getString("sobrenome"));                         
                 vis.setNomeguerra(rs.getString("nomeguerra"));            
@@ -243,6 +319,7 @@ public class VisitanteDAO {
             rs = pstm.executeQuery();
             while (rs.next()) {       
                 vis.setIdentidade(rs.getString("identidade"));
+                vis.setTipo(rs.getInt("tipo"));
                 vis.setNome(rs.getString("nome"));
                 vis.setSobrenome(rs.getString("sobrenome"));                         
                 vis.setNomeguerra(rs.getString("nomeguerra"));            
@@ -275,4 +352,7 @@ public class VisitanteDAO {
         }
         return vis;
     }    
+    
+    
+   
 }

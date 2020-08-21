@@ -11,6 +11,7 @@ package model.bean;
  */
 public class Visitante {
     private String identidade, nome, sobrenome, nomeguerra, email, fone;
+    private int tipo;
     private final PostoGraduacao pg = new PostoGraduacao();
     private final Om om = new Om();
 
@@ -22,6 +23,14 @@ public class Visitante {
         this.identidade = identidade;
     }
 
+    public int getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
+    }
+    
     public String getNome() {
         return nome;
     }
@@ -188,5 +197,9 @@ public class Visitante {
 
     public void setNomeTipoForcaOm(String nome) {
         om.setNomeTipoForca(nome);
+    }
+
+    public void setIdPostoGraduacao(Object object) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
