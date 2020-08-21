@@ -9,7 +9,18 @@
             <param-value>true</param-value>
         </init-param>
     </servlet>
-        
+    <servlet>
+        <servlet-name>CadastrarVisitante</servlet-name>
+        <servlet-class>controller.visitante.CadastrarVisitante</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AtualizarVisitante</servlet-name>
+        <servlet-class>controller.visitante.AtualizarVisitante</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ExcluirVisitante</servlet-name>
+        <servlet-class>controller.visitante.ExcluirVisitante</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>dwr-invoker</servlet-name>
         <url-pattern>/dwr/*</url-pattern>
@@ -30,7 +41,6 @@
         <servlet-name>Autenticador</servlet-name>
         <url-pattern>/Autenticador</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>Sair</servlet-name>
         <servlet-class>controller.Sair</servlet-class>
@@ -42,26 +52,23 @@
         <url-pattern>/restrito/divisaosecao/Sair</url-pattern>
         <url-pattern>/restrito/setor/Sair</url-pattern>
         <url-pattern>/restrito/visitante/Sair</url-pattern>
-    </servlet-mapping>   
-    
+    </servlet-mapping>
     <servlet>
         <servlet-name>CadastrarUsuario</servlet-name>
         <servlet-class>controller.usuario.CadastrarUsuario</servlet-class>
-    </servlet>    
+    </servlet>
     <servlet-mapping>
         <servlet-name>CadastrarUsuario</servlet-name>
         <url-pattern>/restrito/usuario/controller.usuario/CadastrarUsuario</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>AtualizarUsuario</servlet-name>
         <servlet-class>controller.usuario.AtualizarUsuario</servlet-class>
-    </servlet>   
+    </servlet>
     <servlet-mapping>
         <servlet-name>AtualizarUsuario</servlet-name>
         <url-pattern>/restrito/usuario/controller.usuario/AtualizarUsuario</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>AtualizarSenhaUsuario</servlet-name>
         <servlet-class>controller.usuario.AtualizarSenhaUsuario</servlet-class>
@@ -70,7 +77,6 @@
         <servlet-name>AtualizarSenhaUsuario</servlet-name>
         <url-pattern>/restrito/usuario/controller.usuario/AtualizarSenhaUsuario</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>ExcluirUsuario</servlet-name>
         <servlet-class>controller.usuario.ExcluirUsuario</servlet-class>
@@ -79,21 +85,14 @@
         <servlet-name>ExcluirUsuario</servlet-name>
         <url-pattern>/restrito/usuario/controller.usuario/ExcluirUsuario</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>AtivarUsuario</servlet-name>
         <servlet-class>controller.usuario.AtivarUsuario</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>AtivarUsuario</servlet-name>
         <url-pattern>/restrito/usuario/controller.usuario/AtivarUsuario</url-pattern>
     </servlet-mapping>
-    
-    
-    
-    
-    
     <servlet>
         <servlet-name>CadastrarDivisaoSecao</servlet-name>
         <servlet-class>controller.divisaosecao.CadastrarDivisaoSecao</servlet-class>
@@ -102,7 +101,6 @@
         <servlet-name>CadastrarDivisaoSecao</servlet-name>
         <url-pattern>/restrito/divisaosecao/controller.divisaosecao/CadastrarDivisaoSecao</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>AtualizarDivisaoSecao</servlet-name>
         <servlet-class>controller.divisaosecao.AtualizarDivisaoSecao</servlet-class>
@@ -111,7 +109,6 @@
         <servlet-name>AtualizarDivisaoSecao</servlet-name>
         <url-pattern>/restrito/divisaosecao/controller.divisaosecao/AtualizarDivisaoSecao</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>ExcluirDivisaoSecao</servlet-name>
         <servlet-class>controller.divisaosecao.ExcluirDivisaoSecao</servlet-class>
@@ -120,9 +117,6 @@
         <servlet-name>ExcluirDivisaoSecao</servlet-name>
         <url-pattern>/restrito/divisaosecao/controller.divisaosecao/ExcluirDivisaoSecao</url-pattern>
     </servlet-mapping>
-    
-    
-    
     <servlet>
         <servlet-name>CadastrarSetor</servlet-name>
         <servlet-class>controller.setor.CadastrarSetor</servlet-class>
@@ -131,7 +125,6 @@
         <servlet-name>CadastrarSetor</servlet-name>
         <url-pattern>/restrito/setor/controller.setor/CadastrarSetor</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>AtualizarSetor</servlet-name>
         <servlet-class>controller.setor.AtualizarSetor</servlet-class>
@@ -140,7 +133,6 @@
         <servlet-name>AtualizarSetor</servlet-name>
         <url-pattern>/restrito/setor/controller.setor/AtualizarSetor</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>ExcluirSetor</servlet-name>
         <servlet-class>controller.setor.ExcluirSetor</servlet-class>
@@ -149,7 +141,18 @@
         <servlet-name>ExcluirSetor</servlet-name>
         <url-pattern>/restrito/setor/controller.setor/ExcluirSetor</url-pattern>
     </servlet-mapping>
-    
+    <servlet-mapping>
+        <servlet-name>CadastrarVisitante</servlet-name>
+        <url-pattern>/restrito/visitante/controller.visitante/CadastrarVisitante</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AtualizarVisitante</servlet-name>
+        <url-pattern>/restrito/visitante/controller.visitante/AtualizarVisitante</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ExcluirVisitante</servlet-name>
+        <url-pattern>/restrito/visitante/controller.visitante/ExcluirVisitante</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             60

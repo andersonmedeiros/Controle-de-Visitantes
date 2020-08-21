@@ -13,12 +13,14 @@
     </create>
     
     <convert converter="bean" match="model.bean.TipoForca"/>
-    <convert converter="bean" match="model.dao.TipoForcaDAO"/>    
+    <convert converter="bean" match="model.dao.TipoForcaDAO"/>  
+      
     <convert converter="bean" match="model.bean.Forca"/>
     <convert converter="bean" match="model.dao.ForcaDAO"/>    
     
     <convert converter="bean" match="model.bean.Om"/>
     <convert converter="bean" match="model.dao.OmDAO"/>    
+    
     <convert converter="bean" match="model.bean.PostoGraduacao"/>
     <convert converter="bean" match="model.dao.PostoGraduacaoDAO"/> 
     
@@ -30,5 +32,8 @@
     
     <convert converter="bean" match="model.bean.Setor"/>
     <convert converter="bean" match="model.dao.SetorDAO"/>
+    
+    <convert converter="bean" match="model.bean.Visitante"/>
+    <convert converter="bean" match="model.dao.VisitanteDAO"/>
   </allow>
 </dwr>
