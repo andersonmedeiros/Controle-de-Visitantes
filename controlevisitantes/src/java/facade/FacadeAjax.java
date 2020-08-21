@@ -32,6 +32,9 @@ public class FacadeAjax {
         forcas = ForcaDAO.getForcasByIdTipoForcaDWR(idTipoForca);
         return forcas;
     }
+    public ArrayList<Om> getOmsByForcaDWR(int idForca) throws Throwable, Exception{
+        return OmDAO.getOmsByForcaDWR(idForca);
+    }
     public ArrayList<PostoGraduacao> getPGsByForcaDWR(int idForca) throws Throwable, Exception{
         ArrayList<PostoGraduacao> pgs = new ArrayList<>();
         pgs = PostoGraduacaoDAO.getPGsByForcaDWR(idForca);
@@ -49,5 +52,9 @@ public class FacadeAjax {
     }    
     public ArrayList<DivisaoSecao> getDivisoesSecoesDWR() throws Throwable, Exception{
         return DivisaoSecaoDAO.getDivisoesSecoesDWR();
+    }
+    
+    public Visitante getVisitanteByIdentidadeDWR(String identidade){
+        return VisitanteDAO.getVisitanteByIdentidadeDWR(identidade);
     }
 }
