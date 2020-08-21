@@ -16,7 +16,7 @@
         <meta name="description" content="">
         <meta name="author" content="Anderson de Paula Andrade Medeiros">
         
-        <link rel="icon" type="image/x-icon" href="../../assets/img/logo_sgdis.png" />
+        <link rel="icon" type="image/x-icon" href="../../assets/img/brasaocigs.png" />
         <title>Usuários Ativos</title>
         
         <link rel="stylesheet" type="text/css" href="../../assets/node_modules/bootstrap/compiler/bootstrap.css">
@@ -31,7 +31,7 @@
     <body>
         <header>
             <nav class="navbar navbar-expand-lg navbar-light bg-success">
-                <a class="navbar-brand active" href="../../restrito/inicial.jsp"><img src="../../assets/img/logo_sgdis.png" width="30px" height="35px"><span class="sr-only">SGDis</span></a>
+                <a class="navbar-brand active" href="../../restrito/inicial.jsp"><img src="../../assets/img/brasaocigs.png" width="30px" height="35px"><span class="sr-only">SGDis</span></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerSgdis" aria-controls="navbarTogglerSgdis" aria-expanded="false" aria-label="Alterna navegação">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -55,32 +55,54 @@
                                                 "</div>"+
                                             "</li>"+
                                             
-                                            "<li class=\"nav-item\">"+
-                                                "<a class=\"nav-link\" href=\"../../restrito/divisaosecao/divisaosecao.jsp\">Divisão/Seção</a>"+
+                                            "<li class=\"nav-item dropdown\">"+
+                                                "<a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdown\" role=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">"+
+                                                    "Visitantes"+
+                                                "</a>"+
+                                                "<div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdown\">"+                                
+                                                    "<a class=\"dropdown-item\" href=\"../restrito/visitante/civil.jsp\">Listar Visitantes Civis</a>"+
+                                                    "<a class=\"dropdown-item\" href=\"../restrito/visitante/militar.jsp\">Listar Visitantes Militares</a>"+
+                                                    "<div class=\"dropdown-divider\"></div>"+
+                                                    "<a class=\"dropdown-item\" href=\"../restrito/visitante/cadastro.jsp\">Novo Visitante</a>"+
+                                                "</div>"+
                                             "</li>"+
                                                     
-                                            "<li class=\"nav-item\">"+
-                                                "<a class=\"nav-link\" href=\"../../restrito/setor/setor.jsp\">Setores</a>"+
-                                            "</li>"+
-                                            
-                                            "<li class=\"nav-item\">"+
-                                                "<a class=\"nav-link\" href=\"../restrito/avaliacao/avpreliminar.jsp\">Visitantes</a>"+
-                                            "</li>"
+                                            "<li class=\"nav-item dropdown\">"+
+                                                "<a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdown\" role=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">"+
+                                                    "Manutenção"+
+                                                "</a>"+
+                                                "<div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdown\">"+                  
+                                                    "<a class=\"dropdown-item\" href=\"../restrito/organizacaomilitar/om.jsp\">Organização Militar</a>"+              
+                                                    "<a class=\"dropdown-item\" href=\"../restrito/divisaosecao/divisaosecao.jsp\">Divisão/Seção</a>"+
+                                                    "<a class=\"dropdown-item\" href=\"../restrito/setor/setor.jsp\">Setores</a>"+
+                                                "</div>"+
+                                            "</li>"  
                                             );
                             }
                             else if(usuarioLogado.getIdGrupoAcesso() == 2){
                                 out.println(
-                                            "<li class=\"nav-item\">"+
-                                                "<a class=\"nav-link\" href=\"../../restrito/divisaosecao/divisaosecao.jsp\">Divisão/Seção</a>"+
+                                            "<li class=\"nav-item dropdown\">"+
+                                                "<a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdown\" role=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">"+
+                                                    "Visitantes"+
+                                                "</a>"+
+                                                "<div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdown\">"+                                
+                                                    "<a class=\"dropdown-item\" href=\"../restrito/visitante/civil.jsp\">Listar Visitantes Civis</a>"+
+                                                    "<a class=\"dropdown-item\" href=\"../restrito/visitante/militar.jsp\">Listar Visitantes Militares</a>"+
+                                                    "<div class=\"dropdown-divider\"></div>"+
+                                                    "<a class=\"dropdown-item\" href=\"../restrito/visitante/cadastro.jsp\">Novo Visitante</a>"+
+                                                "</div>"+
                                             "</li>"+
                                                     
-                                            "<li class=\"nav-item\">"+
-                                                "<a class=\"nav-link\" href=\"../../restrito/setor/setor.jsp\">Setores</a>"+
-                                            "</li>"+
-                                            
-                                            "<li class=\"nav-item\">"+
-                                                "<a class=\"nav-link\" href=\"../restrito/avaliacao/avpreliminar.jsp\">Visitantes</a>"+
-                                            "</li>"
+                                            "<li class=\"nav-item dropdown\">"+
+                                                "<a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdown\" role=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">"+
+                                                    "Manutenção"+
+                                                "</a>"+
+                                                "<div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdown\">"+                  
+                                                    "<a class=\"dropdown-item\" href=\"../restrito/organizacaomilitar/om.jsp\">Organização Militar</a>"+              
+                                                    "<a class=\"dropdown-item\" href=\"../restrito/divisaosecao/divisaosecao.jsp\">Divisão/Seção</a>"+
+                                                    "<a class=\"dropdown-item\" href=\"../restrito/setor/setor.jsp\">Setores</a>"+
+                                                "</div>"+
+                                            "</li>"  
                                 );
                             }
                         %>

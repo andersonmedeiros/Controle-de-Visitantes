@@ -13,7 +13,7 @@
         <meta name="description" content="">
         <meta name="author" content="Anderson de Paula Andrade Medeiros">
         
-        <link rel="icon" type="image/x-icon" href="assets/img/logo_sgdis.png" />
+        <link rel="icon" type="image/x-icon" href="assets/img/brasaocigs.png" />
         <title>Login</title>
         
         <link rel="stylesheet" type="text/css" href="assets/node_modules/bootstrap/compiler/bootstrap.css">
@@ -54,7 +54,7 @@
                 <div class="col-md-12">
                     <b class="text-center">Controle de Visitantes</b>
                 </div>
-                <img class="col-4" src="assets/img/logo_sgdis.png" alt="Sistema de Controle de Visitantes" >                                       
+                <img class="col-4" src="assets/img/brasaocigs.png" alt="Sistema de Controle de Visitantes" >                                       
 
                 <div class="form-label-group">
                     <label for="txtIdentidade">Identidade: </label>
