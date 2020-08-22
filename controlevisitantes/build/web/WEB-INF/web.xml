@@ -21,6 +21,18 @@
         <servlet-name>ExcluirVisitante</servlet-name>
         <servlet-class>controller.visitante.ExcluirVisitante</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CadastrarOm</servlet-name>
+        <servlet-class>controller.organizacaomilitar.CadastrarOm</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AtualizarOm</servlet-name>
+        <servlet-class>controller.organizacaomilitar.AtualizarOm</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ExcluirOm</servlet-name>
+        <servlet-class>controller.organizacaomilitar.ExcluirOm</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>dwr-invoker</servlet-name>
         <url-pattern>/dwr/*</url-pattern>
@@ -152,6 +164,18 @@
     <servlet-mapping>
         <servlet-name>ExcluirVisitante</servlet-name>
         <url-pattern>/restrito/visitante/controller.visitante/ExcluirVisitante</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CadastrarOm</servlet-name>
+        <url-pattern>/restrito/organizacaomilitar/controller.organizacaomilitar/CadastrarOm</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AtualizarOm</servlet-name>
+        <url-pattern>/restrito/organizacaomilitar/controller.organizacaomilitar/AtualizarOm</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ExcluirOm</servlet-name>
+        <url-pattern>/restrito/organizacaomilitar/controller.organizacaomilitar/ExcluirOm</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
