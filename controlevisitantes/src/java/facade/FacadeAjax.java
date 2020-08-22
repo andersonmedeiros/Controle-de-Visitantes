@@ -41,8 +41,7 @@ public class FacadeAjax {
         return pgs;
     }
     public Om getOmByIdDWR(int idOM) throws Throwable, Exception{
-        Om om = OmDAO.getOmByIdDWR(idOM);
-        return om;
+        return OmDAO.getOmByIdDWR(idOM);
     } 
     public Usuario getUsuarioByIdentidadeDWR(String identidade){
         return UsuarioDAO.getUsuarioByIdentidadeDWR(identidade);
