@@ -19,7 +19,7 @@ import model.bean.*;
  */
 public class OmDAO {
     //Tabela
-    String tabela = "OM";
+    String tabela = "OrganizacaoMilitar";
     
     //Atributos
     String id = "id";
@@ -33,17 +33,38 @@ public class OmDAO {
     
     //Update SQL
     private final String UPDATE = "UPDATE " + tabela +
-                                  " SET " + nome + "=?, " + abreviatura + "=?, " + idForca + "=?, " +
+                                  " SET " + nome + "=?, " + abreviatura + "=?, " + idForca + "=? " +
                                   "WHERE " + id + "=?;";
         
     //Delete SQL
     private final String DELETE = "DELETE FROM " + tabela + " WHERE " + id + "=?;";
     
     //Consultas SQL
+    private final String GETUltimoID = "SELECT MAX(" + id + ") as ultimo_id FROM " + tabela + ";";
     
     Connection conn = null;
     PreparedStatement pstm = null;
     ResultSet rs = null;
+    
+    //Próximo ID a ser inserido
+    public int proxID(){
+        int ultimo_id = 0;
+        try{
+            conn = ConnectionFactory.getConnection();
+            
+            pstm = conn.prepareStatement(GETUltimoID);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                
+                ultimo_id = rs.getInt("ultimo_id");
+            }
+           
+            ConnectionFactory.fechaConexao(conn, pstm);
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());           
+        }
+        return (ultimo_id+1);
+    }
     
     //Insert SQL
     public void insert(Om om) {
@@ -145,7 +166,7 @@ public class OmDAO {
     }
     
     private final String GETOMS = "SELECT * " +
-                                   "FROM " + tabela;
+                                   "FROM " + tabela + " ORDER BY idForca, nome";
        
     public ArrayList<Om> getOms(){
         ArrayList<Om> oms = new ArrayList<>();                    
@@ -178,8 +199,47 @@ public class OmDAO {
         return oms;
     }
     
+    private final static String GETOMSBYFORCADWR = "SELECT * " +
+                                   "FROM OrganizacaoMilitar " + 
+                                   "WHERE idForca = ? ORDER BY nome;";
+       
+    public static ArrayList<Om> getOmsByForcaDWR(int idForca){
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        ArrayList<Om> oms = new ArrayList<>();                    
+        ForcaDAO forcaDAO = new ForcaDAO();
+        try {
+            conn = ConnectionFactory.getConnection();
+            pstm = conn.prepareStatement(GETOMSBYFORCADWR);
+            pstm.setInt(1, idForca);
+           
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                Om om = new Om();    
+                
+                om.setId(rs.getInt("id"));
+                om.setNome(rs.getString("nome"));
+                om.setAbreviatura(rs.getString("abreviatura"));
+
+                Forca forca = forcaDAO.getForcaById(rs.getInt("idForca"));
+                om.setIdForca(forca.getId());
+                om.setNomeForca(forca.getNome());
+                om.setSiglaForca(forca.getSigla());
+                om.setIdTipoForca(forca.getIdTipoForca());
+                om.setNomeTipoForca(forca.getNomeTipoForca());
+                
+                oms.add(om);
+            }
+            ConnectionFactory.fechaConexao(conn, pstm, rs);
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());           
+        }
+        return oms;
+    }
+    
     private final static String GETOMBYIDDWR = "SELECT * " +
-                                            "FROM OM " +
+                                            "FROM OrganizacaoMilitar " +
                                             "WHERE id = ?;";
     
     public static Om getOmByIdDWR(int idOM){
