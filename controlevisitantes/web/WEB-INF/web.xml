@@ -33,6 +33,18 @@
         <servlet-name>ExcluirOm</servlet-name>
         <servlet-class>controller.organizacaomilitar.ExcluirOm</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CadastrarEntrada</servlet-name>
+        <servlet-class>controller.visita.CadastrarEntrada</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CadastrarSaida</servlet-name>
+        <servlet-class>controller.visita.CadastrarSaida</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GerarRelatorioPdf</servlet-name>
+        <servlet-class>controller.relatorio.GerarRelatorioPdf</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>dwr-invoker</servlet-name>
         <url-pattern>/dwr/*</url-pattern>
@@ -60,9 +72,11 @@
     <servlet-mapping>
         <servlet-name>Sair</servlet-name>
         <url-pattern>/restrito/Sair</url-pattern>
-        <url-pattern>/restrito/usuario/Sair</url-pattern>
         <url-pattern>/restrito/divisaosecao/Sair</url-pattern>
+        <url-pattern>/restrito/organizacaomilitar/Sair</url-pattern>
         <url-pattern>/restrito/setor/Sair</url-pattern>
+        <url-pattern>/restrito/usuario/Sair</url-pattern>
+        <url-pattern>/restrito/visita/Sair</url-pattern>
         <url-pattern>/restrito/visitante/Sair</url-pattern>
     </servlet-mapping>
     <servlet>
@@ -176,6 +190,18 @@
     <servlet-mapping>
         <servlet-name>ExcluirOm</servlet-name>
         <url-pattern>/restrito/organizacaomilitar/controller.organizacaomilitar/ExcluirOm</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CadastrarEntrada</servlet-name>
+        <url-pattern>/restrito/visita/controller.visita/CadastrarEntrada</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CadastrarSaida</servlet-name>
+        <url-pattern>/restrito/visita/controller.visita/CadastrarSaida</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GerarRelatorioPdf</servlet-name>
+        <url-pattern>/restrito/visita/controller.relatorio/GerarRelatorioPdf</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
