@@ -135,8 +135,8 @@ public class SetorDAO {
     }
     
     private final String GETSETORBYID = "SELECT * " +
-                                            "FROM Setor " + 
-                                            "WHERE id = ?;";
+                                        "FROM Setor " + 
+                                        "WHERE id = ?;";
        
     public Setor getSetorById(int idSetor){
         Setor setor = new Setor();
@@ -165,7 +165,7 @@ public class SetorDAO {
     }
     
     private final String GETSETORES = "SELECT * " +
-                                         "FROM " + tabela;
+                                      "FROM " + tabela;
        
     public ArrayList<Setor> getSetores(){
         ArrayList<Setor> setores = new ArrayList<>();
@@ -227,7 +227,7 @@ public class SetorDAO {
     }
     
     private final static String GETSETORESDWR = "SELECT * " +
-                                                   "FROM Setor";
+                                                "FROM Setor";
        
     public static ArrayList<Setor> getSetoresDWR(){
         Connection conn = null;
