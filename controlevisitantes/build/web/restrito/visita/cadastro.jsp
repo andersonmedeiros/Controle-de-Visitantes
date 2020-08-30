@@ -213,7 +213,7 @@
                                         <label for="txtDataEntrada">Data de entrada: <span class="campo-obrigatorio">*</span></label>
                                         <input type="date" class="form-control" id="txtDataEntrada" name="txtDataEntrada">
                                         <div class="valid-feedback">Selva!</div>
-                                        <div class="invalid-feedback">Campo Obrigatório!</div>
+                                        <div class="invalid-feedback invalid-dataEntrada">Campo Obrigatório!</div>
                                     </div>    
                                     <div class="form-group col-md-3">
                                         <label for="txtHoraEntrada">Horário de entrada: <span class="campo-obrigatorio">*</span></label>

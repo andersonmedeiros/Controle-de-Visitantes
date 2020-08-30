@@ -127,6 +127,22 @@
             </nav>
         </header>
         <section class="container-fluid col-md-10 mr-auto ml-auto area">
+            <%
+                if(request.getParameter("e") != null){
+                    int retorno = Integer.parseInt(request.getParameter("e"));
+                    if(retorno == 1){
+                        out.println("<div class=\"alert alert-danger shadow-sm text-center\" role=\"alert\">");
+                        out.println("       Não existe registro de Entrada/Saída de Militares de Outras OM para a data informada!");
+                        out.println("</div>");
+                    }
+                    else if(retorno == 2){
+                        out.println("<div class=\"alert alert-danger shadow-sm text-center\" role=\"alert\">");
+                        out.println("       Não existe registro de Entrada/Saída de Civis para a data informada!");
+                        out.println("</div>");
+                    }
+                }
+            %>
+            
             <center>
                 <div class="col-md-12 mb-3">
                     <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#modalFormRelaPdf">Gerar Relatório PDF</button>
