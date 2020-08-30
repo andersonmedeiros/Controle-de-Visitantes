@@ -45,12 +45,15 @@ function alimentaSelectTipoForca(tiposforca){
     dwr.util.removeAllOptions("txtTipoForca");
     dwr.util.addOptions("txtTipoForca", [{id: "0", nome: "Selecione um Tipo de Força..."}], "id", "nome");
     dwr.util.addOptions("txtTipoForca", tiposforca, "id", "nome");
-    
+}
+FacadeAjax.getTiposForcaDWR(alimentaSelectTipoForca);
+
+function alimentaSelectTipoForcaAtt(tiposforca){    
     dwr.util.removeAllOptions("txtTipoForcaAtt");
     dwr.util.addOptions("txtTipoForcaAtt", [{id: "0", nome: "Selecione um Tipo de Força..."}], "id", "nome");
     dwr.util.addOptions("txtTipoForcaAtt", tiposforca, "id", "nome");
 }
-FacadeAjax.getTiposForcaDWR(alimentaSelectTipoForca);
+FacadeAjax.getTiposForcaDWR(alimentaSelectTipoForcaAtt);
 
 function alimentaSelectDependenteTipoForca(idTipoForca){
     FacadeAjax.getForcasByIdTipoForcaDWR(idTipoForca, {
@@ -58,7 +61,13 @@ function alimentaSelectDependenteTipoForca(idTipoForca){
             dwr.util.removeAllOptions("txtForca");
             dwr.util.addOptions("txtForca", [{id: "0", nome: "Selecione uma Força..."}], "id", "nome");
             dwr.util.addOptions("txtForca", forcas, "id", "nome");
-            
+        } 
+    });
+}
+
+function alimentaSelectDependenteTipoForcaAtt(idTipoForca){
+    FacadeAjax.getForcasByIdTipoForcaDWR(idTipoForca, {
+        callback: function(forcas){
             dwr.util.removeAllOptions("txtForcaAtt");
             dwr.util.addOptions("txtForcaAtt", [{id: "0", nome: "Selecione uma Força..."}], "id", "nome");
             dwr.util.addOptions("txtForcaAtt", forcas, "id", "nome");
@@ -72,10 +81,6 @@ function alimentaSelectDependenteForca(idForca){
             dwr.util.removeAllOptions("txtPGrad");
             dwr.util.addOptions("txtPGrad", [{id: "0", nome: "Selecione um Posto/Graduação..."}], "id", "nome");
             dwr.util.addOptions("txtPGrad", postosgraduacoes, "id", "nome");
-            
-            dwr.util.removeAllOptions("txtPGradAtt");
-            dwr.util.addOptions("txtPGradAtt", [{id: "0", nome: "Selecione um Posto/Graduação..."}], "id", "nome");
-            dwr.util.addOptions("txtPGradAtt", postosgraduacoes, "id", "nome");
         }
     });         
     
@@ -84,7 +89,21 @@ function alimentaSelectDependenteForca(idForca){
             dwr.util.removeAllOptions("txtOM");
             dwr.util.addOptions("txtOM", [{id: "0", nome: "Selecione uma Organização Militar..."}], "id", "nome");
             dwr.util.addOptions("txtOM", oms, "id", "nome");
-            
+        }
+    });         
+}
+
+function alimentaSelectDependenteForcaAtt(idForca){
+    FacadeAjax.getPGsByForcaDWR(idForca, {
+        callback: function(postosgraduacoes){                        
+            dwr.util.removeAllOptions("txtPGradAtt");
+            dwr.util.addOptions("txtPGradAtt", [{id: "0", nome: "Selecione um Posto/Graduação..."}], "id", "nome");
+            dwr.util.addOptions("txtPGradAtt", postosgraduacoes, "id", "nome");
+        }
+    });         
+    
+    FacadeAjax.getOmsByForcaDWR(idForca, {
+        callback: function(oms){                        
             dwr.util.removeAllOptions("txtOMAtt");
             dwr.util.addOptions("txtOMAtt", [{id: "0", nome: "Selecione uma Organização Militar..."}], "id", "nome");
             dwr.util.addOptions("txtOMAtt", oms, "id", "nome");
@@ -103,7 +122,7 @@ $("select[name=txtTipoForcaAtt").change(function(){
     limpaAlimentacaoSelect("txtForcaAtt", "Selecione uma Forca...");
     limpaAlimentacaoSelect("txtPGradAtt", "Selecione um Posto/Graduação...");
     limpaAlimentacaoSelect("txtOMAtt", "Selecione uma Organização Militar...");
-    alimentaSelectDependenteTipoForca(this.value);
+    alimentaSelectDependenteTipoForcaAtt(this.value);
 });
 
 $("select[name=txtForca").change(function(){
@@ -115,7 +134,7 @@ $("select[name=txtForca").change(function(){
 $("select[name=txtForcaAtt").change(function(){
     limpaAlimentacaoSelect("txtPGradAtt", "Selecione um Posto/Graduação...");
     limpaAlimentacaoSelect("txtOMAtt", "Selecione uma Organização Militar...");
-    alimentaSelectDependenteForca(this.value);
+    alimentaSelectDependenteForcaAtt(this.value);
 });
 
 function alteraVisitanteMilitar(identidade){
@@ -124,10 +143,10 @@ function alteraVisitanteMilitar(identidade){
             dwr.util.setValues({
                 txtIdentidadeMilitarAtt: visitante.identidade,
                 txtTipoVisitante: visitante.tipo,
-                txtTipoForcaAtt: visitante.idTipoForcaPostoGraduacao,
-                txtForcaAtt: visitante.idForcaPostoGraduacao,
-                txtPGradAtt: visitante.idPostoGraduacao,
-                txtOMAtt: visitante.idOM,
+                //txtTipoForcaAtt: visitante.idTipoForcaPostoGraduacao,
+                //txtForcaAtt: visitante.idForcaPostoGraduacao,
+                //txtPGradAtt: visitante.idPostoGraduacao,
+                //txtOMAtt: visitante.idOM,
                 txtNomeMilitarAtt: visitante.nome,
                 txtSobrenomeMilitarAtt: visitante.sobrenome,
                 txtNomeGuerraAtt: visitante.nomeguerra,

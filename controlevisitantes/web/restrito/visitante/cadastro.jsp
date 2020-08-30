@@ -172,6 +172,12 @@
                                     <div class="valid-feedback">Selva!</div>
                                     <div class="invalid-feedback invalid-identidademilitar">Campo Obrigatório!</div>
                                 </div>  
+                                <div class="form-group col-md-4">
+                                    <label for="txtFotoMilitar">Foto: <span class="campo-obrigatorio">*</span></label>
+                                    <input type="file" class="form-control" id="txtFotoMilitar" name="txtFotoMilitar" accept="image/*" capture>
+                                    <div class="valid-feedback">Selva!</div>
+                                    <div class="invalid-feedback invalid-identidademilitar">Campo Obrigatório!</div>
+                                </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-4">

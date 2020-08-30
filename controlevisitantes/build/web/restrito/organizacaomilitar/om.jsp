@@ -207,7 +207,7 @@
                                 out.println("               </form>");
                                 out.println("           </div>");
                                 out.println("           <div class=\"form-group mr-2\">");                  
-                                out.println("                   <button id="+om.getId()+" type=\"submit\" name=\"btnAlterar\" class=\"btn btn-success\" data-toggle=\"modal\" data-target=\"#modalFormAttOm\" onclick=\"alteraOm("+"'"+om.getId()+"'"+");\">Alterar</button>");
+                                out.println("                   <button id="+om.getId()+" type=\"button\" name=\"btnAlterar\" class=\"btn btn-success\" data-toggle=\"modal\" data-target=\"#modalFormAttOm\" onclick=\"alteraOm("+"'"+om.getId()+"'"+");\">Alterar</button>");
                                 out.println("           </div>");
                                 out.println("       </div>");
                                 out.println("   </td>");

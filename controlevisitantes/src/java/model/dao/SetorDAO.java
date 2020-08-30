@@ -200,7 +200,10 @@ public class SetorDAO {
                                                       "FROM Setor " + 
                                                       "WHERE id = ?;";
        
-    public Setor getSetorByIdDWR(int idSetor){
+    public static Setor getSetorByIdDWR(int idSetor){
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
         Setor setor = new Setor();    
         DivisaoSecaoDAO divsecDAO = new DivisaoSecaoDAO();
         try {

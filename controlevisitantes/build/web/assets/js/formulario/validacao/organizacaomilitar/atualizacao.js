@@ -19,9 +19,11 @@ $(document).ready(function(){
     //Campo Input Abreviatura
     validInput("input[name=txtAbreviaturaAtt]");
     validInputTReal("input[name=txtAbreviaturaAtt]");
+    
+    
 });
 
-$("button[name=btnAlterar]").click(function(){
+$("button[name=btnAlterar]").click(function(){    
     //Campo Select Tipo de Força
     validSelect("select[name=txtTipoForcaAtt]");   
     
