@@ -1,154 +1,70 @@
 //CB Anderson de Paula Andrade Medeiros
 //Técnico em Informática
-//01.08.2020
+//21.08.2020
 
-function limpaAlimentacaoSelect(campo, primeiroSelect){
-    dwr.util.removeAllOptions(campo);
-    dwr.util.addOptions(campo, [{id: "0", nome: primeiroSelect}], "id", "nome");
-}
+$("#txtVeiculoEntrar").change(function() {
+    if($("#txtVeiculoEntrar").val() === "s"){
+        $("#divVeiculos").css("display", "block");        
+    }
+    else if($("#txtVeiculoEntrar").val() === "n" || $("#txtVeiculoEntrar").val() === "0"){
+        $("#divVeiculos").css("display", "none");
 
-$("select[name=txtTipoVisitante").change(function(){
-    var tipoVisitante = $("select[name=txtTipoVisitante]").val();
-   
-    if(tipoVisitante == 0){
-        $("#formVisitanteCivil").css("display", "none");
-        $("#formVisitanteMilitar").css("display", "none");
-    }
-    else if(tipoVisitante == 1){
-        $("#formVisitanteCivil").css("display", "none");
-        $("#formVisitanteMilitar").css("display", "block");
-    }
-    else if(tipoVisitante == 2){
-        $("#formVisitanteMilitar").css("display", "none");
-        $("#formVisitanteCivil").css("display", "block");
+        $("select[name=txtTipoVeiculoAl]").val('0');
+        $("select[name=txtTipoVeiculoAl]").removeClass("is-invalid");
+        $("select[name=txtTipoVeiculoAl]").removeClass("is-valid");
+
+        $("input[name=txtMarcaVeiculoAl]").val('');            
+        $("input[name=txtMarcaVeiculoAl]").removeClass("is-invalid");
+        $("input[name=txtMarcaVeiculoAl]").removeClass("is-valid");
+
+        $("input[name=txtModeloVeiculoAl]").val('');            
+        $("input[name=txtModeloVeiculoAl]").removeClass("is-invalid");
+        $("input[name=txtModeloVeiculoAl]").removeClass("is-valid");
+
+        $("input[name=txtCorVeiculoAl]").val('');            
+        $("input[name=txtCorVeiculoAl]").removeClass("is-invalid");
+        $("input[name=txtCorVeiculoAl]").removeClass("is-valid");
+
+        $("input[name=txtPlacaVeiculoAl]").val('');            
+        $("input[name=txtPlacaVeiculoAl]").removeClass("is-invalid");
+        $("input[name=txtPlacaVeiculoAl]").removeClass("is-valid");
     }
 });
 
-$(document).ready(function(){
-    var tipoVisitante = $("select[name=txtTipoVisitante]").val();
-   
-    if(tipoVisitante == 0){
-        $("#formVisitanteCivil").css("display", "none");
-        $("#formVisitanteMilitar").css("display", "none");
-    }
-    else if(tipoVisitante == 1){
-        $("#formVisitanteCivil").css("display", "none");
-        $("#formVisitanteMilitar").css("display", "block");
-    }
-    else if(tipoVisitante == 2){
-        $("#formVisitanteMilitar").css("display", "none");
-        $("#formVisitanteCivil").css("display", "block");
-    }    
-});
-
-function alimentaSelectTipoForca(tiposforca){
-    dwr.util.removeAllOptions("txtTipoForca");
-    dwr.util.addOptions("txtTipoForca", [{id: "0", nome: "Selecione um Tipo de Força..."}], "id", "nome");
-    dwr.util.addOptions("txtTipoForca", tiposforca, "id", "nome");
+$("select[name=txtTipoVisitante]").change(function(){
+    $("input[name=txtIdentidadeMilitar").val('');
+    $("input[name=txtIdentidadeCivil").val('');
     
-    dwr.util.removeAllOptions("txtTipoForcaAtt");
-    dwr.util.addOptions("txtTipoForcaAtt", [{id: "0", nome: "Selecione um Tipo de Força..."}], "id", "nome");
-    dwr.util.addOptions("txtTipoForcaAtt", tiposforca, "id", "nome");
-}
-FacadeAjax.getTiposForcaDWR(alimentaSelectTipoForca);
-
-function alimentaSelectDependenteTipoForca(idTipoForca){
-    FacadeAjax.getForcasByIdTipoForcaDWR(idTipoForca, {
-        callback: function(forcas){
-            dwr.util.removeAllOptions("txtForca");
-            dwr.util.addOptions("txtForca", [{id: "0", nome: "Selecione uma Força..."}], "id", "nome");
-            dwr.util.addOptions("txtForca", forcas, "id", "nome");
-            
-            dwr.util.removeAllOptions("txtForcaAtt");
-            dwr.util.addOptions("txtForcaAtt", [{id: "0", nome: "Selecione uma Força..."}], "id", "nome");
-            dwr.util.addOptions("txtForcaAtt", forcas, "id", "nome");
-        } 
-    });
-}
-
-function alimentaSelectDependenteForca(idForca){
-    FacadeAjax.getPGsByForcaDWR(idForca, {
-        callback: function(postosgraduacoes){            
-            dwr.util.removeAllOptions("txtPGrad");
-            dwr.util.addOptions("txtPGrad", [{id: "0", nome: "Selecione um Posto/Graduação..."}], "id", "nome");
-            dwr.util.addOptions("txtPGrad", postosgraduacoes, "id", "nome");
-            
-            dwr.util.removeAllOptions("txtPGradAtt");
-            dwr.util.addOptions("txtPGradAtt", [{id: "0", nome: "Selecione um Posto/Graduação..."}], "id", "nome");
-            dwr.util.addOptions("txtPGradAtt", postosgraduacoes, "id", "nome");
-        }
-    });         
+    var tipoVisitante = $("select[name=txtTipoVisitante]").val();
     
-    FacadeAjax.getOmsByForcaDWR(idForca, {
-        callback: function(oms){            
-            dwr.util.removeAllOptions("txtOM");
-            dwr.util.addOptions("txtOM", [{id: "0", nome: "Selecione uma Organização Militar..."}], "id", "nome");
-            dwr.util.addOptions("txtOM", oms, "id", "nome");
-            
-            dwr.util.removeAllOptions("txtOMAtt");
-            dwr.util.addOptions("txtOMAtt", [{id: "0", nome: "Selecione uma Organização Militar..."}], "id", "nome");
-            dwr.util.addOptions("txtOMAtt", oms, "id", "nome");
-        }
-    });         
-}
-
-$("select[name=txtTipoForca").change(function(){
-    limpaAlimentacaoSelect("txtForca", "Selecione uma Forca...");
-    limpaAlimentacaoSelect("txtPGrad", "Selecione um Posto/Graduação...");
-    limpaAlimentacaoSelect("txtOM", "Selecione uma Organização Militar...");
-    alimentaSelectDependenteTipoForca(this.value);
+    if(tipoVisitante == 1){
+        $("#div-idtcivil").css("display", "none");
+        $("#div-idtmilitar").css("display", "block");
+    }else if(tipoVisitante == 2){
+        $("#div-idtmilitar").css("display", "none");
+        $("#div-idtcivil").css("display", "block");
+    }
 });
 
-$("select[name=txtTipoForcaAtt").change(function(){
-    limpaAlimentacaoSelect("txtForcaAtt", "Selecione uma Forca...");
-    limpaAlimentacaoSelect("txtPGradAtt", "Selecione um Posto/Graduação...");
-    limpaAlimentacaoSelect("txtOMAtt", "Selecione uma Organização Militar...");
-    alimentaSelectDependenteTipoForca(this.value);
-});
-
-$("select[name=txtForca").change(function(){
-    limpaAlimentacaoSelect("txtPGrad", "Selecione um Posto/Graduação...");
-    limpaAlimentacaoSelect("txtOM", "Selecione uma Organização Militar...");
-    alimentaSelectDependenteForca(this.value);
-});
-
-$("select[name=txtForcaAtt").change(function(){
-    limpaAlimentacaoSelect("txtPGradAtt", "Selecione um Posto/Graduação...");
-    limpaAlimentacaoSelect("txtOMAtt", "Selecione uma Organização Militar...");
-    alimentaSelectDependenteForca(this.value);
-});
-
-function alteraVisitanteMilitar(identidade){
+function getVisitanteByIdentidade(identidade){
     FacadeAjax.getVisitanteByIdentidadeDWR(identidade, {
-        callback: function(visitante){
-            dwr.util.setValues({
-                txtIdentidadeMilitarAtt: visitante.identidade,
-                txtTipoVisitante: visitante.tipo,
-                txtTipoForcaAtt: visitante.idTipoForcaPostoGraduacao,
-                txtForcaAtt: visitante.idForcaPostoGraduacao,
-                txtPGradAtt: visitante.idPostoGraduacao,
-                txtOMAtt: visitante.idOM,
-                txtNomeMilitarAtt: visitante.nome,
-                txtSobrenomeMilitarAtt: visitante.sobrenome,
-                txtNomeGuerraAtt: visitante.nomeguerra,
-                txtEmailMilitarAtt: visitante.email,
-                txtFoneMilitarAtt: visitante.fone
-            });
+        callback:function(visitante){
+            if(visitante.nome != null){
+                $("#div-visnencontrado").css("display", "none");
+                $("#formVisita").css("display", "block");
+                dwr.util.setValues({txtNomeVisitante: visitante.nome + " " + visitante.sobrenome});
+            }
+            else{
+                $("#formVisita").css("display", "none");
+                $("#div-visnencontrado").css("display", "block");
+            }
         }
-    });
+    }); 
 }
 
-function alteraVisitanteCivil(identidade){
-    FacadeAjax.getVisitanteByIdentidadeDWR(identidade, {
-        callback: function(visitante){
-            dwr.util.setValues({
-                txtIdentidadeCivilAtt: visitante.identidade,
-                txtTipoVisitante: visitante.tipo,
-                txtNomeCivilAtt: visitante.nome,
-                txtSobrenomeCivilAtt: visitante.sobrenome,
-                txtEmailCivilAtt: visitante.email,
-                txtFoneCivilAtt: visitante.fone
-            });
-        }
-    });
+function alimentaSelectSetor(setores){
+    dwr.util.removeAllOptions("txtSetorVisitado");
+    dwr.util.addOptions("txtSetorVisitado", [{id: "0", nome: "Selecione um Setor..."}], "id", "nome");
+    dwr.util.addOptions("txtSetorVisitado", setores, "id", "nome");
 }
+FacadeAjax.getSetoresDWR(alimentaSelectSetor);

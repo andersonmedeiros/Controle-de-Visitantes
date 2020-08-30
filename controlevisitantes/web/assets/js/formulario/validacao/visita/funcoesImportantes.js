@@ -1,6 +1,6 @@
 //CB Anderson de Paula Andrade Medeiros
 //Técnico em Informática
-//01.08.2020
+//21.08.2020
 
 function somenteNumero(campo) {
     // Somente números
@@ -47,14 +47,6 @@ function validSelect(campo){
     }
 };
 
-//Checkbox
-function validCheckbox(campo){
-    if($(campo).is(":checked")){
-        $(campo).removeClass("is-invalid");
-        $(campo).addClass("is-valid");
-    }
-};
-
 //IDENTIDADE MILITAR
 function validIdentidadeMilitar(campo){  
     var idtMil = $(campo).val().replace("-","").replace("(","").replace(")","").replace(" ","");
@@ -93,52 +85,36 @@ function validIdentidadeCivil(campo){
     }
 };
 
-// Email
-function validEmail(campo){
-    var filtro = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]+$/;
-    var email = $(campo).val();
-    if(email == ''){
-    }
-    else if(filtro.test(email) == false){
-        $(campo).removeClass("is-valid");
-        $(campo).addClass("is-invalid");
-        $(".invalid-email").html("Email Inválido!");
-    }
-    else{     
-        $(campo).removeClass("is-invalid");
-        $(campo).addClass("is-valid");
-    }
-};
+// Data de Entrada
+function validDataEntrada(campo){
+    var dataEntrada = $(campo).val();
+    var dataEntradaSplit = dataEntrada.split('-');        
+    var diaEntrada = dataEntradaSplit[2];
+    var mesEntrada = dataEntradaSplit[1];
+    var anoEntrada = dataEntradaSplit[0];
 
-// Fone celular
-function validFoneCel(campo){
-    var foneCel = $(campo).val().replace("-","").replace("(","").replace(")","").replace(" ","");
-    if(foneCel == ''){
-    }
-    else if(foneCel == '00000000000' || foneCel == '11111111111' || foneCel == '22222222222' || foneCel == '33333333333' ||                 
-            foneCel == '44444444444' || foneCel == '55555555555' || foneCel == '66666666666' || foneCel == '77777777777' ||                 
-            foneCel == '88888888888' || foneCel == '99999999999'){
+    var dataAtual = new Date();
+    var diaAtual = dataAtual.getDate();
+    var mesAtual = (dataAtual.getMonth() + 1);
+    var anoAtual = dataAtual.getFullYear();
+
+    if(dataEntrada == ''){
+    }       
+    else if((anoEntrada == anoAtual) && (mesEntrada == mesAtual) && (diaEntrada > diaAtual)){
         $(campo).removeClass("is-valid");
         $(campo).addClass("is-invalid");
-        $(".invalid-foneCel").html("Fone Inválido!");
-    }
-    else{
-        $(campo).removeClass("is-invalid");
-        $(campo).addClass("is-valid");
-    }
-};
-// Fone celular
-function validFoneCelCv(campo){
-    var foneCel = $(campo).val().replace("-","").replace("(","").replace(")","").replace(" ","");
-    if(foneCel == ''){
-    }
-    else if(foneCel == '00000000000' || foneCel == '11111111111' || foneCel == '22222222222' || foneCel == '33333333333' ||                 
-            foneCel == '44444444444' || foneCel == '55555555555' || foneCel == '66666666666' || foneCel == '77777777777' ||                 
-            foneCel == '88888888888' || foneCel == '99999999999'){
+        $(".invalid-dataEntrada").html("Data Inválida! Nascimento após data atual.");
+    }       
+    else if((anoEntrada == anoAtual) && (mesEntrada > mesAtual)){
         $(campo).removeClass("is-valid");
         $(campo).addClass("is-invalid");
-        $(".invalid-foneCel").html("Fone Inválido!");
-    }
+        $(".invalid-dataEntrada").html("Data Inválida! Nascimento após data atual.");
+    }       
+    else if((anoEntrada > anoAtual)){
+        $(campo).removeClass("is-valid");
+        $(campo).addClass("is-invalid");
+        $(".invalid-dataEntrada").html("Data Inválida! Entrada após data atual.");
+    }    
     else{
         $(campo).removeClass("is-invalid");
         $(campo).addClass("is-valid");
@@ -171,19 +147,6 @@ function validInputTReal(campo){
             $(campo).addClass("is-invalid");
         }
     });
-};
-
-//Checkbox
-function validCheckboxTReal(campo){
-    $(campo).change(function(){
-        if($(campo).is(":checked")){
-            $(campo).removeClass("is-invalid");
-            $(campo).addClass("is-valid");
-        }else{
-            $(campo).removeClass("is-valid");
-            $(campo).addClass("is-invalid");
-        }
-    });    
 };
 
 //IDENTIDADE MILITAR
@@ -224,72 +187,6 @@ function validIdentidadeCivilTReal(campo){
             $(campo).removeClass("is-valid");
             $(campo).addClass("is-invalid");
             $(".invalid-identidadecivil").html("Identidade Inválida!");  
-        }
-        else{
-            $(campo).removeClass("is-invalid");
-            $(campo).addClass("is-valid");
-        }
-    });
-};
-
-//Email
-function validEmailTReal(campo){
-    $(campo).change(function(){
-        var filtro = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]+$/;
-        var email = $(campo).val();
-        if(email == ''){
-            $(campo).removeClass("is-valid");
-            $(campo).addClass("is-invalid");
-            $(".invalid-email").html("Campo Obrigatório!");
-        }        
-        else if(filtro.test(email)){
-            $(campo).removeClass("is-invalid");
-            $(campo).addClass("is-valid");
-        }
-        else{            
-            $(campo).removeClass("is-valid");
-            $(campo).addClass("is-invalid");
-            $(".invalid-email").html("Email Inválido!");
-        }
-    });
-};
-
-//Fone celular
-function validFoneCelTReal(campo){  
-    $(campo).change(function(){
-        var foneCel = $(campo).val().replace("-","").replace("(","").replace(")","").replace(" ","");
-        if(foneCel == ''){
-            $(campo).removeClass("is-valid");
-            $(campo).addClass("is-invalid");
-            $(".invalid-foneCel").html("Campo Obrigatório!");
-        }
-        else if(foneCel == '00000000000' || foneCel == '11111111111' || foneCel == '22222222222' || foneCel == '33333333333' ||                 
-                foneCel == '44444444444' || foneCel == '55555555555' || foneCel == '66666666666' || foneCel == '77777777777' ||                 
-                foneCel == '88888888888' || foneCel == '99999999999'){
-            $(campo).removeClass("is-valid");
-            $(campo).addClass("is-invalid");
-            $(".invalid-foneCel").html("Fone Inválido!");
-        }
-        else{
-            $(campo).removeClass("is-invalid");
-            $(campo).addClass("is-valid");
-        }
-    });
-};
-function validFoneCelCvTReal(campo){  
-    $(campo).change(function(){
-        var foneCel = $(campo).val().replace("-","").replace("(","").replace(")","").replace(" ","");
-        if(foneCel == ''){
-            $(campo).removeClass("is-valid");
-            $(campo).addClass("is-invalid");
-            $(".invalid-foneCel").html("Campo Obrigatório!");
-        }
-        else if(foneCel == '00000000000' || foneCel == '11111111111' || foneCel == '22222222222' || foneCel == '33333333333' ||                 
-                foneCel == '44444444444' || foneCel == '55555555555' || foneCel == '66666666666' || foneCel == '77777777777' ||                 
-                foneCel == '88888888888' || foneCel == '99999999999'){
-            $(campo).removeClass("is-valid");
-            $(campo).addClass("is-invalid");
-            $(".invalid-foneCel").html("Fone Inválido!");
         }
         else{
             $(campo).removeClass("is-invalid");

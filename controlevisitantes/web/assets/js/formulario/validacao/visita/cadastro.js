@@ -4,6 +4,11 @@
 
 //Ao carregar ou recarregar a página
 $(document).ready(function(){   
+    limpaCampoSelect("select[name=txtTipoVisitante]");
+    limpaCampoInput("input[name=txtIdentidadeMilitar]");
+    limpaCampoInput("input[name=txtIdentidadeCivil]");
+    limpaCampoInput("input[name=txtNomeVisitante]");    
+    
     //Campo Select Visitante
     validSelect("select[name=txtTipoVisitante]");
     validSelectTReal("select[name=txtTipoVisitante]");
@@ -16,79 +21,53 @@ $(document).ready(function(){
     validIdentidadeCivil("input[name=txtIdentidadeCivil]");
     validIdentidadeCivilTReal("input[name=txtIdentidadeCivil]"); 
     
-    //Campo Select Tipo Força
-    validSelect("select[name=txtTipoForca]");
-    validSelectTReal("select[name=txtTipoForca]");
+    //Campo Input Cracha
+    validInput("input[name=txtCracha]");
+    validInputTReal("input[name=txtCracha]");
     
-    //Campo Select Força
-    validSelect("select[name=txtForca]");
-    validSelectTReal("select[name=txtForca]");
+    //Campo Input Data Entrada
+    validInput("input[name=txtDataEntrada]");
+    validInputTReal("input[name=txtDataEntrada]");
     
-    //Campo Select Posto/Graduação
-    validSelect("select[name=txtPGrad]");
-    validSelectTReal("select[name=txtPGrad]");
+    //Campo Input Hora Entrada
+    validInput("input[name=txtHoraEntrada]");
+    validInputTReal("input[name=txtHoraEntrada]");    
     
-    //Campo Select Organização Militar
-    validSelect("select[name=txtOM]");
-    validSelectTReal("select[name=txtOM]");       
+    //Campo Select Setor Visitado
+    validSelect("select[name=txtSetorVisitado]");
+    validSelectTReal("select[name=txtSetorVisitado]");
     
-    //Campo Input Nome
-    validInput("input[name=txtNomeMilitar]");
-    validInputTReal("input[name=txtNomeMilitar]");
+    //Campo Textarea Finalidade
+    validInput("textarea[name=txtFinalidade]");
+    validInputTReal("textarea[name=txtFinalidade]");    
     
-    //Campo Input Sobrenome
-    validInput("input[name=txtSobrenomeMilitar]");
-    validInputTReal("input[name=txtSobrenomeMilitar]");
+    //Campo Select Entrar Veiculo
+    validSelect("select[name=txtVeiculoEntrar]");
+    validSelectTReal("select[name=txtVeiculoEntrar]");
     
-    //Campo Input Nome
-    validInput("input[name=txtNomeCivil]");
-    validInputTReal("input[name=txtNomeCivil]");
-    
-    //Campo Input Sobrenome
-    validInput("input[name=txtSobrenomeCivil]");
-    validInputTReal("input[name=txtSobrenomeCivil]");
-    
-    //Campo Input Nome Guerra
-    validInput("input[name=txtNomeGuerra]");
-    validInputTReal("input[name=txtNomeGuerra]");
-    
-    //Campo Input Email
-    validEmail("input[name=txtEmailMilitar]");
-    validEmailTReal("input[name=txtEmailMilitar]");
-    
-    //Campo Input Email
-    validEmail("input[name=txtEmailCivil]");
-    validEmailTReal("input[name=txtEmailCivil]");
-    
-    //Campo Input Email
-    validFoneCel("input[name=txtFoneMilitar]");
-    validFoneCelTReal("input[name=txtFoneMilitar]");
-    
-    //Campo Input Email
-    validFoneCel("input[name=txtFoneCivil]");
-    validFoneCelTReal("input[name=txtFoneCivil]");
-});
-
-$("select[name=txtTipoVisitante]").change(function(){
-    limpaCampoInput("input[name=txtIdentidadeMilitar]");
-    limpaCampoInput("input[name=txtIdentidadeCivil]");
-    limpaCampoSelect("select[name=txtTipoForca");
-    limpaCampoSelect("select[name=txtForca");
-    limpaCampoSelect("select[name=txtPGrad");
-    limpaCampoSelect("select[name=txtOM");
-    limpaCampoInput("input[name=txtNomeMilitar]");
-    limpaCampoInput("input[name=txtNomeCivil]");
-    limpaCampoInput("input[name=txtSobrenomeMilitar]");
-    limpaCampoInput("input[name=txtSobrenomeCivil]");
-    limpaCampoInput("input[name=txtNomeGuerra]");
-    limpaCampoInput("input[name=txtEmailMilitar]");
-    limpaCampoInput("input[name=txtEmailCivil]");
-    limpaCampoInput("input[name=txtFoneMilitar]");
-    limpaCampoInput("input[name=txtFoneCivil]");
+    //Campo Select Tipo Veiculo
+    validSelect("select[name=txtTipoVeiculo]");
+    validSelectTReal("select[name=txtTipoVeiculo]");
+        
+    //Campo Input Marca Veiculo
+    validInput("input[name=txtMarcaVeiculo]");
+    validInputTReal("input[name=txtMarcaVeiculo]"); 
+        
+    //Campo Input Modelo Veiculo
+    validInput("input[name=txtModeloVeiculo]");
+    validInputTReal("input[name=txtModeloVeiculo]"); 
+        
+    //Campo Input Cor Veiculo
+    validInput("input[name=txtCorVeiculo]");
+    validInputTReal("input[name=txtCorVeiculo]"); 
+        
+    //Campo Input Placa Veiculo
+    validInput("input[name=txtPlacaVeiculo]");
+    validInputTReal("input[name=txtPlacaVeiculo]"); 
 });
 
 //Obrigatoriedade
-$("button[name=btnSalvarCadastro]").click(function(){     
+$("button[name=btnPesquisar]").click(function(){     
     if($("select[name=txtTipoVisitante]").val() == '0'){
         $("select[name=txtTipoVisitante]").removeClass("is-valid");
         $("select[name=txtTipoVisitante]").addClass("is-invalid");
@@ -96,10 +75,7 @@ $("button[name=btnSalvarCadastro]").click(function(){
         return false;
     }   
     else if($("select[name=txtTipoVisitante]").val() == '1'){
-        var identidadeMilitar = $("input[name=txtIdentidadeMilitar]").val().replace("-", "");    
-        var emailMilitar = $("input[name=txtEmailMilitar]").val(); 
-        var foneCelMilitar = $("input[name=txtFoneMilitar]").val().replace("-","").replace("(","").replace(")","").replace(" ",""); 
-        var filtro = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]+$/;
+        var identidadeMilitar = $("input[name=txtIdentidadeMilitar]").val().replace("-", "");  
         
         if(identidadeMilitar == ''){
             $("input[name=txtIdentidadeMilitar]").removeClass("is-valid");
@@ -117,88 +93,13 @@ $("button[name=btnSalvarCadastro]").click(function(){
             $(".invalid-identidademilitar").html("Identidade Militar Inválida!");
             $("input[name=txtIdentidadeMilitar]").focus();
             return false;
-        } 
-        else if($("select[name=txtTipoForca]").val() == '0'){
-            $("select[name=txtTipoForca]").removeClass("is-valid");
-            $("select[name=txtTipoForca]").addClass("is-invalid");
-            $("select[name=txtTipoForca]").focus();
-            return false;
-        } 
-        else if($("select[name=txtForca]").val() == '0'){
-            $("select[name=txtForca]").removeClass("is-valid");
-            $("select[name=txtForca]").addClass("is-invalid");
-            $("select[name=txtForca]").focus();
-            return false;
-        } 
-        else if($("select[name=txtPGrad]").val() == '0'){
-            $("select[name=txtPGrad]").removeClass("is-valid");
-            $("select[name=txtPGrad]").addClass("is-invalid");
-            $("select[name=txtPGrad]").focus();
-            return false;
-        } 
-        else if($("select[name=txtOM]").val() == '0'){
-            $("select[name=txtOM]").removeClass("is-valid");
-            $("select[name=txtOM]").addClass("is-invalid");
-            $("select[name=txtOM]").focus();
-            return false;
-        }
-        else if($("input[name=txtNomeMilitar]").val() == ''){
-            $("input[name=txtNomeMilitar]").removeClass("is-valid");
-            $("input[name=txtNomeMilitar]").addClass("is-invalid");
-            $("input[name=txtNomeMilitar]").focus();
-            return false;
-        }
-        else if($("input[name=txtSobrenomeMilitar]").val() == ''){
-            $("input[name=txtSobrenomeMilitar]").removeClass("is-valid");
-            $("input[name=txtSobrenomeMilitar]").addClass("is-invalid");
-            $("input[name=txtSobrenomeMilitar]").focus();
-            return false;
-        }
-        else if($("input[name=txtNomeGuerra]").val() == ''){
-            $("input[name=txtNomeGuerra]").removeClass("is-valid");
-            $("input[name=txtNomeGuerra]").addClass("is-invalid");
-            $("input[name=txtNomeGuerra]").focus();
-            return false;
-        }
-        else if(emailMilitar == ''){
-            $("input[name=txtEmailMilitar]").removeClass("is-valid");
-            $("input[name=txtEmailMilitar]").addClass("is-invalid");
-            $("input[name=txtEmailMilitar]").focus();
-            $(".invalid-emailmilitar").html("Campo Obrigatório!");
-            return false;
-        }        
-        else if(filtro.test(emailMilitar) == false){
-            $("input[name=txtEmailMilitar]").removeClass("is-valid");
-            $("input[name=txtEmailMilitar]").addClass("is-invalid");
-            $("input[name=txtEmailMilitar]").focus();
-            $(".invalid-emailmilitar").html("Email Inválido!");
-            return false;
-        }
-        else if(foneCelMilitar == ''){
-            $("input[name=txtFoneMilitar]").removeClass("is-valid");
-            $("input[name=txtFoneMilitar]").addClass("is-invalid");
-            $("input[name=txtFoneMilitar]").focus();
-            $(".invalid-fonecelmilitar").html("Campo Obrigatório!");
-            return false;
-        }
-        else if(foneCelMilitar == '00000000000' || foneCelMilitar == '11111111111' || foneCelMilitar == '22222222222' || foneCelMilitar == '33333333333' ||                 
-                foneCelMilitar == '44444444444' || foneCelMilitar == '55555555555' || foneCelMilitar == '66666666666' || foneCelMilitar == '77777777777' ||                 
-                foneCelMilitar == '88888888888' || foneCelMilitar == '99999999999'){
-            $("input[name=txtFoneMilitar]").removeClass("is-valid");
-            $("input[name=txtFoneMilitar]").addClass("is-invalid");
-            $("input[name=txtFoneMilitar]").focus();
-            $(".invalid-fonecelmilitar").html("Fone Inválido!");
-            return false
         }
         else{        
-            return true;
+            getVisitanteByIdentidade($("input[name=txtIdentidadeMilitar").val().replace("-",""));
         }
     }  
     else if($("select[name=txtTipoVisitante]").val() == '2'){
-        var identidadeCivil = $("input[name=txtIdentidadeCivil]").val().replace("-", "");                    
-        var emailCivil = $("input[name=txtEmailCivil]").val(); 
-        var foneCelCivil = $("input[name=txtFoneCivil]").val().replace("-","").replace("(","").replace(")","").replace(" ","");        
-        var filtro = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]+$/;
+        var identidadeCivil = $("input[name=txtIdentidadeCivil]").val().replace("-", "");      
         
         if(identidadeCivil == ''){
             $("input[name=txtIdentidadeCivil]").removeClass("is-valid");
@@ -216,52 +117,87 @@ $("button[name=btnSalvarCadastro]").click(function(){
             $(".invalid-identidadecivil").html("Identidade Inválida!");
             $("input[name=txtIdentidadeCivil]").focus();
             return false;
-        }        
-        else if($("input[name=txtNomeCivil]").val() == ''){
-            $("input[name=txtNomeCivil]").removeClass("is-valid");
-            $("input[name=txtNomeCivil]").addClass("is-invalid");
-            $("input[name=txtNomeCivil]").focus();
-            return false;
-        }
-        else if($("input[name=txtSobrenomeCivil]").val() == ''){
-            $("input[name=txtSobrenomeCivil]").removeClass("is-valid");
-            $("input[name=txtSobrenomeCivil]").addClass("is-invalid");
-            $("input[name=txtSobrenomeCivil]").focus();
-            return false;
-        }
-        else if(emailCivil == ''){
-            $("input[name=txtEmailCivil]").removeClass("is-valid");
-            $("input[name=txtEmailCivil]").addClass("is-invalid");
-            $("input[name=txtEmailCivil]").focus();
-            $(".invalid-emailcivil").html("Campo Obrigatório!");
-            return false;
-        }        
-        else if(filtro.test(emailCivil) == false){
-            $("input[name=txtEmailCivil]").removeClass("is-valid");
-            $("input[name=txtEmailCivil]").addClass("is-invalid");
-            $("input[name=txtEmailCivil]").focus();
-            $(".invalid-emailcivil").html("Email Inválido!");
-            return false;
-        }
-        else if(foneCelCivil == ''){
-            $("input[name=txtFoneCivil]").removeClass("is-valid");
-            $("input[name=txtFoneCivil]").addClass("is-invalid");
-            $("input[name=txtFoneCivil]").focus();
-            $(".invalid-fonecelcivil").html("Campo Obrigatório!");
-            return false;
-        }
-        else if(foneCelCivil == '00000000000' || foneCelCivil == '11111111111' || foneCelCivil == '22222222222' || foneCelCivil == '33333333333' ||                 
-                foneCelCivil == '44444444444' || foneCelCivil == '55555555555' || foneCelCivil == '66666666666' || foneCelCivil == '77777777777' ||                 
-                foneCelCivil == '88888888888' || foneCelCivil == '99999999999'){
-            $("input[name=txtFoneCivil]").removeClass("is-valid");
-            $("input[name=txtFoneCivil]").addClass("is-invalid");
-            $("input[name=txtFoneCivil]").focus();
-            $(".invalid-fonecelcivil").html("Fone Inválido!");
-            return false;
-        }
+        }       
         else{        
-            return true;
+            getVisitanteByIdentidade($("input[name=txtIdentidadeCivil").val().replace("-",""));
         }
     }    
 });
 
+$("button[name=btnSalvarCadastro]").click(function(){
+    if($("input[name=txtNomeVisitante]").val() == ''){
+        alert("Visitante não selecionado!");
+        return false;
+    }
+    else if($("input[name=txtCracha]").val() == ''){
+        $("input[name=txtCracha]").removeClass("is-valid");
+        $("input[name=txtCracha]").addClass("is-invalid");
+        $("input[name=txtCracha]").focus();
+        return false;
+    }
+    else if($("input[name=txtDataEntrada]").val() == ''){
+        $("input[name=txtDataEntrada]").removeClass("is-valid");
+        $("input[name=txtDataEntrada]").addClass("is-invalid");
+        $("input[name=txtDataEntrada]").focus();
+        return false;
+    }
+    else if($("input[name=txtHoraEntrada]").val() == ''){
+        $("input[name=txtHoraEntrada]").removeClass("is-valid");
+        $("input[name=txtHoraEntrada]").addClass("is-invalid");
+        $("input[name=txtHoraEntrada]").focus();
+        return false;
+    }
+    else if($("select[name=txtSetorVisitado]").val() == '0'){
+        $("select[name=txtSetorVisitado]").removeClass("is-valid");
+        $("select[name=txtSetorVisitado]").addClass("is-invalid");
+        $("select[name=txtSetorVisitado]").focus();
+        return false;
+    }
+    else if($("textarea[name=txtFinalidade]").val() == ''){
+        $("textarea[name=txtFinalidade]").removeClass("is-valid");
+        $("textarea[name=txtFinalidade]").addClass("is-invalid");
+        $("textarea[name=txtFinalidade]").focus();
+        return false;
+    }
+    else if($("select[name=txtVeiculoEntrar]").val() == '0'){
+        $("select[name=txtVeiculoEntrar]").removeClass("is-valid");
+        $("select[name=txtVeiculoEntrar]").addClass("is-invalid");
+        $("select[name=txtVeiculoEntrar]").focus();
+        return false;
+    }  
+    else if($("select[name=txtVeiculoEntrar]").val() == 'n'){
+        return true;
+    }  
+    else if($("select[name=txtVeiculoEntrar]").val() == 's'){
+        if($("select[name=txtTipoVeiculo]").val() == '0'){
+            $("select[name=txtTipoVeiculo]").removeClass("is-valid");
+            $("select[name=txtTipoVeiculo]").addClass("is-invalid");
+            $("select[name=txtTipoVeiculo]").focus();
+            return false;
+        }
+        else if($("input[name=txtMarcaVeiculo]").val() == ''){
+            $("input[name=txtMarcaVeiculo]").removeClass("is-valid");
+            $("input[name=txtMarcaVeiculo]").addClass("is-invalid");
+            $("input[name=txtMarcaVeiculo]").focus();
+            return false;
+        }
+        else if($("input[name=txtModeloVeiculo]").val() == ''){
+            $("input[name=txtModeloVeiculo]").removeClass("is-valid");
+            $("input[name=txtModeloVeiculo]").addClass("is-invalid");
+            $("input[name=txtModeloVeiculo]").focus();
+            return false;
+        }
+        else if($("input[name=txtCorVeiculo]").val() == ''){
+            $("input[name=txtCorVeiculo]").removeClass("is-valid");
+            $("input[name=txtCorVeiculo]").addClass("is-invalid");
+            $("input[name=txtCorVeiculo]").focus();
+            return false;
+        }
+        else if($("input[name=txtPlacaVeiculo]").val() == ''){
+            $("input[name=txtPlacaVeiculo]").removeClass("is-valid");
+            $("input[name=txtPlacaVeiculo]").addClass("is-invalid");
+            $("input[name=txtPlacaVeiculo]").focus();
+            return false;
+        }
+    }  
+});
