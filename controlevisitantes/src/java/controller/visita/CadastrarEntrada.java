@@ -93,7 +93,7 @@ public class CadastrarEntrada extends HttpServlet {
                     veiculo.setMarca(String.valueOf(request.getParameter("txtMarcaVeiculo")).toUpperCase());
                     veiculo.setModelo(String.valueOf(request.getParameter("txtModeloVeiculo")).toUpperCase());
                     veiculo.setCor(String.valueOf(request.getParameter("txtCorVeiculo")).toUpperCase());
-                    veiculo.setPlaca(String.valueOf(request.getParameter("txtPlacaVeiculo")).toUpperCase());
+                    veiculo.setPlaca(String.valueOf(request.getParameter("txtPlacaVeiculo").replace(" ", "")).toUpperCase());
 
                     veiculoDAO.insert(veiculo);      
                 }                

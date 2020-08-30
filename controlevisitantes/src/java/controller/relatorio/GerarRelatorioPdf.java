@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.bean.GeradorDeRelatorios;
+import model.dao.VisitaDAO;
 
 /**
  *
@@ -82,6 +83,7 @@ public class GerarRelatorioPdf extends HttpServlet {
             throws ServletException, IOException {
 
         if((request.getParameter("txtTipoRela")!=null) && (request.getParameter("txtData")!=null)){
+            VisitaDAO visitaDAO = new VisitaDAO();
             ServletContext contexto = getServletContext();
             
             // abre conexão com o banco
@@ -101,7 +103,21 @@ public class GerarRelatorioPdf extends HttpServlet {
             
             //Controle de Entrada/Saída de militares de outras om
             if(tipo == 1){
-                sql_query = "SELECT pg.abreviatura as pg, vis.nome, vis.sobrenome, om.abreviatura as om, v.idtVisitante, v.dataEntrada, v.horaEntrada, v.dataSaida, v.horaSaida, s.abreviatura as destino, " +
+                String sqlQtdeVisitas = "SELECT COUNT(vis.identidade) as qtdeVisitas " +
+                                        "FROM Visita as v " +
+                                        "INNER JOIN Visitante as vis on v.idtVisitante = vis.identidade " +
+                                        "INNER JOIN PostoGraduacao as pg on vis.idPostoGraduacao = pg.id " +
+                                        "INNER JOIN OrganizacaoMilitar as om on vis.idOrganizacaoMilitar = om.id " +
+                                        "INNER JOIN Setor as s on v.idSetor = s.id " +
+                                        "LEFT JOIN Veiculo as veiculo on v.idVeiculo = veiculo.id " +
+                                        "WHERE v.dataSaida is not null AND v.horaSaida is not null AND " +
+                                        "vis.tipo = " + tipo + " AND v.dataEntrada = " + "'" + data + "'" + " order by v.horaEntrada;";
+                
+                if(visitaDAO.getQtdeVisitas(sqlQtdeVisitas) == 0){
+                    response.sendRedirect("/controlevisitantes/restrito/visita/fechada.jsp?e=1");
+                }
+                else{
+                    sql_query = "SELECT pg.abreviatura as pg, vis.nome, vis.sobrenome, om.abreviatura as om, v.idtVisitante, v.dataEntrada, v.horaEntrada, v.dataSaida, v.horaSaida, s.abreviatura as destino, " +
                             "IFNULL(veiculo.marca, '-') as marca, IFNULL(veiculo.modelo, '-') as modelo, IFNULL(veiculo.cor, '-') as cor, IFNULL(veiculo.placa, '-') as placa " +
                             "FROM Visita as v " +
                             "INNER JOIN Visitante as vis on v.idtVisitante = vis.identidade " +
@@ -112,20 +128,34 @@ public class GerarRelatorioPdf extends HttpServlet {
                             "WHERE v.dataSaida is not null AND v.horaSaida is not null AND " +
                             "vis.tipo = " + tipo + " AND v.dataEntrada = " + "'" + data + "'" + " order by v.horaEntrada;";
                 
-                jrxml = contexto.getRealPath("/relatorio/ControleMilitarOutrasOM.jrxml");
+                    jrxml = contexto.getRealPath("/relatorio/ControleMilitarOutrasOM.jrxml");
+                }               
             }
             //Controle de Entrada/Saída de civis
             else if(tipo == 2){
-                sql_query = "SELECT vis.nome, vis.sobrenome, v.idtVisitante, v.dataEntrada, v.horaEntrada, v.dataSaida, v.horaSaida, s.abreviatura as destino, " +
-                            "IFNULL(veiculo.marca, '-') as marca, IFNULL(veiculo.modelo, '-') as modelo, IFNULL(veiculo.cor, '-') as cor, IFNULL(veiculo.placa, '-') as placa " +
-                            "FROM Visita as v " +
-                            "INNER JOIN Visitante as vis on v.idtVisitante = vis.identidade " +
-                            "INNER JOIN Setor as s on v.idSetor = s.id " +
-                            "LEFT JOIN Veiculo as veiculo on v.idVeiculo = veiculo.id " +
-                            "WHERE v.dataSaida is not null and v.horaSaida is not null AND " +
-                            "vis.tipo = " + tipo + " AND v.dataEntrada = " + "'" + data + "'" + " order by v.horaEntrada;";
-            
-                jrxml = contexto.getRealPath("/relatorio/ControleCivis.jrxml");
+                String sqlQtdeVisitas = "SELECT COUNT(vis.identidade) as qtdeVisitas " +
+                                        "FROM Visita as v " +
+                                        "INNER JOIN Visitante as vis on v.idtVisitante = vis.identidade " +
+                                        "INNER JOIN Setor as s on v.idSetor = s.id " +
+                                        "LEFT JOIN Veiculo as veiculo on v.idVeiculo = veiculo.id " +
+                                        "WHERE v.dataSaida is not null and v.horaSaida is not null AND " +
+                                        "vis.tipo = " + tipo + " AND v.dataEntrada = " + "'" + data + "'" + " order by v.horaEntrada;";
+                
+                if(visitaDAO.getQtdeVisitas(sqlQtdeVisitas) == 0){
+                    response.sendRedirect("/controlevisitantes/restrito/visita/fechada.jsp?e=2");
+                }
+                else{
+                    sql_query = "SELECT vis.nome, vis.sobrenome, v.idtVisitante, v.dataEntrada, v.horaEntrada, v.dataSaida, v.horaSaida, s.abreviatura as destino, " +
+                                "IFNULL(veiculo.marca, '-') as marca, IFNULL(veiculo.modelo, '-') as modelo, IFNULL(veiculo.cor, '-') as cor, IFNULL(veiculo.placa, '-') as placa " +
+                                "FROM Visita as v " +
+                                "INNER JOIN Visitante as vis on v.idtVisitante = vis.identidade " +
+                                "INNER JOIN Setor as s on v.idSetor = s.id " +
+                                "LEFT JOIN Veiculo as veiculo on v.idVeiculo = veiculo.id " +
+                                "WHERE v.dataSaida is not null and v.horaSaida is not null AND " +
+                                "vis.tipo = " + tipo + " AND v.dataEntrada = " + "'" + data + "'" + " order by v.horaEntrada;";
+
+                    jrxml = contexto.getRealPath("/relatorio/ControleCivis.jrxml");
+                }
             }
             
             gerador.geraPdf(jrxml, parametros, response.getOutputStream(), sql_query);

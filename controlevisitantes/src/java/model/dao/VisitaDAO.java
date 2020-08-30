@@ -211,6 +211,23 @@ public class VisitaDAO {
         }
         return visita;
     }  
+       
+    public int getQtdeVisitas(String sql){
+        int qtde = 0;
+        try {
+            conn = ConnectionFactory.getConnection();
+            pstm = conn.prepareStatement(sql);
+           
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                qtde = rs.getInt("qtdeVisitas");
+            }
+            ConnectionFactory.fechaConexao(conn, pstm, rs);
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());           
+        }
+        return qtde;
+    }  
     
     private final String GETVISITAS = "SELECT * " +
                                         "FROM " + tabela;
