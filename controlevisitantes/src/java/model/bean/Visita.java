@@ -6,6 +6,7 @@
 package model.bean;
 
 import java.sql.Date;
+import java.sql.Time;
 
 /**
  *
@@ -14,9 +15,12 @@ import java.sql.Date;
 public class Visita {
     private final Visitante vis = new Visitante();
     private final Setor setor = new Setor();
-    int cracha;
-    Date entrada, saida;
     private final Veiculo v = new Veiculo();
+    
+    int cracha;
+    Date dataEntrada, dataSaida;
+    Time horaEntrada, horaSaida;
+    String finalidade;
 
     public int getCracha() {
         return cracha;
@@ -26,21 +30,45 @@ public class Visita {
         this.cracha = cracha;
     }
 
-    public Date getEntrada() {
-        return entrada;
+    public Date getDataEntrada() {
+        return dataEntrada;
     }
 
-    public void setEntrada(Date entrada) {
-        this.entrada = entrada;
+    public void setDataEntrada(Date dataEntrada) {
+        this.dataEntrada = dataEntrada;
     }
 
-    public Date getSaida() {
-        return saida;
+    public Date getDataSaida() {
+        return dataSaida;
     }
 
-    public void setSaida(Date saida) {
-        this.saida = saida;
+    public void setDataSaida(Date dataSaida) {
+        this.dataSaida = dataSaida;
     }
+
+    public Time getHoraEntrada() {
+        return horaEntrada;
+    }
+
+    public void setHoraEntrada(Time horaEntrada) {
+        this.horaEntrada = horaEntrada;
+    }
+
+    public Time getHoraSaida() {
+        return horaSaida;
+    }
+
+    public void setHoraSaida(Time horaSaida) {
+        this.horaSaida = horaSaida;
+    }
+
+    public String getFinalidade() {
+        return finalidade;
+    }
+
+    public void setFinalidade(String finalidade) {
+        this.finalidade = finalidade;
+    }   
     
     public String getIdentidadeVisitante() {
         return vis.getIdentidade();
