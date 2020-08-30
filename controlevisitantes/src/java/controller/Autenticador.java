@@ -83,7 +83,7 @@ public class Autenticador extends HttpServlet {
         if(identidade.equals("0107912217") && senha.equals("123")){
             HttpSession sessao = request.getSession();
             sessao.setAttribute("usuarioAutenticado", "sti");
-            response.sendRedirect("/controlevisitantes/restrito/inicial.jsp");
+            response.sendRedirect("/controlevisitantes/restrito/visita/aberta.jsp");
         }else{
             Usuario usu = new Usuario();
             UsuarioDAO usuDAO = new UsuarioDAO();
@@ -112,7 +112,7 @@ public class Autenticador extends HttpServlet {
             }else if(usuAutenticado != null && validaLoginSenha == true){
                 HttpSession sessao = request.getSession();
                 sessao.setAttribute("usuarioAutenticado", usuAutenticado);
-                response.sendRedirect("/controlevisitantes/restrito/inicial.jsp");
+                response.sendRedirect("/controlevisitantes/restrito/visita/aberta.jsp");
             }
         }
     }
