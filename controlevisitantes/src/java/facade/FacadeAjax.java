@@ -56,4 +56,8 @@ public class FacadeAjax {
     public Visitante getVisitanteByIdentidadeDWR(String identidade){
         return VisitanteDAO.getVisitanteByIdentidadeDWR(identidade);
     }
+    
+    public ArrayList<Setor> getSetoresDWR() throws Throwable, Exception{
+        return SetorDAO.getSetoresDWR();
+    }
 }
