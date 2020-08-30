@@ -26,8 +26,8 @@ $(document).ready(function(){
     validInputTReal("input[name=txtCracha]");
     
     //Campo Input Data Entrada
-    validInput("input[name=txtDataEntrada]");
-    validInputTReal("input[name=txtDataEntrada]");
+    validDataEntrada("input[name=txtDataEntrada]");
+    validDataEntradaTReal("input[name=txtDataEntrada]");
     
     //Campo Input Hora Entrada
     validInput("input[name=txtHoraEntrada]");
@@ -125,6 +125,17 @@ $("button[name=btnPesquisar]").click(function(){
 });
 
 $("button[name=btnSalvarCadastro]").click(function(){
+    var dataEntrada = $("input[name=txtDataEntrada]").val();
+    var dataEntradaSplit = dataEntrada.split('-');        
+    var diaNascAl = dataEntradaSplit[2];
+    var mesNascAl = dataEntradaSplit[1];
+    var anoNascAl = dataEntradaSplit[0];
+
+    var dataAtual = new Date();
+    var diaAtual = dataAtual.getDate();
+    var mesAtual = (dataAtual.getMonth() + 1);
+    var anoAtual = dataAtual.getFullYear();  
+    
     if($("input[name=txtNomeVisitante]").val() == ''){
         alert("Visitante não selecionado!");
         return false;
@@ -135,9 +146,52 @@ $("button[name=btnSalvarCadastro]").click(function(){
         $("input[name=txtCracha]").focus();
         return false;
     }
-    else if($("input[name=txtDataEntrada]").val() == ''){
+    else if(dataEntrada == ''){
         $("input[name=txtDataEntrada]").removeClass("is-valid");
         $("input[name=txtDataEntrada]").addClass("is-invalid");
+        $(".invalid-dataEntrada").html("Campo Obrigatório!");
+        $("input[name=txtDataEntrada]").focus();
+        return false;
+    }       
+    else if((anoNascAl == anoAtual) && (mesNascAl == mesAtual) && (diaNascAl < diaAtual)){
+        $("input[name=txtDataEntrada]").removeClass("is-valid");
+        $("input[name=txtDataEntrada]").addClass("is-invalid");
+        $(".invalid-dataEntrada").html("Data Inválida! Entrada antes data atual.");
+        $("input[name=txtDataEntrada]").focus();
+        return false;
+    }       
+    else if((anoNascAl == anoAtual) && (mesNascAl < mesAtual)){
+        $("input[name=txtDataEntrada]").removeClass("is-valid");
+        $("input[name=txtDataEntrada]").addClass("is-invalid");
+        $(".invalid-dataEntrada").html("Data Inválida! Entrada antes data atual.");
+        $("input[name=txtDataEntrada]").focus();
+        return false;
+    }       
+    else if((anoNascAl < anoAtual)){
+        $("input[name=txtDataEntrada]").removeClass("is-valid");
+        $("input[name=txtDataEntrada]").addClass("is-invalid");
+        $(".invalid-dataEntrada").html("Data Inválida! Entrada antes data atual.");
+        $("input[name=txtDataEntrada]").focus();
+        return false;
+    }   
+    else if((anoNascAl == anoAtual) && (mesNascAl == mesAtual) && (diaNascAl > diaAtual)){
+        $("input[name=txtDataEntrada]").removeClass("is-valid");
+        $("input[name=txtDataEntrada]").addClass("is-invalid");
+        $(".invalid-dataEntrada").html("Data Inválida! Entrada após data atual.");
+        $("input[name=txtDataEntrada]").focus();
+        return false;
+    }       
+    else if((anoNascAl == anoAtual) && (mesNascAl > mesAtual)){
+        $("input[name=txtDataEntrada]").removeClass("is-valid");
+        $("input[name=txtDataEntrada]").addClass("is-invalid");
+        $(".invalid-dataEntrada").html("Data Inválida! Entrada após data atual.");
+        $("input[name=txtDataEntrada]").focus();
+        return false;
+    }       
+    else if((anoNascAl > anoAtual)){
+        $("input[name=txtDataEntrada]").removeClass("is-valid");
+        $("input[name=txtDataEntrada]").addClass("is-invalid");
+        $(".invalid-dataEntrada").html("Data Inválida! Entrada após data atual.");
         $("input[name=txtDataEntrada]").focus();
         return false;
     }

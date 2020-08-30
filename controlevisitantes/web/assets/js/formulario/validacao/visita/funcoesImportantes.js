@@ -100,15 +100,30 @@ function validDataEntrada(campo){
 
     if(dataEntrada == ''){
     }       
+    else if((anoEntrada == anoAtual) && (mesEntrada == mesAtual) && (diaEntrada < diaAtual)){
+        $(campo).removeClass("is-valid");
+        $(campo).addClass("is-invalid");
+        $(".invalid-dataEntrada").html("Data Inválida! Entrada antes data atual.");
+    }       
+    else if((anoEntrada == anoAtual) && (mesEntrada < mesAtual)){
+        $(campo).removeClass("is-valid");
+        $(campo).addClass("is-invalid");
+        $(".invalid-dataEntrada").html("Data Inválida! Entrada antes data atual.");
+    }       
+    else if((anoEntrada < anoAtual)){
+        $(campo).removeClass("is-valid");
+        $(campo).addClass("is-invalid");
+        $(".invalid-dataEntrada").html("Data Inválida! Entrada antes data atual.");
+    }    
     else if((anoEntrada == anoAtual) && (mesEntrada == mesAtual) && (diaEntrada > diaAtual)){
         $(campo).removeClass("is-valid");
         $(campo).addClass("is-invalid");
-        $(".invalid-dataEntrada").html("Data Inválida! Nascimento após data atual.");
+        $(".invalid-dataEntrada").html("Data Inválida! Entrada após data atual.");
     }       
     else if((anoEntrada == anoAtual) && (mesEntrada > mesAtual)){
         $(campo).removeClass("is-valid");
         $(campo).addClass("is-invalid");
-        $(".invalid-dataEntrada").html("Data Inválida! Nascimento após data atual.");
+        $(".invalid-dataEntrada").html("Data Inválida! Entrada após data atual.");
     }       
     else if((anoEntrada > anoAtual)){
         $(campo).removeClass("is-valid");
@@ -193,4 +208,60 @@ function validIdentidadeCivilTReal(campo){
             $(campo).addClass("is-valid");
         }
     });
+};
+
+// Data de Entrada
+function validDataEntradaTReal(campo){ 
+    $(campo).change(function(){
+        var dataEntrada = $(campo).val();
+        var dataEntradaSplit = dataEntrada.split('-');        
+        var diaNascAl = dataEntradaSplit[2];
+        var mesNascAl = dataEntradaSplit[1];
+        var anoNascAl = dataEntradaSplit[0];
+        
+        var dataAtual = new Date();
+        var diaAtual = dataAtual.getDate();
+        var mesAtual = (dataAtual.getMonth() + 1);
+        var anoAtual = dataAtual.getFullYear();        
+        
+        if(dataEntrada == ''){
+            $(campo).removeClass("is-valid");
+            $(campo).addClass("is-invalid");
+            $(".invalid-dataEntrada").html("Campo Obrigatório!");
+        }       
+        else if((anoNascAl == anoAtual) && (mesNascAl == mesAtual) && (diaNascAl < diaAtual)){
+            $(campo).removeClass("is-valid");
+            $(campo).addClass("is-invalid");
+            $(".invalid-dataEntrada").html("Data Inválida! Entrada antes data atual.");
+        }       
+        else if((anoNascAl == anoAtual) && (mesNascAl < mesAtual)){
+            $(campo).removeClass("is-valid");
+            $(campo).addClass("is-invalid");
+            $(".invalid-dataEntrada").html("Data Inválida! Entrada antes data atual.");
+        }       
+        else if((anoNascAl < anoAtual)){
+            $(campo).removeClass("is-valid");
+            $(campo).addClass("is-invalid");
+            $(".invalid-dataEntrada").html("Data Inválida! Entrada antes data atual.");
+        }   
+        else if((anoNascAl == anoAtual) && (mesNascAl == mesAtual) && (diaNascAl > diaAtual)){
+            $(campo).removeClass("is-valid");
+            $(campo).addClass("is-invalid");
+            $(".invalid-dataEntrada").html("Data Inválida! Entrada após data atual.");
+        }       
+        else if((anoNascAl == anoAtual) && (mesNascAl > mesAtual)){
+            $(campo).removeClass("is-valid");
+            $(campo).addClass("is-invalid");
+            $(".invalid-dataEntrada").html("Data Inválida! Entrada após data atual.");
+        }       
+        else if((anoNascAl > anoAtual)){
+            $(campo).removeClass("is-valid");
+            $(campo).addClass("is-invalid");
+            $(".invalid-dataEntrada").html("Data Inválida! Entrada após data atual.");
+        }   
+        else{
+            $(campo).removeClass("is-invalid");
+            $(campo).addClass("is-valid");
+        }
+    });    
 };
