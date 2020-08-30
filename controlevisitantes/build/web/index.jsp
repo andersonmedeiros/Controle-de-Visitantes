@@ -23,7 +23,7 @@
     </head>
     <body>
         
-        <form class="form-signin" name="formLogin" action="Autenticador" method="POST">
+        <form class="form-signin col-md-12" name="formLogin" action="Autenticador" method="POST">
             <%
                 if(request.getParameter("e") != null){
                     int grp_acesso_sgdis = Integer.parseInt(request.getParameter("e"));
@@ -50,9 +50,9 @@
                     }
                 }
             %>
-            <div class="text-center col-md-3 form form-signin">
-                <div class="col-md-12">
-                    <b class="text-center">Controle de Visitantes</b>
+            <div class="text-center form form-signin">
+                <div class="col-md-12 mb-1">
+                    <b class="text-center" style="color: #000000; font-size: 15pt;">Controle de Visitantes</b>
                 </div>
                 <img class="col-4" src="assets/img/brasaocigs.png" alt="Sistema de Controle de Visitantes" >                                       
 
@@ -67,7 +67,7 @@
                 </div>
                 
                 <button type="submit" class="btn btn-primary btn-block btn-success">Entrar</button>
-                <p class="mt-3 text-center">Desenvolvido por <b>CB</b> Anderson <b>De Paula</b>Andrade Medeiros</p>
+                <p class="mt-3 text-center" style="color: #000000;">Desenvolvido por <b>CB</b> Anderson <b>De Paula</b> Andrade Medeiros</p>
                 <p class="mb-3 text-center copy">&copy; 2020</p>
             </div>
         </form>

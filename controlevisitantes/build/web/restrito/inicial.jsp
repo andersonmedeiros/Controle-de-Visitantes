@@ -54,6 +54,17 @@
                                                     
                                             "<li class=\"nav-item dropdown\">"+
                                                 "<a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdown\" role=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">"+
+                                                    "Manutenção"+
+                                                "</a>"+
+                                                "<div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdown\">"+                  
+                                                    "<a class=\"dropdown-item\" href=\"../restrito/organizacaomilitar/om.jsp\">Organização Militar</a>"+              
+                                                    "<a class=\"dropdown-item\" href=\"../restrito/divisaosecao/divisaosecao.jsp\">Divisão/Seção</a>"+
+                                                    "<a class=\"dropdown-item\" href=\"../restrito/setor/setor.jsp\">Setores</a>"+
+                                                "</div>"+
+                                            "</li>"+ 
+                                                    
+                                            "<li class=\"nav-item dropdown\">"+
+                                                "<a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdown\" role=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">"+
                                                     "Visitantes"+
                                                 "</a>"+
                                                 "<div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdown\">"+                                
@@ -62,18 +73,19 @@
                                                     "<div class=\"dropdown-divider\"></div>"+
                                                     "<a class=\"dropdown-item\" href=\"../restrito/visitante/cadastro.jsp\">Novo Visitante</a>"+
                                                 "</div>"+
-                                            "</li>"+
+                                            "</li>"+                 
                                                     
                                             "<li class=\"nav-item dropdown\">"+
                                                 "<a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdown\" role=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">"+
-                                                    "Manutenção"+
+                                                    "Visitas"+
                                                 "</a>"+
-                                                "<div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdown\">"+                  
-                                                    "<a class=\"dropdown-item\" href=\"../restrito/organizacaomilitar/om.jsp\">Organização Militar</a>"+              
-                                                    "<a class=\"dropdown-item\" href=\"../restrito/divisaosecao/divisaosecao.jsp\">Divisão/Seção</a>"+
-                                                    "<a class=\"dropdown-item\" href=\"../restrito/setor/setor.jsp\">Setores</a>"+
+                                                "<div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdown\">"+                                
+                                                    "<a class=\"dropdown-item\" href=\"../restrito/visita/aberta.jsp\">Visitas Abertas</a>"+
+                                                    "<a class=\"dropdown-item\" href=\"../restrito/visita/fechada.jsp\">Visitas Fechadas</a>"+
+                                                    "<div class=\"dropdown-divider\"></div>"+
+                                                    "<a class=\"dropdown-item\" href=\"../restrito/visita/cadastro.jsp\">Nova Visita</a>"+
                                                 "</div>"+
-                                            "</li>"  
+                                            "</li>"
                                 );
                             }
                             else if(usuarioLogado.getIdGrupoAcesso() == 2){
@@ -88,18 +100,19 @@
                                                     "<div class=\"dropdown-divider\"></div>"+
                                                     "<a class=\"dropdown-item\" href=\"../restrito/visitante/cadastro.jsp\">Novo Visitante</a>"+
                                                 "</div>"+
-                                            "</li>"+
-                                                    
+                                            "</li>"+ 
+                                            
                                             "<li class=\"nav-item dropdown\">"+
                                                 "<a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdown\" role=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">"+
-                                                    "Manutenção"+
+                                                    "Visitas"+
                                                 "</a>"+
-                                                "<div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdown\">"+                  
-                                                    "<a class=\"dropdown-item\" href=\"../restrito/organizacaomilitar/om.jsp\">Organização Militar</a>"+              
-                                                    "<a class=\"dropdown-item\" href=\"../restrito/divisaosecao/divisaosecao.jsp\">Divisão/Seção</a>"+
-                                                    "<a class=\"dropdown-item\" href=\"../restrito/setor/setor.jsp\">Setores</a>"+
+                                                "<div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdown\">"+                                
+                                                    "<a class=\"dropdown-item\" href=\"../restrito/visita/aberta.jsp\">Visitas Abertas</a>"+
+                                                    "<a class=\"dropdown-item\" href=\"../restrito/visita/fechada.jsp\">Visitas Fechadas</a>"+
+                                                    "<div class=\"dropdown-divider\"></div>"+
+                                                    "<a class=\"dropdown-item\" href=\"../restrito/visita/cadastro.jsp\">Nova Visita</a>"+
                                                 "</div>"+
-                                            "</li>"  
+                                            "</li>"
                                 );
                             }
                         %>   
