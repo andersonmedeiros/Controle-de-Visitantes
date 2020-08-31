@@ -143,13 +143,64 @@
                 }
             %>
             
-            <center>
-                <div class="col-md-12 mb-3">
-                    <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#modalFormRelaPdf">Gerar Relatório PDF</button>
-                </div>
-            </center>
+            <form id="formPesqVisitasFechadas" class="form formCad" action="controller.relatorio/GerarRelatorioPdf" method="POST" target="_blank">
+                <fieldset>
+                    <div class="fieldset-header">
+                        <h5 class="fieldset-title">Visitas</h5>
+                    </div>
+                    <div class="fieldset-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-5">
+                                <label for="txtTipoRela">Relatório de: <span class="campo-obrigatorio">*</span></label>
+                                <select class="form-control" id="txtTipoRela" name="txtTipoRela">
+                                    <option value="0" selected>Selecione o relatório desejado...</option>
+                                    <option value="1">ENTRADA/SAÍDA DE MILITARES DE OUTRAS OM</option>
+                                    <option value="2">ENTRADA/SAÍDA DE CIVIS</option>
+                                </select>
+                                <div class="valid-feedback">Selva!</div>
+                                <div class="invalid-feedback">Campo Obrigatório!</div>
+                            </div>  
+                            <div class="form-group col-md-5">
+                                <label for="txtData">Data: <span class="campo-obrigatorio">*</span></label>
+                                <input type="date" class="form-control" id="txtData" name="txtData">
+                                <div class="valid-feedback">Selva!</div>
+                                <div class="invalid-feedback">Campo Obrigatório!</div>
+                            </div> 
+                            <div class="form-group col-md-2 align-self-center">
+                                <button type="button" id="btn" name="btnPesquisar" class="btn btn-warning btn-pesquisar col-md-12" value="Pesquisar">Pesquisar</button>
+                            </div>
+                        </div>                      
+                        <div class="header-interno">
+                            <h5 class="title-interno"></h5>
+                        </div>
+                        <div id="div-visitas" class="fieldset-interno" style="display: none;">
+                            <center>
+                                <div id="div-btn-pdf" class="col-md-12 mb-3" style="display: none;">
+                                    <button type="submit" class="btn btn-success">Gerar PDF</button>
+                                </div>
+                            </center>
+                            
+                            <table id="tbl-visitas" class="table">
+                                <thead class="thead-light">
+                                    <tr>
+                                    </tr>
+                                </thead>
+                                <tbody id="visitas"></tbody>
+                            </table>
+                                                       
+                        </div>
+                        <div id="div-visitas-0" class="fieldset-interno" style="display: none">
+                            <div class="alert alert-danger shadow-sm text-center" role="alert">
+                                Não existe registro de Entrada/Saída para a data informada!
+                            </div>
+                        </div>
+                    </div>                    
+                </fieldset>                
+            </form>
             
-            <table class="table">
+            
+            
+            <!--<table class="table">
                 <thead class="thead-light">
                     <tr>
                         <th scope="col">#</th>
@@ -161,7 +212,7 @@
                 </thead>
                 <tbody>
                     <%              
-                        VisitaDAO visitaDAO = new VisitaDAO();
+                        /*VisitaDAO visitaDAO = new VisitaDAO();
                         ArrayList<Visita> visitasfechadas = visitaDAO.getVisitasFechadas();
                         int i=1;
                         
@@ -181,10 +232,10 @@
                                 out.println("</tr>");
                                 i++;
                             }
-                        }
+                        }*/
                     %>
                 </tbody>
-            </table> 
+            </table> -->
                 
             <!-- Modal Cadastro-->
             <div class="modal fade" id="modalFormRelaPdf" tabindex="-1" role="dialog" aria-labelledby="modalFormRelaPdf" aria-hidden="true">
@@ -238,11 +289,14 @@
         <script src="../../assets/node_modules/bootstrap/dist/js/bootstrap.js"></script>
         
         <script src="../../assets/js/dwr/visita/cadastro/camposDinamicos.js"></script>
+        <script src="../../assets/js/dwr/visita/tabelaDinamica.js"></script>
 
         <script src="../../assets/js/formulario/validacao/visita/funcoesImportantes.js"></script>
+        <script src="../../assets/js/formulario/validacao/visita/pesqvisitasbytipoanddata.js"></script>
         <script src="../../assets/js/formulario/validacao/visita/cadastro.js"></script> 
         <script src="../../assets/js/formulario/validacao/visita/relatorio.js"></script> 
         <script src="../../assets/js/bootstrap-validate.js"></script>
+        <script src="../../assets/js/moment.js"></script>
     </body>
 </html>
 

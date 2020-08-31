@@ -5,6 +5,7 @@
  */
 package facade;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import model.bean.*;
 import model.dao.*;
@@ -62,5 +63,9 @@ public class FacadeAjax {
     
     public ArrayList<Setor> getSetoresDWR() throws Throwable, Exception{
         return SetorDAO.getSetoresDWR();
+    }
+    
+    public ArrayList<Visita> getVisitasByTipoAndDataDWR(int tipo, String data) throws Throwable, Exception{
+        return VisitaDAO.getVisitasByTipoAndDataDWR(tipo, data);
     }
 }

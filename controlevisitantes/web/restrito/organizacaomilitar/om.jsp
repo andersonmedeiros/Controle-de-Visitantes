@@ -170,7 +170,57 @@
                     <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#modalFormOm">Nova Organização Militar</button>
                 </div>
             </center>
-            <table class="table">
+            
+            <form id="formPesqOms" class="form formCad">
+                <fieldset>
+                    <div class="fieldset-header">
+                        <h5 class="fieldset-title">Organização Militar</h5>
+                    </div>
+                    <div class="fieldset-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-5">
+                                <label for="txtTipoForca">Tipo de Força: <span class="campo-obrigatorio">*</span></label>
+                                <select class="form-control" id="txtTipoForca" name="txtTipoForca">
+                                    <option value="0" selected>Selecione um Tipo de Força...</option>                                    
+                                </select>
+                                <div class="valid-feedback">Selva!</div>
+                                <div class="invalid-feedback">Campo Obrigatório!</div>
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label for="txtForca">Força: <span class="campo-obrigatorio">*</span></label>
+                                <select class="form-control" id="txtForca" name="txtForca">
+                                    <option value="0" selected>Selecione uma Força...</option>                                    
+                                </select>
+                                <div class="valid-feedback">Selva!</div>
+                                <div class="invalid-feedback">Campo Obrigatório!</div>
+                            </div>
+                            <div class="form-group col-md-2 align-self-center">
+                               <button type="button" id="btn" name="btnPesquisar" class="btn btn-warning btn-pesquisar col-md-12" value="Pesquisar">Pesquisar</button>
+                            </div>
+                        </div>                        
+                        <div class="header-interno">
+                            <h5 class="title-interno"></h5>
+                        </div>
+                        <div class="fieldset-interno">
+                            <table class="table">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">NOME</th>
+                                        <th scope="col">ABREVIATURA</th>
+                                        <th scope="col">FORÇA</th>
+                                        <th scope="col">AÇÃO</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="oms"></tbody>
+                            </table>
+                                                       
+                        </div>
+                    </div>                    
+                </fieldset>                
+            </form>
+                                
+            <!--<table class="table">
                 <thead class="thead-light">
                     <tr>
                         <th scope="col">#</th>
@@ -182,7 +232,7 @@
                 </thead>
                 <tbody>
                     <%              
-                        OmDAO omDAO = new OmDAO();
+                        /*OmDAO omDAO = new OmDAO();
                         ArrayList<Om> oms = omDAO.getOms();
                         int i=1;
                         
@@ -214,10 +264,10 @@
                                 out.println("</tr>");
                                 i++;
                             }
-                        }
+                        }*/
                     %>
                 </tbody>
-            </table>
+            </table>-->
             
             
 
@@ -344,9 +394,11 @@
         <script src="../../assets/node_modules/bootstrap/dist/js/bootstrap.js"></script>
         
         <script src="../../assets/js/dwr/organizacaomilitar/camposDinamicos.js"></script>
+        <script src="../../assets/js/dwr/organizacaomilitar/tabelaDinamica.js"></script>
 
         <script src="../../assets/js/formulario/validacao/organizacaomilitar/funcoesImportantes.js"></script>
         <script src="../../assets/js/formulario/validacao/organizacaomilitar/cadastro.js"></script> 
+        <script src="../../assets/js/formulario/validacao/organizacaomilitar/pesqomsbyforca.js"></script> 
         <script src="../../assets/js/formulario/validacao/organizacaomilitar/atualizacao.js"></script> 
         <script src="../../assets/js/bootstrap-validate.js"></script>
     </body>

@@ -381,6 +381,7 @@ public class VisitaDAO {
         }
         return visitas;
     }
+    
     private final String GETVISITASFECHADAS = "SELECT * " +
                                               "FROM " + tabela + 
                                              " WHERE dataSaida is not null AND horaSaida is not null order by dataEntrada desc;";
@@ -532,4 +533,148 @@ public class VisitaDAO {
         }
         return visita;
     }    
+    
+    private static final String GETVISITASMILOUTRASOMDWR = "SELECT pg.abreviatura as pg, vis.nome, vis.sobrenome, om.abreviatura as om, v.idtVisitante, v.dataEntrada, v.horaEntrada, v.dataSaida, v.horaSaida, s.abreviatura as destino, " +
+                                                        "IFNULL(veiculo.marca, '-') as marca, IFNULL(veiculo.modelo, '-') as modelo, IFNULL(veiculo.cor, '-') as cor, IFNULL(veiculo.placa, '-') as placa " +
+                                                        "FROM Visita as v " +
+                                                        "INNER JOIN Visitante as vis on v.idtVisitante = vis.identidade " +
+                                                        "INNER JOIN PostoGraduacao as pg on vis.idPostoGraduacao = pg.id " +
+                                                        "INNER JOIN OrganizacaoMilitar as om on vis.idOrganizacaoMilitar = om.id " +
+                                                        "INNER JOIN Setor as s on v.idSetor = s.id " +
+                                                        "LEFT JOIN Veiculo as veiculo on v.idVeiculo = veiculo.id " +
+                                                        "WHERE v.dataSaida is not null AND v.horaSaida is not null AND " +
+                                                        "vis.tipo = ? AND v.dataEntrada = ? order by v.horaEntrada;";
+    
+    private static final String GETVISITASCIVISDWR = "SELECT vis.nome, vis.sobrenome, v.idtVisitante, v.dataEntrada, v.horaEntrada, v.dataSaida, v.horaSaida, s.abreviatura as destino, " +
+                                                  "IFNULL(veiculo.marca, '-') as marca, IFNULL(veiculo.modelo, '-') as modelo, IFNULL(veiculo.cor, '-') as cor, IFNULL(veiculo.placa, '-') as placa " +
+                                                  "FROM Visita as v " +
+                                                  "INNER JOIN Visitante as vis on v.idtVisitante = vis.identidade " +
+                                                  "INNER JOIN Setor as s on v.idSetor = s.id " +
+                                                  "LEFT JOIN Veiculo as veiculo on v.idVeiculo = veiculo.id " +
+                                                  "WHERE v.dataSaida is not null and v.horaSaida is not null AND " +
+                                                  "vis.tipo = ? AND v.dataEntrada = ? order by v.horaEntrada;";
+       
+    public static ArrayList<Visita> getVisitasByTipoAndDataDWR(int tipo, String data){
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        ArrayList<Visita> visitas = new ArrayList<>();  
+        VisitanteDAO visDAO = new VisitanteDAO();
+        SetorDAO setorDAO = new SetorDAO();
+        VeiculoDAO vDAO = new VeiculoDAO();
+        try {
+            conn = ConnectionFactory.getConnection();
+            if(tipo == 1){
+                pstm = conn.prepareStatement(GETVISITASMILOUTRASOMDWR);
+                pstm.setInt(1, tipo);
+                pstm.setString(2, data);
+                
+                rs = pstm.executeQuery();
+                while (rs.next()) {
+                    Visita visita = new Visita();
+                    visita.setDataEntrada(rs.getDate("v.dataEntrada"));
+                    visita.setHoraEntrada(rs.getTime("v.horaEntrada"));
+                    visita.setDataSaida(rs.getDate("v.dataSaida"));                            
+                    visita.setHoraSaida(rs.getTime("v.horaSaida"));                           
+
+                    Visitante vis = visDAO.getVisitanteById(rs.getString("v.idtVisitante"));
+                    visita.setIdentidadeVisitante(vis.getIdentidade());
+                    visita.setNomeVisitante(vis.getNome());
+                    visita.setSobrenomeVisitante(vis.getSobrenome());
+                    visita.setNomeguerraVisitante(vis.getNomeguerra());
+                    visita.setEmailVisitante(vis.getEmail());
+                    visita.setFoneVisitante(vis.getFone());
+
+                    visita.setIdPostoGraduacaoVisitante(vis.getIdPostoGraduacao());
+                    visita.setNomePostoGraduacaoVisitante(vis.getNomePostoGraduacao());
+                    visita.setAbreviaturaPostoGraduacaoVisitante(vis.getAbreviaturaPostoGraduacao());
+                    visita.setIdForcaPostoGraduacaoVisitante(vis.getIdForcaPostoGraduacao());
+                    visita.setNomeForcaPostoGraduacaoVisitante(vis.getNomeForcaPostoGraduacao());
+                    visita.setSiglaForcaPostoGraduacaoVisitante(vis.getSiglaForcaPostoGraduacao());
+                    visita.setIdTipoForcaPostoGraduacaoVisitante(vis.getIdTipoForcaPostoGraduacao());
+                    visita.setNomeTipoForcaPostoGraduacaoVisitante(vis.getNomeTipoForcaPostoGraduacao());
+
+                    visita.setIdOmVisitante(vis.getIdOm());
+                    visita.setNomeOmVisitante(vis.getNomeOm());
+                    visita.setAbreviaturaOmVisitante(vis.getAbreviaturaOm());
+                    visita.setIdForcaOmVisitante(vis.getIdForcaOm());
+                    visita.setNomeForcaOmVisitante(vis.getNomeForcaOm());
+                    visita.setAbreviaturaOmVisitante(vis.getAbreviaturaOm());
+                    visita.setIdForcaOmVisitante(vis.getIdForcaOm());
+                    visita.setNomeForcaOmVisitante(vis.getNomeForcaOm());
+                    visita.setSiglaForcaOmVisitante(vis.getSiglaForcaOm());
+                    visita.setIdTipoForcaOmVisitante(vis.getIdTipoForcaOm());
+                    visita.setNomeTipoForcaOmVisitante(vis.getNomeTipoForcaOm());  
+
+                    visita.setAbreviaturaSetor(rs.getString("destino"));
+
+                    visita.setMarcaVeiculo(rs.getString("marca"));
+                    visita.setModeloVeiculo(rs.getString("modelo"));
+                    visita.setCorVeiculo(rs.getString("cor"));
+                    visita.setPlacaVeiculo(rs.getString("placa"));
+
+                    visitas.add(visita);
+                }
+
+            }
+            else if(tipo == 2){
+                pstm = conn.prepareStatement(GETVISITASCIVISDWR);
+                pstm.setInt(1, tipo);
+                pstm.setString(2, data);
+                
+                rs = pstm.executeQuery();
+                while (rs.next()) {
+                    Visita visita = new Visita();
+                    visita.setDataEntrada(rs.getDate("v.dataEntrada"));
+                    visita.setHoraEntrada(rs.getTime("v.horaEntrada"));
+                    visita.setDataSaida(rs.getDate("v.dataSaida"));                            
+                    visita.setHoraSaida(rs.getTime("v.horaSaida"));                           
+
+                    Visitante vis = visDAO.getVisitanteById(rs.getString("v.idtVisitante"));
+                    visita.setIdentidadeVisitante(vis.getIdentidade());
+                    visita.setNomeVisitante(vis.getNome());
+                    visita.setSobrenomeVisitante(vis.getSobrenome());
+                    visita.setNomeguerraVisitante(vis.getNomeguerra());
+                    visita.setEmailVisitante(vis.getEmail());
+                    visita.setFoneVisitante(vis.getFone());
+
+                    visita.setIdPostoGraduacaoVisitante(vis.getIdPostoGraduacao());
+                    visita.setNomePostoGraduacaoVisitante(vis.getNomePostoGraduacao());
+                    visita.setAbreviaturaPostoGraduacaoVisitante(vis.getAbreviaturaPostoGraduacao());
+                    visita.setIdForcaPostoGraduacaoVisitante(vis.getIdForcaPostoGraduacao());
+                    visita.setNomeForcaPostoGraduacaoVisitante(vis.getNomeForcaPostoGraduacao());
+                    visita.setSiglaForcaPostoGraduacaoVisitante(vis.getSiglaForcaPostoGraduacao());
+                    visita.setIdTipoForcaPostoGraduacaoVisitante(vis.getIdTipoForcaPostoGraduacao());
+                    visita.setNomeTipoForcaPostoGraduacaoVisitante(vis.getNomeTipoForcaPostoGraduacao());
+
+                    visita.setIdOmVisitante(vis.getIdOm());
+                    visita.setNomeOmVisitante(vis.getNomeOm());
+                    visita.setAbreviaturaOmVisitante(vis.getAbreviaturaOm());
+                    visita.setIdForcaOmVisitante(vis.getIdForcaOm());
+                    visita.setNomeForcaOmVisitante(vis.getNomeForcaOm());
+                    visita.setAbreviaturaOmVisitante(vis.getAbreviaturaOm());
+                    visita.setIdForcaOmVisitante(vis.getIdForcaOm());
+                    visita.setNomeForcaOmVisitante(vis.getNomeForcaOm());
+                    visita.setSiglaForcaOmVisitante(vis.getSiglaForcaOm());
+                    visita.setIdTipoForcaOmVisitante(vis.getIdTipoForcaOm());
+                    visita.setNomeTipoForcaOmVisitante(vis.getNomeTipoForcaOm());  
+
+                    visita.setAbreviaturaSetor(rs.getString("destino"));
+
+                    visita.setMarcaVeiculo(rs.getString("marca"));
+                    visita.setModeloVeiculo(rs.getString("modelo"));
+                    visita.setCorVeiculo(rs.getString("cor"));
+                    visita.setPlacaVeiculo(rs.getString("placa"));
+
+                    visitas.add(visita);
+                }
+            }            
+           
+            ConnectionFactory.fechaConexao(conn, pstm, rs);
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());           
+        }
+        return visitas;
+    }
+    
 }

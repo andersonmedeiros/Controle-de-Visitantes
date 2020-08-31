@@ -35,5 +35,8 @@
     
     <convert converter="bean" match="model.bean.Visitante"/>
     <convert converter="bean" match="model.dao.VisitanteDAO"/>
+    
+    <convert converter="bean" match="model.bean.Visita"/>
+    <convert converter="bean" match="model.dao.VisitaDAO"/>
   </allow>
 </dwr>
