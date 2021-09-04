@@ -129,8 +129,9 @@
         </section>
         
         <footer class="container-fluid bg-success text-center fixed-bottom">
-            <b>Desenvolvido por CB Anderson de Paula Andrade Medeiros</b><br>
-            <b class="text-center copy">&copy; 2020</b>
+            <b>Desenvolvido pelo 3º Sgt Anderson de Paula Andrade Medeiros</b><br>
+            <b>Seção de Tecnologia da Informação</b><br>
+            <b class="text-center copy">&copy; 2021</b>
         </footer>
         
         <script src="../assets/node_modules/jquery/dist/jquery.js"></script>
