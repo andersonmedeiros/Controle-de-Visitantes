@@ -5,12 +5,12 @@
 //Ao carregar ou recarregar a página
 $(document).ready(function(){   
     //Campo Select Tipo Forca
-    validSelect("select[name=txtTipoForca]");
-    validSelectTReal("select[name=txtTipoForca]");
+    validSelect("select[name=txtTipoForcaCad]");
+    validSelectTReal("select[name=txtTipoForcaCad]");
     
     //Campo Select Força
-    validSelect("select[name=txtForca]");
-    validSelectTReal("select[name=txtForca]");
+    validSelect("select[name=txtForcaCad]");
+    validSelectTReal("select[name=txtForcaCad]");
     
     //Campo Input Nome
     validInput("input[name=txtNome]");
@@ -21,8 +21,8 @@ $(document).ready(function(){
     validInputTReal("input[name=txtAbreviatura]");
 });
 
-$("select[name=txtTipoForca]").change(function(){
-    limpaCampoSelect("select[name=txtForca");
+$("select[name=txtTipoForcaCad]").change(function(){
+    limpaCampoSelect("select[name=txtForcaCad");
     limpaCampoInput("input[name=txtNome]");
     limpaCampoInput("input[name=txtAbreviatura]");
 });
@@ -34,16 +34,16 @@ $("select[name=txtForca]").change(function(){
 
 //Obrigatoriedade
 $("button[name=btnSalvarCadastro]").click(function(){     
-    if($("select[name=txtTipoForca]").val() == '0'){
-        $("select[name=txtTipoForca]").removeClass("is-valid");
-        $("select[name=txtTipoForca]").addClass("is-invalid");
-        $("select[name=txtTipoForca]").focus();
+    if($("select[name=txtTipoForcaCad]").val() == '0'){
+        $("select[name=txtTipoForcaCad]").removeClass("is-valid");
+        $("select[name=txtTipoForcaCad]").addClass("is-invalid");
+        $("select[name=txtTipoForcaCad]").focus();
         return false;
     } 
-    else if($("select[name=txtForca]").val() == '0'){
-        $("select[name=txtForca]").removeClass("is-valid");
-        $("select[name=txtForca]").addClass("is-invalid");
-        $("select[name=txtForca]").focus();
+    else if($("select[name=txtForcaCad]").val() == '0'){
+        $("select[name=txtForcaCad]").removeClass("is-valid");
+        $("select[name=txtForcaCad]").addClass("is-invalid");
+        $("select[name=txtForcaCad]").focus();
         return false;
     }
     else if($("input[name=txtNome]").val() == ''){

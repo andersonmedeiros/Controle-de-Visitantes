@@ -85,7 +85,7 @@ public class AtualizarSetor extends HttpServlet {
                 setor.setId(Integer.parseInt(request.getParameter("txtIdAtt")));                
                 setor.setNome(String.valueOf(request.getParameter("txtNomeAtt")).toUpperCase());
                 setor.setAbreviatura(String.valueOf(request.getParameter("txtAbreviaturaAtt")).toUpperCase());
-                setor.setIdDivisaoSecao(Integer.parseInt(request.getParameter("txtIdDivisaoSecaoAtt")));     
+                setor.setIdDivisaoSecao(Integer.parseInt(request.getParameter("txtDivisaoSecaoAtt")));     
                 
                 System.out.println("Setor: Cad");
                 System.out.println("id: " + setor.getId());

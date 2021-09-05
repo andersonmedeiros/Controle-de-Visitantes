@@ -83,7 +83,7 @@ public class CadastrarOm extends HttpServlet {
                 
                 Om om = new Om();  
                 om.setId(omDAO.proxID());
-                om.setIdForca(Integer.parseInt(request.getParameter("txtForca")));
+                om.setIdForca(Integer.parseInt(request.getParameter("txtForcaCad")));
                 om.setNome(String.valueOf(request.getParameter("txtNome")).toUpperCase());
                 om.setAbreviatura(String.valueOf(request.getParameter("txtAbreviatura")).toUpperCase());
                 

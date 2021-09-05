@@ -285,16 +285,16 @@
                             <form class="container-fluid" action="controller.organizacaomilitar/CadastrarOm" method="POST" name="formCadastrar">
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <label for="txtTipoForca">Tipo de Força: <span class="campo-obrigatorio">*</span></label>
-                                        <select class="form-control" id="txtTipoForca" name="txtTipoForca">
+                                        <label for="txtTipoForcaCad">Tipo de Força: <span class="campo-obrigatorio">*</span></label>
+                                        <select class="form-control" id="txtTipoForcaCad" name="txtTipoForcaCad">
                                             <option value="0" selected>Selecione um Tipo de Força...</option>
                                         </select>
                                         <div class="valid-feedback">Selva!</div>
                                         <div class="invalid-feedback">Campo Obrigatório!</div>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="txtForca">Força: <span class="campo-obrigatorio">*</span></label>
-                                        <select class="form-control" id="txtForca" name="txtForca">
+                                        <label for="txtForcaCad">Força: <span class="campo-obrigatorio">*</span></label>
+                                        <select class="form-control" id="txtForcaCad" name="txtForcaCad">
                                             <option value="0" selected>Selecione uma Força...</option>
                                         </select>
                                         <div class="valid-feedback">Selva!</div>

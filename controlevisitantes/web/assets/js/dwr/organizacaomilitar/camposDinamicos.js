@@ -25,6 +25,23 @@ function alimentaSelectDependenteTipoForca(idTipoForca){
     });
 }
 
+function alimentaSelectTipoForcaCad(tiposforca){
+    dwr.util.removeAllOptions("txtTipoForcaCad");
+    dwr.util.addOptions("txtTipoForcaCad", [{id: "0", nome: "Selecione um Tipo de Força..."}], "id", "nome");
+    dwr.util.addOptions("txtTipoForcaCad", tiposforca, "id", "nome");
+}
+FacadeAjax.getTiposForcaDWR(alimentaSelectTipoForcaCad);
+
+function alimentaSelectDependenteTipoForcaCad(idTipoForca){
+    FacadeAjax.getForcasByIdTipoForcaDWR(idTipoForca, {
+        callback: function(forcas){
+            dwr.util.removeAllOptions("txtForcaCad");
+            dwr.util.addOptions("txtForcaCad", [{id: "0", nome: "Selecione uma Força..."}], "id", "nome");
+            dwr.util.addOptions("txtForcaCad", forcas, "id", "nome");
+        } 
+    });
+}
+
 function alimentaSelectTipoForcaAtt(tiposforca){
     dwr.util.removeAllOptions("txtTipoForcaAtt");
     dwr.util.addOptions("txtTipoForcaAtt", [{id: "0", nome: "Selecione um Tipo de Força..."}], "id", "nome");
@@ -44,6 +61,10 @@ function alimentaSelectDependenteTipoForcaAtt(idTipoForca){
 $("select[name=txtTipoForca").change(function(){
     limpaAlimentacaoSelect("txtForca", "Selecione uma Forca...");
     alimentaSelectDependenteTipoForca(this.value);
+});
+$("select[name=txtTipoForcaCad").change(function(){
+    limpaAlimentacaoSelect("txtForcaCad", "Selecione uma Forca...");
+    alimentaSelectDependenteTipoForcaCad(this.value);
 });
 $("select[name=txtTipoForcaAtt").change(function(){
     limpaAlimentacaoSelect("txtForcaAtt", "Selecione uma Forca...");
