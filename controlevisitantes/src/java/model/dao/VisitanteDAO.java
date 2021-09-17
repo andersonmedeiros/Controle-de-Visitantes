@@ -19,7 +19,7 @@ import model.bean.*;
  */
 public class VisitanteDAO {
     //Tabela
-    String tabela = "Visitante";
+    String tabela = "visitante";
     
     //Atributos
     String identidade = "identidade";
@@ -148,7 +148,7 @@ public class VisitanteDAO {
     }
     
     private final String GETVISITANTEBYIDT = "SELECT * " +
-                                            "FROM Visitante " + 
+                                            "FROM visitante " + 
                                             "WHERE identidade = ?";
        
     public Visitante getVisitanteById(String identidade){
@@ -302,7 +302,7 @@ public class VisitanteDAO {
         return visitantes;
     }
     
-    private final static String GETVISITANTEBYIDTDWR = "SELECT * FROM Visitante WHERE identidade = ?";
+    private final static String GETVISITANTEBYIDTDWR = "SELECT * FROM visitante WHERE identidade = ?";
        
     public static Visitante getVisitanteByIdentidadeDWR(String identidade){
         PostoGraduacaoDAO pgDAO = new PostoGraduacaoDAO();

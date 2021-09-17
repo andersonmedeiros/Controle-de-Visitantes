@@ -104,12 +104,12 @@ public class GerarRelatorioPdf extends HttpServlet {
             //Controle de Entrada/Saída de militares de outras om
             if(tipo == 1){
                 String sqlQtdeVisitas = "SELECT COUNT(vis.identidade) as qtdeVisitas " +
-                                        "FROM Visita as v " +
-                                        "INNER JOIN Visitante as vis on v.idtVisitante = vis.identidade " +
-                                        "INNER JOIN PostoGraduacao as pg on vis.idPostoGraduacao = pg.id " +
-                                        "INNER JOIN OrganizacaoMilitar as om on vis.idOrganizacaoMilitar = om.id " +
-                                        "INNER JOIN Setor as s on v.idSetor = s.id " +
-                                        "LEFT JOIN Veiculo as veiculo on v.idVeiculo = veiculo.id " +
+                                        "FROM visita as v " +
+                                        "INNER JOIN visitante as vis on v.idtVisitante = vis.identidade " +
+                                        "INNER JOIN postograduacao as pg on vis.idPostoGraduacao = pg.id " +
+                                        "INNER JOIN organizacaomilitar as om on vis.idOrganizacaoMilitar = om.id " +
+                                        "INNER JOIN setor as s on v.idSetor = s.id " +
+                                        "LEFT JOIN veiculo as veiculo on v.idVeiculo = veiculo.id " +
                                         "WHERE v.dataSaida is not null AND v.horaSaida is not null AND " +
                                         "vis.tipo = " + tipo + " AND v.dataEntrada = " + "'" + data + "'" + " order by v.horaEntrada;";
                 
@@ -119,12 +119,12 @@ public class GerarRelatorioPdf extends HttpServlet {
                 else{
                     sql_query = "SELECT pg.abreviatura as pg, vis.nome, vis.sobrenome, om.abreviatura as om, v.idtVisitante, v.dataEntrada, v.horaEntrada, v.dataSaida, v.horaSaida, s.abreviatura as destino, " +
                             "IFNULL(veiculo.marca, '-') as marca, IFNULL(veiculo.modelo, '-') as modelo, IFNULL(veiculo.cor, '-') as cor, IFNULL(veiculo.placa, '-') as placa " +
-                            "FROM Visita as v " +
-                            "INNER JOIN Visitante as vis on v.idtVisitante = vis.identidade " +
-                            "INNER JOIN PostoGraduacao as pg on vis.idPostoGraduacao = pg.id " +
-                            "INNER JOIN OrganizacaoMilitar as om on vis.idOrganizacaoMilitar = om.id " +
-                            "INNER JOIN Setor as s on v.idSetor = s.id " +
-                            "LEFT JOIN Veiculo as veiculo on v.idVeiculo = veiculo.id " +
+                            "FROM visita as v " +
+                            "INNER JOIN visitante as vis on v.idtVisitante = vis.identidade " +
+                            "INNER JOIN postograduacao as pg on vis.idPostoGraduacao = pg.id " +
+                            "INNER JOIN organizacaomilitar as om on vis.idOrganizacaoMilitar = om.id " +
+                            "INNER JOIN setor as s on v.idSetor = s.id " +
+                            "LEFT JOIN veiculo as veiculo on v.idVeiculo = veiculo.id " +
                             "WHERE v.dataSaida is not null AND v.horaSaida is not null AND " +
                             "vis.tipo = " + tipo + " AND v.dataEntrada = " + "'" + data + "'" + " order by v.horaEntrada;";
                 
@@ -134,10 +134,10 @@ public class GerarRelatorioPdf extends HttpServlet {
             //Controle de Entrada/Saída de civis
             else if(tipo == 2){
                 String sqlQtdeVisitas = "SELECT COUNT(vis.identidade) as qtdeVisitas " +
-                                        "FROM Visita as v " +
-                                        "INNER JOIN Visitante as vis on v.idtVisitante = vis.identidade " +
-                                        "INNER JOIN Setor as s on v.idSetor = s.id " +
-                                        "LEFT JOIN Veiculo as veiculo on v.idVeiculo = veiculo.id " +
+                                        "FROM visita as v " +
+                                        "INNER JOIN visitante as vis on v.idtVisitante = vis.identidade " +
+                                        "INNER JOIN setor as s on v.idSetor = s.id " +
+                                        "LEFT JOIN veiculo as veiculo on v.idVeiculo = veiculo.id " +
                                         "WHERE v.dataSaida is not null and v.horaSaida is not null AND " +
                                         "vis.tipo = " + tipo + " AND v.dataEntrada = " + "'" + data + "'" + " order by v.horaEntrada;";
                 
@@ -147,10 +147,10 @@ public class GerarRelatorioPdf extends HttpServlet {
                 else{
                     sql_query = "SELECT vis.nome, vis.sobrenome, v.idtVisitante, v.dataEntrada, v.horaEntrada, v.dataSaida, v.horaSaida, s.abreviatura as destino, " +
                                 "IFNULL(veiculo.marca, '-') as marca, IFNULL(veiculo.modelo, '-') as modelo, IFNULL(veiculo.cor, '-') as cor, IFNULL(veiculo.placa, '-') as placa " +
-                                "FROM Visita as v " +
-                                "INNER JOIN Visitante as vis on v.idtVisitante = vis.identidade " +
-                                "INNER JOIN Setor as s on v.idSetor = s.id " +
-                                "LEFT JOIN Veiculo as veiculo on v.idVeiculo = veiculo.id " +
+                                "FROM visita as v " +
+                                "INNER JOIN visitante as vis on v.idtVisitante = vis.identidade " +
+                                "INNER JOIN setor as s on v.idSetor = s.id " +
+                                "LEFT JOIN veiculo as veiculo on v.idVeiculo = veiculo.id " +
                                 "WHERE v.dataSaida is not null and v.horaSaida is not null AND " +
                                 "vis.tipo = " + tipo + " AND v.dataEntrada = " + "'" + data + "'" + " order by v.horaEntrada;";
 

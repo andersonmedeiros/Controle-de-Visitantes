@@ -21,7 +21,7 @@ import model.bean.PostoGraduacao;
  */
 public class UsuarioDAO {
     //Tabela
-    String tabela = "Usuario";
+    String tabela = "usuario";
     
     //Atributos
     String identidade = "identidade";
@@ -197,7 +197,7 @@ public class UsuarioDAO {
     }
     
     private final String GETUSUARIOBYIDT = "SELECT * " +
-                                            "FROM Usuario " + 
+                                            "FROM usuario " + 
                                             "WHERE identidade = ?";
        
     public Usuario getUsuarioByIdentidade(String identidade){
@@ -372,7 +372,7 @@ public class UsuarioDAO {
         return usuarios;
     }
     
-    private final static String GETUSUARIOBYIDTDWR = "SELECT * FROM Usuario WHERE identidade = ?";
+    private final static String GETUSUARIOBYIDTDWR = "SELECT * FROM usuario WHERE identidade = ?";
        
     public static Usuario getUsuarioByIdentidadeDWR(String identidade){
         PostoGraduacaoDAO pgDAO = new PostoGraduacaoDAO();

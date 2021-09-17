@@ -19,7 +19,7 @@ import model.bean.TipoForca;
  */
 public class TipoForcaDAO {
     //Tabela
-    String tabela = "TipoForca";
+    String tabela = "tipoforca";
     
     //Atributos
     String id = "id";
@@ -106,7 +106,7 @@ public class TipoForcaDAO {
     }
     
     private final String GETTIPOFORCABYID = "SELECT * " +
-                                            "FROM TipoForca " + 
+                                            "FROM tipoforca " + 
                                             "WHERE id = ?;";
        
     public TipoForca getTipoForcaById(int idTipoForca){
@@ -154,7 +154,7 @@ public class TipoForcaDAO {
     }
     
     private final static String GETTIPOFORCABYIDDWR = "SELECT * " +
-                                                      "FROM TipoForca " + 
+                                                      "FROM tipoforca " + 
                                                       "WHERE id = ?;";
        
     public TipoForca getTipoForcaByIdDWR(int idTipoForca){
@@ -177,7 +177,7 @@ public class TipoForcaDAO {
     }
     
     private final static String GETTIPOSFORCADWR = "SELECT * " +
-                                                   "FROM TipoForca";
+                                                   "FROM tipoforca";
        
     public static ArrayList<TipoForca> getTiposForcaDWR(){
         Connection conn = null;

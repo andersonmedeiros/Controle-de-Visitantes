@@ -19,7 +19,7 @@ import model.bean.DivisaoSecao;
  */
 public class DivisaoSecaoDAO {
     //Tabela
-    String tabela = "DivisaoSecao";
+    String tabela = "divisaosecao";
     
     //Atributos
     String id = "id";
@@ -131,7 +131,7 @@ public class DivisaoSecaoDAO {
     }
     
     private final String GETDIVISAOSECAOBYID = "SELECT * " +
-                                            "FROM DivisaoSecao " + 
+                                            "FROM divisaosecao " + 
                                             "WHERE id = ?;";
        
     public DivisaoSecao getDivisaoSecaoById(int idDivisaoSecao){
@@ -181,7 +181,7 @@ public class DivisaoSecaoDAO {
     }
     
     private final static String GETDIVISAOSECAOBYIDDWR = "SELECT * " +
-                                                      "FROM DivisaoSecao " + 
+                                                      "FROM divisaosecao " + 
                                                       "WHERE id = ?;";
        
     public static DivisaoSecao getDivisaoSecaoByIdDWR(int idDivisaoSecao){
@@ -208,7 +208,7 @@ public class DivisaoSecaoDAO {
     }
     
     private final static String GETDIVISOESSECOESDWR = "SELECT * " +
-                                                   "FROM DivisaoSecao ORDER BY nome";
+                                                   "FROM divisaosecao ORDER BY nome";
        
     public static ArrayList<DivisaoSecao> getDivisoesSecoesDWR(){
         Connection conn = null;

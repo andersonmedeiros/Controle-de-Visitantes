@@ -20,7 +20,7 @@ import model.bean.PostoGraduacao;
  */
 public class PostoGraduacaoDAO {
     //Tabela
-    String tabela = "PostoGraduacao";
+    String tabela = "postograduacao";
     
     //Atributos
     String id = "id";
@@ -114,7 +114,7 @@ public class PostoGraduacaoDAO {
     }
     
     private final String GETPOSTOGRADUACAOBYID = "SELECT * " +
-                                             "FROM PostoGraduacao " + 
+                                             "FROM postograduacao " + 
                                              "WHERE id = ?";
        
     public PostoGraduacao getPostoGraduacaoById(int idPG){
@@ -146,7 +146,7 @@ public class PostoGraduacaoDAO {
     }
     
     private final static String GETPOSTOSGRADUACOESBYFORCADWR = "SELECT * " +
-                                                                          "FROM PostoGraduacao " + 
+                                                                          "FROM postograduacao " + 
                                                                           "WHERE idForca = ?";   
     
     

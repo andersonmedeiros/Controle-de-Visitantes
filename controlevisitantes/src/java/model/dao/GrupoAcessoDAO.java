@@ -19,7 +19,7 @@ import model.bean.GrupoAcesso;
  */
 public class GrupoAcessoDAO {
     //Tabela
-    String tabela = "GrupoAcesso";
+    String tabela = "grupoacesso";
     
     //Atributos
     String id = "id";

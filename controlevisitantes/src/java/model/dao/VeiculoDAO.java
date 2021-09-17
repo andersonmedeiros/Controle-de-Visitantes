@@ -19,7 +19,7 @@ import model.bean.Veiculo;
  */
 public class VeiculoDAO {
     //Tabela
-    String tabela = "Veiculo";
+    String tabela = "veiculo";
     
     //Atributos
     String id = "id";
@@ -140,7 +140,7 @@ public class VeiculoDAO {
     }
     
     private final String GETVEICULOBYID = "SELECT * " +
-                                        "FROM Veiculo " + 
+                                        "FROM veiculo " + 
                                         "WHERE id = ?";
        
     public Veiculo getVeiculoById(int id){

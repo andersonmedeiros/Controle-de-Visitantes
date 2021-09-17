@@ -19,7 +19,7 @@ import model.bean.*;
  */
 public class OmDAO {
     //Tabela
-    String tabela = "OrganizacaoMilitar";
+    String tabela = "organizacaomilitar";
     
     //Atributos
     String id = "id";
@@ -200,7 +200,7 @@ public class OmDAO {
     }
     
     private final static String GETOMSBYFORCADWR = "SELECT * " +
-                                   "FROM OrganizacaoMilitar " + 
+                                   "FROM organizacaomilitar " + 
                                    "WHERE idForca = ? ORDER BY nome;";
        
     public static ArrayList<Om> getOmsByForcaDWR(int idForca){
@@ -239,7 +239,7 @@ public class OmDAO {
     }
     
     private final static String GETOMBYIDDWR = "SELECT * " +
-                                            "FROM OrganizacaoMilitar " +
+                                            "FROM organizacaomilitar " +
                                             "WHERE id = ?;";
     
     public static Om getOmByIdDWR(int idOM){

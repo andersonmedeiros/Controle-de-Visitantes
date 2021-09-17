@@ -20,7 +20,7 @@ import model.bean.Setor;
  */
 public class SetorDAO {
     //Tabela
-    String tabela = "Setor";
+    String tabela = "setor";
     
     //Atributos
     String id = "id";
@@ -135,7 +135,7 @@ public class SetorDAO {
     }
     
     private final String GETSETORBYID = "SELECT * " +
-                                        "FROM Setor " + 
+                                        "FROM setor " + 
                                         "WHERE id = ?;";
        
     public Setor getSetorById(int idSetor){
@@ -197,7 +197,7 @@ public class SetorDAO {
     }
     
     private final static String GETSETORBYIDDWR = "SELECT * " +
-                                                      "FROM Setor " + 
+                                                      "FROM setor " + 
                                                       "WHERE id = ?;";
        
     public static Setor getSetorByIdDWR(int idSetor){
@@ -230,7 +230,7 @@ public class SetorDAO {
     }
     
     private final static String GETSETORESDWR = "SELECT * " +
-                                                "FROM Setor";
+                                                "FROM setor";
        
     public static ArrayList<Setor> getSetoresDWR(){
         Connection conn = null;
