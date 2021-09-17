@@ -7,11 +7,11 @@
 		<![CDATA[SELECT pg.abreviatura as pg, vis.nome, vis.sobrenome, om.abreviatura as om, v.idtVisitante, v.dataEntrada, v.horaEntrada, v.dataSaida, v.horaSaida, s.abreviatura as destino,
 ifnull(veiculo.marca, '-') as marca, ifnull(veiculo.modelo, '-') as modelo, ifnull(veiculo.cor, '-') as cor, ifnull(veiculo.placa, '-') as placa
 FROM Visita as v
-INNER JOIN Visitante as vis on v.idtVisitante = vis.identidade
-INNER JOIN PostoGraduacao as pg on vis.idPostoGraduacao = pg.id
-INNER JOIN OrganizacaoMilitar as om on vis.idOrganizacaoMilitar = om.id
-INNER JOIN Setor as s on v.idSetor = s.id
-LEFT JOIN Veiculo as veiculo on v.idVeiculo = veiculo.id
+INNER JOIN visitante as vis on v.idtVisitante = vis.identidade
+INNER JOIN postograduacao as pg on vis.idPostoGraduacao = pg.id
+INNER JOIN organizacaomilitar as om on vis.idOrganizacaoMilitar = om.id
+INNER JOIN setor as s on v.idSetor = s.id
+LEFT JOIN veiculo as veiculo on v.idVeiculo = veiculo.id
 WHERE vis.tipo=1 AND v.dataSaida is not null AND v.horaSaida is not null order by v.dataEntrada desc;]]>
 	</queryString>
 	<field name="pg" class="java.lang.String">
@@ -150,7 +150,8 @@ WHERE vis.tipo=1 AND v.dataSaida is not null AND v.horaSaida is not null order b
 			</staticText>
 			<image>
 				<reportElement x="376" y="0" width="50" height="50" uuid="2effaef9-b16a-47f2-a49a-30a2c6cf663c"/>
-				<imageExpression><![CDATA["/home/anderson/Documentos/gitHub/controle-visitantes/controlevisitantes/web/relatorio/brasao.png"]]></imageExpression>
+				<imageExpression><![CDATA["C:/Users/User/Documents/git/controle-visitantes/controlevisitantes/web/relatorio/brasao.png"]]></imageExpression>
+				<!--<imageExpression><![CDATA["/var/lib/tomcat9/webapps/ROOT/relatorio/brasao.png"]]></imageExpression>-->
 			</image>
 			<staticText>
 				<reportElement x="0" y="83" width="802" height="20" uuid="88429d21-1ef6-4958-81d6-ecd77e86d568">
@@ -571,7 +572,7 @@ WHERE vis.tipo=1 AND v.dataSaida is not null AND v.horaSaida is not null order b
 					<topPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[FISC ADM]]></text>
+				<text><![CDATA[SEC INTLG]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="602" y="40" width="100" height="20" uuid="d00065b6-45ff-4c3d-b27a-67b3866208b3">

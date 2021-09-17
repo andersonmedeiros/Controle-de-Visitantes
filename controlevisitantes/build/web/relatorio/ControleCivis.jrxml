@@ -6,10 +6,10 @@
 	<queryString>
 		<![CDATA[SELECT vis.nome, vis.sobrenome, v.idtVisitante, v.dataEntrada, v.horaEntrada, v.dataSaida, v.horaSaida, s.abreviatura as destino, 
 ifnull(veiculo.marca, '-') as marca, ifnull(veiculo.modelo, '-') as modelo, ifnull(veiculo.cor, '-') as cor, ifnull(veiculo.placa, '-') as placa
-FROM Visita as v
-INNER JOIN Visitante as vis on v.idtVisitante = vis.identidade
-INNER JOIN Setor as s on v.idSetor = s.id
-LEFT JOIN Veiculo as veiculo on v.idVeiculo = veiculo.id
+FROM visita as v
+INNER JOIN visitante as vis on v.idtVisitante = vis.identidade
+INNER JOIN setor as s on v.idSetor = s.id
+LEFT JOIN veiculo as veiculo on v.idVeiculo = veiculo.id
 WHERE vis.tipo = 2 and v.dataSaida is not null and v.horaSaida is not null;]]>
 	</queryString>
 	<field name="nome" class="java.lang.String">
@@ -93,8 +93,9 @@ WHERE vis.tipo = 2 and v.dataSaida is not null and v.horaSaida is not null;]]>
 			</staticText>
 			<image>
 				<reportElement x="376" y="0" width="50" height="50" uuid="fb06e5b2-ee18-4afe-8b3a-380ef470ecb2"/>
-				<imageExpression><![CDATA["/home/anderson/Documentos/gitHub/controle-visitantes/controlevisitantes/web/relatorio/brasao.png"]]></imageExpression>
-			</image>
+                                <imageExpression><![CDATA["C:/Users/User/Documents/git/controle-visitantes/controlevisitantes/web/relatorio/brasao.png"]]></imageExpression>
+                                <!--<imageExpression><![CDATA["/var/lib/tomcat9/webapps/ROOT/web/relatorio/brasao.png"]]></imageExpression>-->
+                        </image>
 			<staticText>
 				<reportElement x="0" y="67" width="802" height="20" uuid="de07aec6-c650-43e7-b93b-41ef3be6a003">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -498,7 +499,7 @@ WHERE vis.tipo = 2 and v.dataSaida is not null and v.horaSaida is not null;]]>
 					<topPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[FISC ADM]]></text>
+				<text><![CDATA[SEC INTLG]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="602" y="40" width="100" height="20" uuid="de09a4b7-5ee9-4851-b9a3-fb6fe637c378">
