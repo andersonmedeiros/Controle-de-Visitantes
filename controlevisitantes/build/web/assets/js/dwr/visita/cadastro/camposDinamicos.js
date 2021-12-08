@@ -46,8 +46,8 @@ $("select[name=txtTipoVisitante]").change(function(){
     }
 });
 
-function getVisitanteByIdentidade(identidade){
-    FacadeAjax.getVisitanteByIdentidadeDWR(identidade, {
+function getVisitanteByCpf(cpf){
+    FacadeAjax.getVisitanteByCpfDWR(cpf, {
         callback:function(visitante){
             if(visitante.nome != null){
                 $("#div-visnencontrado").css("display", "none");

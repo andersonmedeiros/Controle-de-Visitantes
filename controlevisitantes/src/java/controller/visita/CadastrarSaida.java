@@ -87,7 +87,7 @@ public class CadastrarSaida extends HttpServlet {
                 VisitaDAO visitaDAO = new VisitaDAO();                 
                 Visita visita = new Visita();
                     
-                visita.setIdentidadeVisitante(String.valueOf(request.getParameter("idtVisitante")).replace("-", ""));                             
+                visita.setCpfVisitante(String.valueOf(request.getParameter("cpfVisitante")).replace(".", "").replace(".", "").replace("-", ""));                             
                 visita.setIdSetor(Integer.parseInt(request.getParameter("idSetor")));
                 
                 String dataEntrada[] = String.valueOf(request.getParameter("dataEntrada")).split("-");

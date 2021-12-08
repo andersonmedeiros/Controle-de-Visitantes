@@ -176,7 +176,13 @@
                         </div>
                         <div id="formVisitanteMilitar" style="display: none;">
                             <div class="form-row">
-                                <div id="div-identidade" class="form-group col-md-4">
+                                <div id="div-cpf" class="form-group col-md-6">
+                                    <label for="txtCpfMilitar">CPF: <span class="campo-obrigatorio">*</span></label>
+                                    <input type="text" class="form-control cpf" id="txtCpfMilitar" name="txtCpfMilitar" placeholder="Ex.: 120000000-0">
+                                    <div class="valid-feedback">Selva!</div>
+                                    <div class="invalid-feedback invalid-cpf">Campo Obrigatório!</div>
+                                </div>  
+                                <div id="div-identidade" class="form-group col-md-6">
                                     <label for="txtIdentidadeMilitar">Identidade: <span class="campo-obrigatorio">*</span></label>
                                     <input type="text" class="form-control idt-mil" id="txtIdentidadeMilitar" name="txtIdentidadeMilitar" placeholder="Ex.: 120000000-0">
                                     <div class="valid-feedback">Selva!</div>
@@ -258,19 +264,27 @@
                         </div>
                         <div id="formVisitanteCivil" style="display: none;">
                             <div class="form-row">
-                                <div id="div-identidade" class="form-group col-md-3">
+                                <div id="div-identidade" class="form-group col-md-6">
+                                    <label for="txtCpfCivil">CPF: <span class="campo-obrigatorio">*</span></label>
+                                    <input type="text" class="form-control cpf" id="txtCpfCivil" name="txtCpfCivil" placeholder="Ex.: 000.000.000-00">
+                                    <div class="valid-feedback">Selva!</div>
+                                    <div class="invalid-feedback invalid-cpf">Campo Obrigatório!</div>
+                                </div>  
+                                <div id="div-identidade" class="form-group col-md-6">
                                     <label for="txtIdentidadeCivil">Identidade: <span class="campo-obrigatorio">*</span></label>
                                     <input type="text" class="form-control idt-cv" id="txtIdentidadeCivil" name="txtIdentidadeCivil" placeholder="Ex.: 0000000-0">
                                     <div class="valid-feedback">Selva!</div>
                                     <div class="invalid-feedback invalid-identidade">Campo Obrigatório!</div>
                                 </div>  
-                                <div id="div-nome" class="form-group col-md-3">
+                            </div>
+                            <div class="form-row">
+                                <div id="div-nome" class="form-group col-md-4">
                                     <label for="txtNomeCivil">Nome: <span class="campo-obrigatorio">*</span></label>
                                     <input type="text" class="form-control" id="txtNomeCivil" name="txtNomeCivil" placeholder="Ex.: Nome">
                                     <div class="valid-feedback">Selva!</div>
                                     <div class="invalid-feedback">Campo Obrigatório!</div>
                                 </div>                                    
-                                <div id="div-sobrenome" class="form-group col-md-6">
+                                <div id="div-sobrenome" class="form-group col-md-8">
                                     <label for="txtSobrenomeCivil">Sobrenome: <span class="campo-obrigatorio">*</span></label>
                                     <input type="text" class="form-control" id="txtSobrenomeCivil" name="txtSobrenomeCivil" placeholder="Ex.: Sobrenome">
                                     <div class="valid-feedback">Selva!</div>

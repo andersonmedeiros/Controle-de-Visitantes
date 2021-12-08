@@ -178,16 +178,16 @@
                                     <div class="invalid-feedback">Campo Obrigatório!</div>
                                 </div>
                                 <div id="div-idtmilitar" class="form-group col-md-4" style="display: none;">
-                                    <label for="txtIdentidadeMilitar">Identidade: <span class="campo-obrigatorio">*</span></label>
-                                    <input type="text" class="form-control idt-mil" id="txtIdentidadeMilitar" name="txtIdentidadeMilitar" placeholder="Ex.: 120000000-0" maxlength="10">
+                                    <label for="txtCpfMilitar">CPF: <span class="campo-obrigatorio">*</span></label>
+                                    <input type="text" class="form-control cpf" id="txtCpfMilitar" name="txtCpfMilitar" placeholder="Ex.: 000.000.000-00">
                                     <div class="valid-feedback">Selva!</div>
-                                    <div class="invalid-feedback invalid-identidade">Campo Obrigatório!</div>
+                                    <div class="invalid-feedback invalid-cpf">Campo Obrigatório!</div>
                                 </div>   
                                 <div id="div-idtcivil" class="form-group col-md-4" style="display: none;">
-                                    <label for="txtIdentidadeCivil">Identidade: <span class="campo-obrigatorio">*</span></label>
-                                    <input type="text" class="form-control idt-cv" id="txtIdentidadeCivil" name="txtIdentidadeCivil" placeholder="Ex.: 120000000-0" maxlength="10">
+                                    <label for="txtCpfCivil">CPF: <span class="campo-obrigatorio">*</span></label>
+                                    <input type="text" class="form-control cpf" id="txtCpfCivil" name="txtCpfCivil" placeholder="Ex.: 000.000.000-00">
                                     <div class="valid-feedback">Selva!</div>
-                                    <div class="invalid-feedback invalid-identidade">Campo Obrigatório!</div>
+                                    <div class="invalid-feedback invalid-cpf">Campo Obrigatório!</div>
                                 </div>  
                                 <div class="form-group col-md-4 align-self-end" style="margin-bottom: 16px;">
                                     <button type="button" id="btn" name="btnPesquisar" class="btn btn-warning btn-tentativas" value="Candidatura" >Pesquisar</button>

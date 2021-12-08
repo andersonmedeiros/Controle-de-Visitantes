@@ -103,9 +103,9 @@ public class GerarRelatorioPdf extends HttpServlet {
             
             //Controle de Entrada/Saída de militares de outras om
             if(tipo == 1){
-                String sqlQtdeVisitas = "SELECT COUNT(vis.identidade) as qtdeVisitas " +
+                String sqlQtdeVisitas = "SELECT COUNT(vis.cpf) as qtdeVisitas " +
                                         "FROM visita as v " +
-                                        "INNER JOIN visitante as vis on v.idtVisitante = vis.identidade " +
+                                        "INNER JOIN visitante as vis on v.cpfVisitante = vis.cpf " +
                                         "INNER JOIN postograduacao as pg on vis.idPostoGraduacao = pg.id " +
                                         "INNER JOIN organizacaomilitar as om on vis.idOrganizacaoMilitar = om.id " +
                                         "INNER JOIN setor as s on v.idSetor = s.id " +
@@ -117,10 +117,10 @@ public class GerarRelatorioPdf extends HttpServlet {
                     response.sendRedirect("/controlevisitantes/restrito/visita/fechada.jsp?e=1");
                 }
                 else{
-                    sql_query = "SELECT pg.abreviatura as pg, vis.nome, vis.sobrenome, om.abreviatura as om, v.idtVisitante, v.dataEntrada, v.horaEntrada, v.dataSaida, v.horaSaida, s.abreviatura as destino, " +
+                    sql_query = "SELECT pg.abreviatura as pg, vis.nome, vis.sobrenome, om.abreviatura as om, v.cpfVisitante, v.dataEntrada, v.horaEntrada, v.dataSaida, v.horaSaida, s.abreviatura as destino, " +
                             "IFNULL(veiculo.marca, '-') as marca, IFNULL(veiculo.modelo, '-') as modelo, IFNULL(veiculo.cor, '-') as cor, IFNULL(veiculo.placa, '-') as placa " +
                             "FROM visita as v " +
-                            "INNER JOIN visitante as vis on v.idtVisitante = vis.identidade " +
+                            "INNER JOIN visitante as vis on v.cpfVisitante = vis.cpf " +
                             "INNER JOIN postograduacao as pg on vis.idPostoGraduacao = pg.id " +
                             "INNER JOIN organizacaomilitar as om on vis.idOrganizacaoMilitar = om.id " +
                             "INNER JOIN setor as s on v.idSetor = s.id " +
@@ -133,28 +133,31 @@ public class GerarRelatorioPdf extends HttpServlet {
             }
             //Controle de Entrada/Saída de civis
             else if(tipo == 2){
-                String sqlQtdeVisitas = "SELECT COUNT(vis.identidade) as qtdeVisitas " +
+                String sqlQtdeVisitas = "SELECT COUNT(vis.cpf) as qtdeVisitas " +
                                         "FROM visita as v " +
-                                        "INNER JOIN visitante as vis on v.idtVisitante = vis.identidade " +
+                                        "INNER JOIN visitante as vis on v.cpfVisitante = vis.cpf " +
                                         "INNER JOIN setor as s on v.idSetor = s.id " +
                                         "LEFT JOIN veiculo as veiculo on v.idVeiculo = veiculo.id " +
                                         "WHERE v.dataSaida is not null and v.horaSaida is not null AND " +
                                         "vis.tipo = " + tipo + " AND v.dataEntrada = " + "'" + data + "'" + " order by v.horaEntrada;";
                 
+                System.out.println("passou");
+                System.out.println(sqlQtdeVisitas);
+                
                 if(visitaDAO.getQtdeVisitas(sqlQtdeVisitas) == 0){
                     response.sendRedirect("/controlevisitantes/restrito/visita/fechada.jsp?e=2");
                 }
                 else{
-                    sql_query = "SELECT vis.nome, vis.sobrenome, v.idtVisitante, v.dataEntrada, v.horaEntrada, v.dataSaida, v.horaSaida, s.abreviatura as destino, " +
+                    sql_query = "SELECT vis.nome, vis.sobrenome, v.cpfVisitante, v.dataEntrada, v.horaEntrada, v.dataSaida, v.horaSaida, s.abreviatura as destino, " +
                                 "IFNULL(veiculo.marca, '-') as marca, IFNULL(veiculo.modelo, '-') as modelo, IFNULL(veiculo.cor, '-') as cor, IFNULL(veiculo.placa, '-') as placa " +
                                 "FROM visita as v " +
-                                "INNER JOIN visitante as vis on v.idtVisitante = vis.identidade " +
+                                "INNER JOIN visitante as vis on v.cpfVisitante = vis.cpf " +
                                 "INNER JOIN setor as s on v.idSetor = s.id " +
                                 "LEFT JOIN veiculo as veiculo on v.idVeiculo = veiculo.id " +
                                 "WHERE v.dataSaida is not null and v.horaSaida is not null AND " +
                                 "vis.tipo = " + tipo + " AND v.dataEntrada = " + "'" + data + "'" + " order by v.horaEntrada;";
 
-                    jrxml = contexto.getRealPath("/relatorio/ControleCivis.jrxml");
+                    jrxml = contexto.getRealPath("/relatorio/ControleCivil.jrxml");
                 }
             }
             

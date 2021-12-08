@@ -185,11 +185,11 @@
                                 out.println("       <div class=form-row>");
                                 out.println("           <div class=\"form-group mr-2\">");
                                 out.println("               <form name=\"formExcluir\" method=\"POST\" action=\"controller.visita/CadastrarSaida\">");
-                                out.println("                   <input type=\"hidden\" class=\"form-control\" name=\"idtVisitante\" id=\"idtVisitante\" readonly=\"readonly\" value=\""+visita.getIdentidadeVisitante()+"\"/>");
+                                out.println("                   <input type=\"hidden\" class=\"form-control\" name=\"cpfVisitante\" id=\"cpfVisitante\" readonly=\"readonly\" value=\""+visita.getCpfVisitante()+"\"/>");
                                 out.println("                   <input type=\"hidden\" class=\"form-control\" name=\"idSetor\" id=\"idSetor\" readonly=\"readonly\" value=\""+visita.getIdSetor()+"\"/>");
                                 out.println("                   <input type=\"hidden\" class=\"form-control\" name=\"dataEntrada\" id=\"dataEntrada\" readonly=\"readonly\" value=\""+visita.getDataEntrada()+"\"/>");
                                 out.println("                   <input type=\"hidden\" class=\"form-control\" name=\"horaEntrada\" id=\"horaEntrada\" readonly=\"readonly\" value=\""+visita.getHoraEntrada()+"\"/>");
-                                out.println("                   <button id="+visita.getIdentidadeVisitante()+" type=\"submit\" name=\"btnSaida\" class=\"btn btn-danger\" onclick=\"return confirm('Tem certeza que deseja registrar a saída?');\">Registrar Saída</button>");
+                                out.println("                   <button id="+visita.getCpfVisitante()+" type=\"submit\" name=\"btnSaida\" class=\"btn btn-danger\" onclick=\"return confirm('Tem certeza que deseja registrar a saída?');\">Registrar Saída</button>");
                                 out.println("               </form>");
                                 out.println("           </div>");
                                 out.println("       </div>");

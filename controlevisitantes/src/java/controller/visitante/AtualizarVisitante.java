@@ -86,6 +86,7 @@ public class AtualizarVisitante extends HttpServlet {
                 
                 if(Integer.parseInt(request.getParameter("txtTipoVisitante")) == 1){
                     vis.setTipo(Integer.parseInt(request.getParameter("txtTipoVisitante")));
+                    vis.setCpf(String.valueOf(request.getParameter("txtCpfMilitarAtt").replace(".", "").replace(".","").replace("-", "")));
                     vis.setIdentidade(String.valueOf(request.getParameter("txtIdentidadeMilitarAtt").replace("-", "")));
                     vis.setIdPostoGraduacao(Integer.parseInt(request.getParameter("txtPGradAtt")));
                     vis.setIdOm(Integer.parseInt(request.getParameter("txtOMAtt")));
@@ -98,6 +99,7 @@ public class AtualizarVisitante extends HttpServlet {
                 }
                 else if(Integer.parseInt(request.getParameter("txtTipoVisitante")) == 2){
                     vis.setTipo(Integer.parseInt(request.getParameter("txtTipoVisitante")));
+                    vis.setCpf(String.valueOf(request.getParameter("txtCpfCivilAtt").replace(".", "").replace(".","").replace("-", "")));
                     vis.setIdentidade(String.valueOf(request.getParameter("txtIdentidadeCivilAtt").replace("-", "")));
                     vis.setNome(String.valueOf(request.getParameter("txtNomeCivilAtt")).toUpperCase());
                     vis.setSobrenome(String.valueOf(request.getParameter("txtSobrenomeCivilAtt")).toUpperCase());
@@ -108,6 +110,7 @@ public class AtualizarVisitante extends HttpServlet {
                 
                 System.out.println("Visitante: //");
                 System.out.println("tipo: " + vis.getTipo());
+                System.out.println("identidade: " + vis.getCpf());                
                 System.out.println("identidade: " + vis.getIdentidade());                
                 System.out.println("pg: " + vis.getIdPostoGraduacao());
                 System.out.println("om: " + vis.getIdOm());

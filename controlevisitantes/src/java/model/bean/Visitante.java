@@ -10,7 +10,7 @@ package model.bean;
  * @author anderson
  */
 public class Visitante {
-    private String identidade, nome, sobrenome, nomeguerra, email, fone;
+    private String identidade, cpf, nome, sobrenome, nomeguerra, email, fone;
     private int tipo;
     private final PostoGraduacao pg = new PostoGraduacao();
     private final Om om = new Om();
@@ -22,7 +22,15 @@ public class Visitante {
     public void setIdentidade(String identidade) {
         this.identidade = identidade;
     }
+    
+    public String getCpf() {
+        return cpf;
+    }
 
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+    
     public int getTipo() {
         return tipo;
     }

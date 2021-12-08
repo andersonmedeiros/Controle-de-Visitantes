@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.14.0.final using JasperReports Library version 6.14.0-2ab0d8625be255bf609c78e1181801213e51db8f  -->
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ControleMilitarOutrasOM" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a2bd62ca-0bc1-4029-aa93-4be87ea53ff6">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="BDControleVisitantes.xml"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="localhost ctvis"/>
 	<queryString>
-		<![CDATA[SELECT pg.abreviatura as pg, vis.nome, vis.sobrenome, om.abreviatura as om, v.idtVisitante, v.dataEntrada, v.horaEntrada, v.dataSaida, v.horaSaida, s.abreviatura as destino,
+		<![CDATA[SELECT pg.abreviatura as pg, vis.nome, vis.sobrenome, om.abreviatura as om, v.cpfVisitante, v.dataEntrada, v.horaEntrada, v.dataSaida, v.horaSaida, s.abreviatura as destino,
 ifnull(veiculo.marca, '-') as marca, ifnull(veiculo.modelo, '-') as modelo, ifnull(veiculo.cor, '-') as cor, ifnull(veiculo.placa, '-') as placa
-FROM Visita as v
-INNER JOIN visitante as vis on v.idtVisitante = vis.identidade
+FROM visita as v
+INNER JOIN visitante as vis on v.cpfVisitante = vis.cpf
 INNER JOIN postograduacao as pg on vis.idPostoGraduacao = pg.id
 INNER JOIN organizacaomilitar as om on vis.idOrganizacaoMilitar = om.id
 INNER JOIN setor as s on v.idSetor = s.id
@@ -17,59 +17,59 @@ WHERE vis.tipo=1 AND v.dataSaida is not null AND v.horaSaida is not null order b
 	<field name="pg" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="abreviatura"/>
 		<property name="com.jaspersoft.studio.field.label" value="pg"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="PostoGraduacao"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="postograduacao"/>
 	</field>
 	<field name="nome" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="nome"/>
 		<property name="com.jaspersoft.studio.field.label" value="nome"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="Visitante"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="visitante"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="sobrenome" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="sobrenome"/>
 		<property name="com.jaspersoft.studio.field.label" value="sobrenome"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="Visitante"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="visitante"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="om" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="abreviatura"/>
 		<property name="com.jaspersoft.studio.field.label" value="om"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="OrganizacaoMilitar"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="organizacaomilitar"/>
 	</field>
-	<field name="idtVisitante" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="idtVisitante"/>
-		<property name="com.jaspersoft.studio.field.label" value="idtVisitante"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="Visita"/>
+	<field name="cpfVisitante" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="cpfVisitante"/>
+		<property name="com.jaspersoft.studio.field.label" value="cpfVisitante"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="visita"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="dataEntrada" class="java.sql.Date">
 		<property name="com.jaspersoft.studio.field.name" value="dataEntrada"/>
 		<property name="com.jaspersoft.studio.field.label" value="dataEntrada"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="Visita"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="visita"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="horaEntrada" class="java.sql.Time">
 		<property name="com.jaspersoft.studio.field.name" value="horaEntrada"/>
 		<property name="com.jaspersoft.studio.field.label" value="horaEntrada"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="Visita"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="visita"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="dataSaida" class="java.sql.Date">
 		<property name="com.jaspersoft.studio.field.name" value="dataSaida"/>
 		<property name="com.jaspersoft.studio.field.label" value="dataSaida"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="Visita"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="visita"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="horaSaida" class="java.sql.Time">
 		<property name="com.jaspersoft.studio.field.name" value="horaSaida"/>
 		<property name="com.jaspersoft.studio.field.label" value="horaSaida"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="Visita"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="visita"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="destino" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="abreviatura"/>
 		<property name="com.jaspersoft.studio.field.label" value="destino"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="Setor"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="setor"/>
 	</field>
 	<field name="marca" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="marca"/>
@@ -150,8 +150,8 @@ WHERE vis.tipo=1 AND v.dataSaida is not null AND v.horaSaida is not null order b
 			</staticText>
 			<image>
 				<reportElement x="376" y="0" width="50" height="50" uuid="2effaef9-b16a-47f2-a49a-30a2c6cf663c"/>
-				<imageExpression><![CDATA["C:/Users/User/Documents/git/controle-visitantes/controlevisitantes/web/relatorio/brasao.png"]]></imageExpression>
 				<!--<imageExpression><![CDATA["/var/lib/tomcat9/webapps/ROOT/relatorio/brasao.png"]]></imageExpression>-->
+				<imageExpression><![CDATA["C:/Users/User/Documents/git/controle-visitantes/controlevisitantes/web/relatorio/brasao.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="0" y="83" width="802" height="20" uuid="88429d21-1ef6-4958-81d6-ecd77e86d568">
@@ -215,7 +215,7 @@ WHERE vis.tipo=1 AND v.dataSaida is not null AND v.horaSaida is not null order b
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="11" isBold="true"/>
 					</textElement>
-					<text><![CDATA[IDENTIDADE]]></text>
+					<text><![CDATA[CPF]]></text>
 				</staticText>
 				<staticText>
 					<reportElement stretchType="RelativeToTallestObject" x="351" y="0" width="68" height="50" uuid="397ced99-7eac-4891-b9a5-2d2057dfa0d8">
@@ -419,7 +419,7 @@ WHERE vis.tipo=1 AND v.dataSaida is not null AND v.horaSaida is not null order b
 						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<textFieldExpression><![CDATA[$F{idtVisitante}.toString()]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{cpfVisitante}.toString()]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight">
 					<reportElement stretchType="RelativeToTallestObject" x="351" y="0" width="68" height="35" uuid="ae4018d5-378a-4629-89f3-3c0ba616f1d3">

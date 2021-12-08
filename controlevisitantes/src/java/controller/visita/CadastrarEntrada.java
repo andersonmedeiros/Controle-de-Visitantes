@@ -101,10 +101,10 @@ public class CadastrarEntrada extends HttpServlet {
                 VisitaDAO visitaDAO = new VisitaDAO();                 
                 Visita visita = new Visita();
                 
-                if(!request.getParameter("txtIdentidadeMilitar").equals("")){
-                    visita.setIdentidadeVisitante(String.valueOf(request.getParameter("txtIdentidadeMilitar")).replace("-", ""));
-                }else if(!request.getParameter("txtIdentidadeCivil").equals("")){
-                    visita.setIdentidadeVisitante(String.valueOf(request.getParameter("txtIdentidadeCivil")).replace("-", ""));
+                if(!request.getParameter("txtCpfMilitar").equals("")){
+                    visita.setCpfVisitante(String.valueOf(request.getParameter("txtCpfMilitar")).replace(".","").replace(".", "").replace("-", ""));
+                }else if(!request.getParameter("txtCpfCivil").equals("")){
+                    visita.setCpfVisitante(String.valueOf(request.getParameter("txtCpfCivil")).replace(".","").replace(".", "").replace("-", ""));
                 }
                                 
                 visita.setIdSetor(Integer.parseInt(request.getParameter("txtSetorVisitado")));

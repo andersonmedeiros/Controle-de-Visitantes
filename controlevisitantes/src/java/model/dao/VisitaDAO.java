@@ -26,7 +26,7 @@ public class VisitaDAO {
     String tabela = "visita";
     
     //Atributos
-    String idtVisitante = "idtVisitante";
+    String cpfVisitante = "cpfVisitante";
     String idSetor = "idSetor";
     String cracha = "cracha";
     String dataEntrada = "dataEntrada";
@@ -37,16 +37,16 @@ public class VisitaDAO {
     String finalidade = "finalidade";
     
     //Insert SQL
-    private final String INSERTENTRADA = "INSERT INTO " + tabela + "(" + idtVisitante + "," + idSetor + "," + cracha +  "," + dataEntrada + "," + horaEntrada + "," + idVeiculo + "," + finalidade + ")" +
+    private final String INSERTENTRADA = "INSERT INTO " + tabela + "(" + cpfVisitante + "," + idSetor + "," + cracha +  "," + dataEntrada + "," + horaEntrada + "," + idVeiculo + "," + finalidade + ")" +
                                          " VALUES(?,?,?,?,?,?,?);";
     
     //Update SQL
     private final String INSERTSAIDA = "UPDATE " + tabela +
                                         " SET " +  dataSaida + "=?, " + horaSaida + "=? " +
-                                        "WHERE " + idtVisitante + "=? AND " + idSetor + "=? AND " + dataEntrada + "=? AND " + horaEntrada + "=?;";
+                                        "WHERE " + cpfVisitante + "=? AND " + idSetor + "=? AND " + dataEntrada + "=? AND " + horaEntrada + "=?;";
         
     //Delete SQL
-    private final String DELETE = "DELETE FROM " + tabela + " WHERE " + idtVisitante + "=? AND " + idSetor + "=? AND " + dataEntrada + "=? AND " + horaEntrada + "=?;";
+    private final String DELETE = "DELETE FROM " + tabela + " WHERE " + cpfVisitante + "=? AND " + idSetor + "=? AND " + dataEntrada + "=? AND " + horaEntrada + "=?;";
     
     //Consultas SQL
     
@@ -62,7 +62,7 @@ public class VisitaDAO {
                 
                 pstm = conn.prepareStatement(INSERTENTRADA);
                 
-                pstm.setString(1, visita.getIdentidadeVisitante());
+                pstm.setString(1, visita.getCpfVisitante());
                 pstm.setInt(2, visita.getIdSetor());
                 pstm.setInt(3, visita.getCracha());
                 pstm.setDate(4, visita.getDataEntrada());
@@ -97,7 +97,7 @@ public class VisitaDAO {
                 
                 pstm.setDate(1, visita.getDataSaida());
                 pstm.setTime(2, visita.getHoraSaida());
-                pstm.setString(3, visita.getIdentidadeVisitante());
+                pstm.setString(3, visita.getCpfVisitante());
                 pstm.setInt(4, visita.getIdSetor());
                 pstm.setDate(5, visita.getDataEntrada());
                 pstm.setTime(6, visita.getHoraEntrada());
@@ -118,12 +118,12 @@ public class VisitaDAO {
     
     
     //Delete SQL
-    public void delete(String idtVisitante, int idSetor, Date entrada) {
-        if (!idtVisitante.equals("") && idSetor != 0 && entrada != null){
+    public void delete(String cpfVisitante, int idSetor, Date entrada) {
+        if (!cpfVisitante.equals("") && idSetor != 0 && entrada != null){
             try {
                 conn = ConnectionFactory.getConnection();
                 pstm = conn.prepareStatement(DELETE);
-                pstm.setString(1, idtVisitante);
+                pstm.setString(1, cpfVisitante);
                 pstm.setInt(2, idSetor);
                 pstm.setDate(3, entrada);
             
@@ -140,9 +140,9 @@ public class VisitaDAO {
     
     private final String GETVISITABYIDT = "SELECT * " +
                                             "FROM visita " + 
-                                            "WHERE idtVisitante = ?";
+                                            "WHERE cpfVisitante = ?";
        
-    public Visita getVisitaByIdtVisitante(String idtVisitante){
+    public Visita getVisitaByIdtVisitante(String cpfVisitante){
         Visita visita = new Visita();
         VisitanteDAO visDAO = new VisitanteDAO();
         SetorDAO setorDAO = new SetorDAO();
@@ -150,7 +150,7 @@ public class VisitaDAO {
         try {
             conn = ConnectionFactory.getConnection();
             pstm = conn.prepareStatement(GETVISITABYIDT);
-            pstm.setString(1, idtVisitante);
+            pstm.setString(1, cpfVisitante);
            
             rs = pstm.executeQuery();
             while (rs.next()) {
@@ -160,7 +160,8 @@ public class VisitaDAO {
                 visita.setDataSaida(rs.getDate("dataSaida"));                            
                 visita.setHoraSaida(rs.getTime("horaSaida"));                            
                 
-                Visitante vis = visDAO.getVisitanteById(rs.getString("idtVisitante"));
+                Visitante vis = visDAO.getVisitanteByCpf(rs.getString("cpfVisitante"));
+                visita.setCpfVisitante(vis.getCpf());
                 visita.setIdentidadeVisitante(vis.getIdentidade());
                 visita.setNomeVisitante(vis.getNome());
                 visita.setSobrenomeVisitante(vis.getSobrenome());
@@ -251,7 +252,8 @@ public class VisitaDAO {
                 visita.setDataSaida(rs.getDate("dataSaida"));                            
                 visita.setHoraSaida(rs.getTime("horaSaida"));                           
                 
-                Visitante vis = visDAO.getVisitanteById(rs.getString("idtVisitante"));
+                Visitante vis = visDAO.getVisitanteByCpf(rs.getString("cpfVisitante"));
+                visita.setCpfVisitante(vis.getCpf());
                 visita.setIdentidadeVisitante(vis.getIdentidade());
                 visita.setNomeVisitante(vis.getNome());
                 visita.setSobrenomeVisitante(vis.getSobrenome());
@@ -328,7 +330,8 @@ public class VisitaDAO {
                 visita.setDataSaida(rs.getDate("dataSaida"));                            
                 visita.setHoraSaida(rs.getTime("horaSaida"));                           
                 
-                Visitante vis = visDAO.getVisitanteById(rs.getString("idtVisitante"));
+                Visitante vis = visDAO.getVisitanteByCpf(rs.getString("cpfVisitante"));
+                visita.setCpfVisitante(vis.getCpf());
                 visita.setIdentidadeVisitante(vis.getIdentidade());
                 visita.setNomeVisitante(vis.getNome());
                 visita.setSobrenomeVisitante(vis.getSobrenome());
@@ -405,7 +408,8 @@ public class VisitaDAO {
                 visita.setDataSaida(rs.getDate("dataSaida"));                            
                 visita.setHoraSaida(rs.getTime("horaSaida"));                           
                 
-                Visitante vis = visDAO.getVisitanteById(rs.getString("idtVisitante"));
+                Visitante vis = visDAO.getVisitanteByCpf(rs.getString("cpfVisitante"));
+                visita.setCpfVisitante(vis.getCpf());
                 visita.setIdentidadeVisitante(vis.getIdentidade());
                 visita.setNomeVisitante(vis.getNome());
                 visita.setSobrenomeVisitante(vis.getSobrenome());
@@ -459,9 +463,9 @@ public class VisitaDAO {
         return visitas;
     }
     
-    private final static String GETVISITABYIDTDWR = "SELECT * FROM visita WHERE idtVisitante = ?";
+    private final static String GETVISITABYIDTDWR = "SELECT * FROM visita WHERE cpfVisitante = ?";
        
-    public static Visita getVisitaByIdentidadeDWR(String idtVisitante){
+    public static Visita getVisitaByIdentidadeDWR(String cpfVisitante){
         VisitanteDAO visDAO = new VisitanteDAO();
         SetorDAO setorDAO = new SetorDAO();
         VeiculoDAO vDAO = new VeiculoDAO();
@@ -472,7 +476,7 @@ public class VisitaDAO {
         try {
             conn = ConnectionFactory.getConnection();
             pstm = conn.prepareStatement(GETVISITABYIDTDWR);
-            pstm.setString(1, idtVisitante);
+            pstm.setString(1, cpfVisitante);
            
             rs = pstm.executeQuery();
             while (rs.next()) {       
@@ -482,7 +486,8 @@ public class VisitaDAO {
                 visita.setDataSaida(rs.getDate("dataSaida"));                            
                 visita.setHoraSaida(rs.getTime("horaSaida"));                            
                 
-                Visitante vis = visDAO.getVisitanteById(rs.getString("idtVisitante"));
+                Visitante vis = visDAO.getVisitanteByCpf(rs.getString("cpfVisitante"));
+                visita.setCpfVisitante(vis.getCpf());
                 visita.setIdentidadeVisitante(vis.getIdentidade());
                 visita.setNomeVisitante(vis.getNome());
                 visita.setSobrenomeVisitante(vis.getSobrenome());
@@ -534,10 +539,10 @@ public class VisitaDAO {
         return visita;
     }    
     
-    private static final String GETVISITASMILOUTRASOMDWR = "SELECT pg.abreviatura as pg, vis.nome, vis.sobrenome, om.abreviatura as om, v.idtVisitante, v.dataEntrada, v.horaEntrada, v.dataSaida, v.horaSaida, s.abreviatura as destino, " +
+    private static final String GETVISITASMILOUTRASOMDWR = "SELECT pg.abreviatura as pg, vis.nome, vis.sobrenome, om.abreviatura as om, v.cpfVisitante, v.dataEntrada, v.horaEntrada, v.dataSaida, v.horaSaida, s.abreviatura as destino, " +
                                                         "IFNULL(veiculo.marca, '-') as marca, IFNULL(veiculo.modelo, '-') as modelo, IFNULL(veiculo.cor, '-') as cor, IFNULL(veiculo.placa, '-') as placa " +
                                                         "FROM visita as v " +
-                                                        "INNER JOIN visitante as vis on v.idtVisitante = vis.identidade " +
+                                                        "INNER JOIN visitante as vis on v.cpfVisitante = vis.cpf " +
                                                         "INNER JOIN postograduacao as pg on vis.idPostoGraduacao = pg.id " +
                                                         "INNER JOIN organizacaomilitar as om on vis.idOrganizacaoMilitar = om.id " +
                                                         "INNER JOIN setor as s on v.idSetor = s.id " +
@@ -545,10 +550,10 @@ public class VisitaDAO {
                                                         "WHERE v.dataSaida is not null AND v.horaSaida is not null AND " +
                                                         "vis.tipo = ? AND v.dataEntrada = ? order by v.horaEntrada;";
     
-    private static final String GETVISITASCIVISDWR = "SELECT vis.nome, vis.sobrenome, v.idtVisitante, v.dataEntrada, v.horaEntrada, v.dataSaida, v.horaSaida, s.abreviatura as destino, " +
+    private static final String GETVISITASCIVISDWR = "SELECT vis.nome, vis.sobrenome, v.cpfVisitante, v.dataEntrada, v.horaEntrada, v.dataSaida, v.horaSaida, s.abreviatura as destino, " +
                                                   "IFNULL(veiculo.marca, '-') as marca, IFNULL(veiculo.modelo, '-') as modelo, IFNULL(veiculo.cor, '-') as cor, IFNULL(veiculo.placa, '-') as placa " +
                                                   "FROM visita as v " +
-                                                  "INNER JOIN visitante as vis on v.idtVisitante = vis.identidade " +
+                                                  "INNER JOIN visitante as vis on v.cpfVisitante = vis.cpf " +
                                                   "INNER JOIN setor as s on v.idSetor = s.id " +
                                                   "LEFT JOIN veiculo as veiculo on v.idVeiculo = veiculo.id " +
                                                   "WHERE v.dataSaida is not null and v.horaSaida is not null AND " +
@@ -577,7 +582,8 @@ public class VisitaDAO {
                     visita.setDataSaida(rs.getDate("v.dataSaida"));                            
                     visita.setHoraSaida(rs.getTime("v.horaSaida"));                           
 
-                    Visitante vis = visDAO.getVisitanteById(rs.getString("v.idtVisitante"));
+                    Visitante vis = visDAO.getVisitanteByCpf(rs.getString("v.cpfVisitante"));
+                    visita.setCpfVisitante(vis.getCpf());
                     visita.setIdentidadeVisitante(vis.getIdentidade());
                     visita.setNomeVisitante(vis.getNome());
                     visita.setSobrenomeVisitante(vis.getSobrenome());
@@ -630,7 +636,8 @@ public class VisitaDAO {
                     visita.setDataSaida(rs.getDate("v.dataSaida"));                            
                     visita.setHoraSaida(rs.getTime("v.horaSaida"));                           
 
-                    Visitante vis = visDAO.getVisitanteById(rs.getString("v.idtVisitante"));
+                    Visitante vis = visDAO.getVisitanteByCpf(rs.getString("v.cpfVisitante"));
+                    visita.setCpfVisitante(vis.getCpf());
                     visita.setIdentidadeVisitante(vis.getIdentidade());
                     visita.setNomeVisitante(vis.getNome());
                     visita.setSobrenomeVisitante(vis.getSobrenome());

@@ -13,7 +13,7 @@
         <meta name="description" content="">
         <meta name="author" content="Anderson de Paula Andrade Medeiros">
         
-        <!--<link rel="icon" type="image/x-icon" href="assets/img/brasaocigs.png" />-->
+        <link rel="icon" type="image/x-icon" href="assets/img/brasaocigs.png"/>
         <title>Login</title>
         
         <link rel="stylesheet" type="text/css" href="assets/node_modules/bootstrap/compiler/bootstrap.css">
@@ -54,7 +54,7 @@
                 <div class="col-md-12 mb-1">
                     <b class="text-center" style="color: #000000; font-size: 15pt;">Controle de Visitantes</b>
                 </div>
-                <!--<img class="col-4" src="assets/img/brasaocigs.png" alt="Sistema de Controle de Visitantes" >           -->                            
+                <img class="col-4" src="assets/img/brasaocigs.png" alt="Sistema de Controle de Visitantes">             
 
                 <div class="form-label-group">
                     <label for="txtIdentidade">Identidade: </label>
@@ -67,7 +67,7 @@
                 </div>
                 
                 <button type="submit" class="btn btn-primary btn-block btn-success">Entrar</button>
-                <p class="mt-3 text-center" style="color: #000000;">Desenvolvido por Anderson <b>De Paula</b> Andrade Medeiros</p>
+                <p class="mt-3 text-center" style="color: #000000;">Desenvolvido 3º Sgt por Anderson <b>De Paula</b> Andrade Medeiros</p>
                 <p class="mb-3 text-center copy">&copy; 2021</p>
             </div>
         </form>

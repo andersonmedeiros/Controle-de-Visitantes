@@ -47,7 +47,7 @@ public class FacadeAjax {
     public Setor getSetorByIdDWR(int idSetor) throws Throwable, Exception{
         return SetorDAO.getSetorByIdDWR(idSetor);
     } 
-    public Usuario getUsuarioByIdentidadeDWR(String identidade){
+    public Usuario getUsuarioByIdentiadeDWR(String identidade){
         return UsuarioDAO.getUsuarioByIdentidadeDWR(identidade);
     }
     public DivisaoSecao getDivisaoSecaoByIdDWR(int idDivisaoSecao){
@@ -57,8 +57,8 @@ public class FacadeAjax {
         return DivisaoSecaoDAO.getDivisoesSecoesDWR();
     }
     
-    public Visitante getVisitanteByIdentidadeDWR(String identidade){
-        return VisitanteDAO.getVisitanteByIdentidadeDWR(identidade);
+    public Visitante getVisitanteByCpfDWR(String identidade){
+        return VisitanteDAO.getVisitanteByCpfDWR(identidade);
     }
     
     public ArrayList<Setor> getSetoresDWR() throws Throwable, Exception{

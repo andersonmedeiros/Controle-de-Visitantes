@@ -1,24 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ControleMilitarOutrasOM" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a2bd62ca-0bc1-4029-aa93-4be87ea53ff6">
-	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="localhost ctvis"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<queryString>
-		<![CDATA[SELECT pg.abreviatura as pg, vis.nome, vis.sobrenome, om.abreviatura as om, v.cpfVisitante, v.dataEntrada, v.horaEntrada, v.dataSaida, v.horaSaida, s.abreviatura as destino,
+		<![CDATA[SELECT vis.nome, vis.sobrenome, v.cpfVisitante, v.dataEntrada, v.horaEntrada, v.dataSaida, v.horaSaida, s.abreviatura as destino, 
 ifnull(veiculo.marca, '-') as marca, ifnull(veiculo.modelo, '-') as modelo, ifnull(veiculo.cor, '-') as cor, ifnull(veiculo.placa, '-') as placa
 FROM visita as v
 INNER JOIN visitante as vis on v.cpfVisitante = vis.cpf
-INNER JOIN postograduacao as pg on vis.idPostoGraduacao = pg.id
-INNER JOIN organizacaomilitar as om on vis.idOrganizacaoMilitar = om.id
 INNER JOIN setor as s on v.idSetor = s.id
 LEFT JOIN veiculo as veiculo on v.idVeiculo = veiculo.id
-WHERE vis.tipo=1 AND v.dataSaida is not null AND v.horaSaida is not null order by v.dataEntrada desc;]]>
+WHERE vis.tipo = 2 and v.dataSaida is not null and v.horaSaida is not null;]]>
 	</queryString>
-	<field name="pg" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="abreviatura"/>
-		<property name="com.jaspersoft.studio.field.label" value="pg"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="postograduacao"/>
-	</field>
 	<field name="nome" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="nome"/>
 		<property name="com.jaspersoft.studio.field.label" value="nome"/>
@@ -30,11 +23,6 @@ WHERE vis.tipo=1 AND v.dataSaida is not null AND v.horaSaida is not null order b
 		<property name="com.jaspersoft.studio.field.label" value="sobrenome"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="visitante"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="om" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="abreviatura"/>
-		<property name="com.jaspersoft.studio.field.label" value="om"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="organizacaomilitar"/>
 	</field>
 	<field name="cpfVisitante" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="cpfVisitante"/>
@@ -186,7 +174,7 @@ WHERE vis.tipo=1 AND v.dataSaida is not null AND v.horaSaida is not null order b
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<staticText>
-					<reportElement stretchType="RelativeToTallestObject" x="65" y="0" width="116" height="50" uuid="83b3a198-d362-492a-872c-2616a1af5bdd">
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="180" height="50" uuid="83b3a198-d362-492a-872c-2616a1af5bdd">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					</reportElement>
@@ -202,7 +190,7 @@ WHERE vis.tipo=1 AND v.dataSaida is not null AND v.horaSaida is not null order b
 					<text><![CDATA[NOME COMPLETO]]></text>
 				</staticText>
 				<staticText>
-					<reportElement stretchType="RelativeToTallestObject" x="181" y="0" width="80" height="50" uuid="2f147d47-6e7c-497e-b1cc-e96b9682e74b">
+					<reportElement stretchType="RelativeToTallestObject" x="180" y="0" width="100" height="50" uuid="2f147d47-6e7c-497e-b1cc-e96b9682e74b">
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
@@ -218,7 +206,7 @@ WHERE vis.tipo=1 AND v.dataSaida is not null AND v.horaSaida is not null order b
 					<text><![CDATA[CPF]]></text>
 				</staticText>
 				<staticText>
-					<reportElement stretchType="RelativeToTallestObject" x="351" y="0" width="68" height="50" uuid="397ced99-7eac-4891-b9a5-2d2057dfa0d8">
+					<reportElement stretchType="RelativeToTallestObject" x="280" y="0" width="68" height="50" uuid="397ced99-7eac-4891-b9a5-2d2057dfa0d8">
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
@@ -234,7 +222,7 @@ WHERE vis.tipo=1 AND v.dataSaida is not null AND v.horaSaida is not null order b
 					<text><![CDATA[ENTRADA]]></text>
 				</staticText>
 				<staticText>
-					<reportElement stretchType="RelativeToTallestObject" x="419" y="0" width="68" height="50" uuid="d7fbd772-ef42-480d-b7d9-12cdf0b8cfd3">
+					<reportElement stretchType="RelativeToTallestObject" x="348" y="0" width="68" height="50" uuid="d7fbd772-ef42-480d-b7d9-12cdf0b8cfd3">
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
@@ -250,7 +238,7 @@ WHERE vis.tipo=1 AND v.dataSaida is not null AND v.horaSaida is not null order b
 					<text><![CDATA[SAÍDA]]></text>
 				</staticText>
 				<staticText>
-					<reportElement stretchType="RelativeToTallestObject" x="487" y="0" width="240" height="25" uuid="fecc5ce4-28b1-4a5a-a805-7a98f9ff9c56">
+					<reportElement stretchType="RelativeToTallestObject" x="416" y="0" width="264" height="25" uuid="fecc5ce4-28b1-4a5a-a805-7a98f9ff9c56">
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
@@ -266,8 +254,7 @@ WHERE vis.tipo=1 AND v.dataSaida is not null AND v.horaSaida is not null order b
 					<text><![CDATA[VEÍCULO]]></text>
 				</staticText>
 				<staticText>
-					<reportElement stretchType="RelativeToTallestObject" x="666" y="25" width="61" height="25" uuid="fd3adaf7-0f5d-4f2c-af13-b6e6b483cfbe">
-						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<reportElement stretchType="RelativeToTallestObject" x="616" y="25" width="64" height="25" uuid="fd3adaf7-0f5d-4f2c-af13-b6e6b483cfbe">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
 					<box>
@@ -282,7 +269,7 @@ WHERE vis.tipo=1 AND v.dataSaida is not null AND v.horaSaida is not null order b
 					<text><![CDATA[PLACA]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="727" y="0" width="75" height="50" uuid="8e8b0a36-8ea2-4d8d-8950-6bae209084a9">
+					<reportElement x="680" y="0" width="122" height="50" uuid="8e8b0a36-8ea2-4d8d-8950-6bae209084a9">
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
@@ -298,7 +285,7 @@ WHERE vis.tipo=1 AND v.dataSaida is not null AND v.horaSaida is not null order b
 					<text><![CDATA[DESTINO]]></text>
 				</staticText>
 				<staticText>
-					<reportElement stretchType="RelativeToTallestObject" x="487" y="25" width="56" height="25" uuid="42e2b38b-7f43-4244-a323-a716a86a8f80">
+					<reportElement stretchType="RelativeToTallestObject" x="416" y="25" width="65" height="25" uuid="42e2b38b-7f43-4244-a323-a716a86a8f80">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					</reportElement>
@@ -314,9 +301,8 @@ WHERE vis.tipo=1 AND v.dataSaida is not null AND v.horaSaida is not null order b
 					<text><![CDATA[MARCA]]></text>
 				</staticText>
 				<staticText>
-					<reportElement stretchType="RelativeToTallestObject" x="543" y="25" width="60" height="25" uuid="7d0f6bff-1615-4dcf-859c-79f018e885a1">
+					<reportElement stretchType="RelativeToTallestObject" x="481" y="25" width="67" height="25" uuid="7d0f6bff-1615-4dcf-859c-79f018e885a1">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
-						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					</reportElement>
 					<box>
 						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -330,9 +316,8 @@ WHERE vis.tipo=1 AND v.dataSaida is not null AND v.horaSaida is not null order b
 					<text><![CDATA[MODELO]]></text>
 				</staticText>
 				<staticText>
-					<reportElement stretchType="RelativeToTallestObject" x="603" y="25" width="63" height="25" uuid="e20e5766-3bc6-4e20-818c-cfa09b35e905">
+					<reportElement stretchType="RelativeToTallestObject" x="548" y="25" width="68" height="25" uuid="e20e5766-3bc6-4e20-818c-cfa09b35e905">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
-						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					</reportElement>
 					<box>
 						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -344,38 +329,6 @@ WHERE vis.tipo=1 AND v.dataSaida is not null AND v.horaSaida is not null order b
 						<font size="11" isBold="true"/>
 					</textElement>
 					<text><![CDATA[COR]]></text>
-				</staticText>
-				<staticText>
-					<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="65" height="50" uuid="5847bc1c-757c-4fe4-a7fb-f735c6f468df">
-						<property name="com.jaspersoft.studio.unit.height" value="px"/>
-						<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					</reportElement>
-					<box>
-						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-					</box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="11" isBold="true"/>
-					</textElement>
-					<text><![CDATA[P/G]]></text>
-				</staticText>
-				<staticText>
-					<reportElement stretchType="RelativeToTallestObject" x="261" y="0" width="90" height="50" uuid="f6ec2f3f-b5c6-46b6-8144-2a398e51a1cf">
-						<property name="com.jaspersoft.studio.unit.width" value="px"/>
-						<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					</reportElement>
-					<box>
-						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-					</box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="11" isBold="true"/>
-					</textElement>
-					<text><![CDATA[OM]]></text>
 				</staticText>
 			</frame>
 		</band>
@@ -395,22 +348,9 @@ WHERE vis.tipo=1 AND v.dataSaida is not null AND v.horaSaida is not null order b
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textField textAdjust="StretchHeight">
-					<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="65" height="35" uuid="2f62e190-ab10-4021-bf96-242d8ffe17eb">
+					<reportElement stretchType="RelativeToTallestObject" x="180" y="0" width="100" height="35" uuid="ac82c6f7-b9a8-4ba1-bd62-8c9523a3d8f0">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
-						<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					</reportElement>
-					<box>
-						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-					</box>
-					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<textFieldExpression><![CDATA[$F{pg}.toString()]]></textFieldExpression>
-				</textField>
-				<textField textAdjust="StretchHeight">
-					<reportElement stretchType="RelativeToTallestObject" x="181" y="0" width="80" height="35" uuid="ac82c6f7-b9a8-4ba1-bd62-8c9523a3d8f0">
-						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
 					<box>
 						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -422,7 +362,7 @@ WHERE vis.tipo=1 AND v.dataSaida is not null AND v.horaSaida is not null order b
 					<textFieldExpression><![CDATA[$F{cpfVisitante}.toString()]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight">
-					<reportElement stretchType="RelativeToTallestObject" x="351" y="0" width="68" height="35" uuid="ae4018d5-378a-4629-89f3-3c0ba616f1d3">
+					<reportElement stretchType="RelativeToTallestObject" x="280" y="0" width="68" height="35" uuid="ae4018d5-378a-4629-89f3-3c0ba616f1d3">
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
@@ -436,7 +376,7 @@ WHERE vis.tipo=1 AND v.dataSaida is not null AND v.horaSaida is not null order b
 					<textFieldExpression><![CDATA[$F{dataEntrada}.toString() + " " + $F{horaEntrada}.toString()]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight">
-					<reportElement stretchType="RelativeToTallestObject" x="419" y="0" width="68" height="35" uuid="159a1273-c51b-405f-8e49-1b74cd87582d">
+					<reportElement stretchType="RelativeToTallestObject" x="348" y="0" width="68" height="35" uuid="159a1273-c51b-405f-8e49-1b74cd87582d">
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
@@ -450,8 +390,7 @@ WHERE vis.tipo=1 AND v.dataSaida is not null AND v.horaSaida is not null order b
 					<textFieldExpression><![CDATA[$F{dataSaida}.toString() + " " +$F{horaSaida}.toString()]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight">
-					<reportElement stretchType="RelativeToTallestObject" x="487" y="0" width="56" height="35" uuid="57e07f5a-c21d-4095-a2fb-b7f0194873b4">
-						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<reportElement stretchType="RelativeToTallestObject" x="416" y="0" width="65" height="35" uuid="57e07f5a-c21d-4095-a2fb-b7f0194873b4">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
 					<box>
@@ -464,7 +403,7 @@ WHERE vis.tipo=1 AND v.dataSaida is not null AND v.horaSaida is not null order b
 					<textFieldExpression><![CDATA[$F{marca}.toString()]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight">
-					<reportElement stretchType="RelativeToTallestObject" x="666" y="0" width="61" height="35" uuid="710e6302-3003-4e28-b6a8-3a658f6a61cd">
+					<reportElement stretchType="RelativeToTallestObject" x="616" y="0" width="64" height="35" uuid="710e6302-3003-4e28-b6a8-3a658f6a61cd">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					</reportElement>
@@ -478,7 +417,7 @@ WHERE vis.tipo=1 AND v.dataSaida is not null AND v.horaSaida is not null order b
 					<textFieldExpression><![CDATA[$F{placa}.toString()]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight">
-					<reportElement stretchType="RelativeToTallestObject" x="727" y="0" width="75" height="35" uuid="40ca0e34-786f-4fae-b89d-d86262e8fe05">
+					<reportElement stretchType="RelativeToTallestObject" x="680" y="0" width="122" height="35" uuid="40ca0e34-786f-4fae-b89d-d86262e8fe05">
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
@@ -492,7 +431,7 @@ WHERE vis.tipo=1 AND v.dataSaida is not null AND v.horaSaida is not null order b
 					<textFieldExpression><![CDATA[$F{destino}.toString()]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight">
-					<reportElement stretchType="RelativeToTallestObject" x="543" y="0" width="60" height="35" uuid="70db4fa9-e0a5-499c-803e-aa2c7751e6b4">
+					<reportElement stretchType="RelativeToTallestObject" x="481" y="0" width="67" height="35" uuid="70db4fa9-e0a5-499c-803e-aa2c7751e6b4">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					</reportElement>
@@ -506,7 +445,7 @@ WHERE vis.tipo=1 AND v.dataSaida is not null AND v.horaSaida is not null order b
 					<textFieldExpression><![CDATA[$F{modelo}.toString()]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight">
-					<reportElement stretchType="RelativeToTallestObject" x="603" y="0" width="63" height="35" uuid="b1e9e4f8-dd6c-4fd3-bd21-5b775e5c019f">
+					<reportElement stretchType="RelativeToTallestObject" x="548" y="0" width="68" height="35" uuid="b1e9e4f8-dd6c-4fd3-bd21-5b775e5c019f">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					</reportElement>
@@ -520,7 +459,7 @@ WHERE vis.tipo=1 AND v.dataSaida is not null AND v.horaSaida is not null order b
 					<textFieldExpression><![CDATA[$F{cor}.toString()]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight">
-					<reportElement stretchType="RelativeToTallestObject" x="65" y="0" width="116" height="35" uuid="d681ef5a-16c7-40fc-9e6b-897897019a43">
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="180" height="35" uuid="d681ef5a-16c7-40fc-9e6b-897897019a43">
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
@@ -532,19 +471,6 @@ WHERE vis.tipo=1 AND v.dataSaida is not null AND v.horaSaida is not null order b
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA[$F{nome}.toString() + " " + $F{sobrenome}.toString()]]></textFieldExpression>
-				</textField>
-				<textField textAdjust="StretchHeight">
-					<reportElement stretchType="RelativeToTallestObject" x="261" y="0" width="90" height="35" uuid="84129008-549e-446a-a0e3-da504e80c59e">
-						<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					</reportElement>
-					<box>
-						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-					</box>
-					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<textFieldExpression><![CDATA[$F{om}.toString()]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>

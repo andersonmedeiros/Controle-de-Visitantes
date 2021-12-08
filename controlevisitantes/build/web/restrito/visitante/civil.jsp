@@ -170,7 +170,7 @@
                 <thead class="thead-light">
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">IDENTIDADE</th>
+                        <th scope="col">CPF</th>
                         <th scope="col">NOME</th>
                         <th scope="col">AÇÃO</th>
                     </tr>
@@ -191,19 +191,19 @@
                                 
                                 out.println("<tr>");
                                 out.println("   <th scope=\"row\">"+ (i) +"</th>");
-                                out.println("   <td>"+ vis.getIdentidade() +"</td>");
+                                out.println("   <td>"+ vis.getCpf() +"</td>");
                                 out.println("   <td>"+ vis.getNome() + " " + vis.getSobrenome() +"</td>");
                                 out.println("   <td>");
                                 out.println("       <div class=form-row>");
                                 out.println("           <div class=\"form-group mr-2\">");
                                 out.println("               <form name=\"formExcluir\" method=\"POST\" action=\"controller.visitante/ExcluirVisitante\">");
-                                out.println("                   <input type=\"hidden\" class=\"form-control\" name=\"idtVisitanteExcluir\" id=\"idtVisitanteExcluir\" readonly=\"readonly\" value=\""+vis.getIdentidade()+"\"/>");
+                                out.println("                   <input type=\"hidden\" class=\"form-control\" name=\"idtVisitanteExcluir\" id=\"idtVisitanteExcluir\" readonly=\"readonly\" value=\""+vis.getCpf()+"\"/>");
                                 out.println("                   <input type=\"hidden\" class=\"form-control\" name=\"tipoVisitanteExcluir\" id=\"tipoVisitanteExcluir\" readonly=\"readonly\" value=\""+vis.getTipo()+"\"/>");
-                                out.println("                   <button id="+vis.getIdentidade()+" type=\"submit\" name=\"btnExcluir\" class=\"btn btn-danger\" onclick=\"return confirm('Tem certeza que deseja excluir o registro?');\">Excluir</button>");
+                                out.println("                   <button id="+vis.getCpf()+" type=\"submit\" name=\"btnExcluir\" class=\"btn btn-danger\" onclick=\"return confirm('Tem certeza que deseja excluir o registro?');\">Excluir</button>");
                                 out.println("               </form>");
                                 out.println("           </div>");
                                 out.println("           <div class=\"form-group mr-2\">");                  
-                                out.println("                   <button id="+vis.getIdentidade()+" type=\"submit\" name=\"btnAlterar\" class=\"btn btn-success\" data-toggle=\"modal\" data-target=\"#modalFormAttVisitante\" onclick=\"alteraVisitanteCivil("+"'"+vis.getIdentidade()+"'"+");\">Alterar</button>");
+                                out.println("                   <button id="+vis.getCpf()+" type=\"submit\" name=\"btnAlterar\" class=\"btn btn-success\" data-toggle=\"modal\" data-target=\"#modalFormAttVisitante\" onclick=\"alteraVisitanteCivil("+"'"+vis.getCpf()+"'"+");\">Alterar</button>");
                                 out.println("           </div>");
                                 out.println("       </div>");
                                 out.println("   </td>");
@@ -228,6 +228,7 @@
                         </div>
                         <div class="modal-body">                            
                             <form class="container-fluid" action="controller.visitante/AtualizarVisitante" method="POST" name="formAtualizar">
+                                <input type="hidden" class="form-control" id="txtCpfCivilAtt" name="txtCpfCivilAtt">
                                 <input type="hidden" class="form-control" id="txtIdentidadeCivilAtt" name="txtIdentidadeCivilAtt">
                                 <input type="hidden" class="form-control" id="txtTipoVisitante" name="txtTipoVisitante">
                                 

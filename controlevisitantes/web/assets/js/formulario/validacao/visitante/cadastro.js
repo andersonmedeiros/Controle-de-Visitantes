@@ -2,15 +2,25 @@
 //Técnico em Informática
 //01.08.2020
 
+var cpfMilitarOk = 0;
+var cpfCivilOk = 0;
 //Ao carregar ou recarregar a página
 $(document).ready(function(){   
     //Campo Select Visitante
     validSelect("select[name=txtTipoVisitante]");
     validSelectTReal("select[name=txtTipoVisitante]");
     
+    //Campo Input Cpf Militar
+    validCPF("input[name=txtCpfMilitar]");
+    validCPFTReal("input[name=txtCpfMilitar]"); 
+    
     //Campo Input Identidade Militar
     validIdentidadeMilitar("input[name=txtIdentidadeMilitar]");
     validIdentidadeMilitarTReal("input[name=txtIdentidadeMilitar]"); 
+   
+    //Campo Input Cpf Civil
+    validCPF("input[name=txtCpfCivil]");
+    validCPFTReal("input[name=txtCpfCivil]"); 
    
     //Campo Input Identidade Civil
     validIdentidadeCivil("input[name=txtIdentidadeCivil]");
@@ -71,7 +81,9 @@ $(document).ready(function(){
 
 $("select[name=txtTipoVisitante]").change(function(){
     limpaCampoInput("input[name=txtIdentidadeMilitar]");
+    limpaCampoInput("input[name=txtCpfMilitar]");
     limpaCampoInput("input[name=txtIdentidadeCivil]");
+    limpaCampoInput("input[name=txtCpfCivil]");
     limpaCampoSelect("select[name=txtTipoForca");
     limpaCampoSelect("select[name=txtForca");
     limpaCampoSelect("select[name=txtPGrad");
@@ -96,12 +108,72 @@ $("button[name=btnSalvarCadastro]").click(function(){
         return false;
     }   
     else if($("select[name=txtTipoVisitante]").val() == '1'){
+        var cpfMilitar = $("input[name=txtCpfMilitar]").val().replace(".", "").replace(".","").replace("-","");    
         var identidadeMilitar = $("input[name=txtIdentidadeMilitar]").val().replace("-", "");    
         var emailMilitar = $("input[name=txtEmailMilitar]").val(); 
         var foneCelMilitar = $("input[name=txtFoneMilitar]").val().replace("-","").replace("(","").replace(")","").replace(" ",""); 
         var filtro = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]+$/;
         
-        if(identidadeMilitar == ''){
+        //CPF
+        if(cpfMilitar == ''){
+            $("input[name=txtCpfMilitar]").removeClass("is-valid");
+            $("input[name=txtCpfMilitar]").addClass("is-invalid");
+            $("input[name=txtCpfMilitar]").focus();
+            $(".invalid-cpf").html("Campo Obrigatório!");
+            return false;
+        }
+        else if(cpfMilitar == '00000000000' || cpfMilitar == '11111111111' || cpfMilitar == '22222222222' || cpfMilitar == '33333333333' ||                 
+                cpfMilitar == '44444444444' || cpfMilitar == '55555555555' || cpfMilitar == '66666666666' || cpfMilitar == '77777777777' ||                 
+                cpfMilitar == '88888888888' || cpfMilitar == '99999999999'){
+            $("input[name=txtCpfMilitar]").removeClass("is-valid");
+            $("input[name=txtCpfMilitar]").addClass("is-invalid");
+            $("input[name=txtCpfMilitar]").focus();
+            $(".invalid-cpf").html("CPF Inválido!");
+            return false;
+        }        
+        else if(cpfMilitarOk == 0){
+            // Valida 1o digito	
+            var add = 0;	
+            for (var i=0; i < 9; i ++)		
+                add += parseInt(cpfMilitar.charAt(i)) * (10 - i);	
+            var rev = 11 - (add % 11);	
+            if (rev == 10 || rev == 11)		
+                rev = 0;	
+            if (rev != parseInt(cpfMilitar.charAt(9))){
+                $("input[name=txtCpfMilitar]").removeClass("is-valid");
+                $("input[name=txtCpfMilitar]").addClass("is-invalid");
+                $("input[name=txtCpfMilitar]").focus();
+                $(".invalid-cpf").html("CPF Inválido!");
+                return false;
+
+            }else{
+                $("input[name=txtCpfMilitar]").removeClass("is-invalid");
+                $("input[name=txtCpfMilitar]").addClass("is-valid");
+                cpfMilitarOk=1;
+                return false;
+            }
+            // Valida 2o digito	
+            add = 0;	
+            for (var i = 0; i < 10; i ++)		
+                add += parseInt(cpfMilitar.charAt(i)) * (11 - i);	
+            rev = 11 - (add % 11);	
+            if (rev == 10 || rev == 11)	
+                rev = 0;	
+            if (rev != parseInt(cpfMilitar.charAt(10))){
+                $("input[name=txtCpfMilitar]").removeClass("is-valid");
+                $("input[name=txtCpfMilitar]").addClass("is-invalid");
+                $("input[name=txtCpfMilitar]").focus();
+                $(".invalid-cpf").html("CPF Inválido!");
+                return false;
+                
+            }else{
+                $("input[name=txtCpfMilitar]").removeClass("is-invalid");
+                $("input[name=txtCpfMilitar]").addClass("is-valid");
+                cpfMilitarOk=1;
+                return false;
+            }    
+        } 
+        else if(identidadeMilitar == ''){
             $("input[name=txtIdentidadeMilitar]").removeClass("is-valid");
             $("input[name=txtIdentidadeMilitar]").addClass("is-invalid");
             $("input[name=txtIdentidadeMilitar]").focus();
@@ -113,11 +185,10 @@ $("button[name=btnSalvarCadastro]").click(function(){
                 identidadeMilitar == '8888888888' || identidadeMilitar == '9999999999'){
             $("input[name=txtIdentidadeMilitar]").removeClass("is-valid");
             $("input[name=txtIdentidadeMilitar]").addClass("is-invalid");
-
             $(".invalid-identidademilitar").html("Identidade Militar Inválida!");
             $("input[name=txtIdentidadeMilitar]").focus();
             return false;
-        } 
+        }
         else if($("select[name=txtTipoForca]").val() == '0'){
             $("select[name=txtTipoForca]").removeClass("is-valid");
             $("select[name=txtTipoForca]").addClass("is-invalid");
@@ -195,12 +266,72 @@ $("button[name=btnSalvarCadastro]").click(function(){
         }
     }  
     else if($("select[name=txtTipoVisitante]").val() == '2'){
+        var cpfCivil = $("input[name=txtCpfCivil]").val().replace(".", "").replace(".","").replace("-","");                    
         var identidadeCivil = $("input[name=txtIdentidadeCivil]").val().replace("-", "");                    
         var emailCivil = $("input[name=txtEmailCivil]").val(); 
         var foneCelCivil = $("input[name=txtFoneCivil]").val().replace("-","").replace("(","").replace(")","").replace(" ","");        
         var filtro = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]+$/;
         
-        if(identidadeCivil == ''){
+        //CPF
+        if(cpfCivil == ''){
+            $("input[name=txtCpfCivil]").removeClass("is-valid");
+            $("input[name=txtCpfCivil]").addClass("is-invalid");
+            $("input[name=txtCpfCivil]").focus();
+            $(".invalid-cpf").html("Campo Obrigatório!");
+            return false;
+        }
+        else if(cpfCivil == '00000000000' || cpfCivil == '11111111111' || cpfCivil == '22222222222' || cpfCivil == '33333333333' ||                 
+                cpfCivil == '44444444444' || cpfCivil == '55555555555' || cpfCivil == '66666666666' || cpfCivil == '77777777777' ||                 
+                cpfCivil == '88888888888' || cpfCivil == '99999999999'){
+            $("input[name=txtCpfCivil]").removeClass("is-valid");
+            $("input[name=txtCpfCivil]").addClass("is-invalid");
+            $("input[name=txtCpfCivil]").focus();
+            $(".invalid-cpf").html("CPF Inválido!");
+            return false;
+        }        
+        else if(cpfCivilOk == 0){
+            // Valida 1o digito	
+            var add = 0;	
+            for (var i=0; i < 9; i ++)		
+                add += parseInt(cpfCivil.charAt(i)) * (10 - i);	
+            var rev = 11 - (add % 11);	
+            if (rev == 10 || rev == 11)		
+                rev = 0;	
+            if (rev != parseInt(cpfCivil.charAt(9))){
+                $("input[name=txtCpfCivil]").removeClass("is-valid");
+                $("input[name=txtCpfCivil]").addClass("is-invalid");
+                $("input[name=txtCpfCivil]").focus();
+                $(".invalid-cpf").html("CPF Inválido!");
+                return false;
+
+            }else{
+                $("input[name=txtCpfCivil]").removeClass("is-invalid");
+                $("input[name=txtCpfCivil]").addClass("is-valid");
+                cpfCivilOk=1;
+                return false;
+            }
+            // Valida 2o digito	
+            add = 0;	
+            for (var i = 0; i < 10; i ++)		
+                add += parseInt(cpfCivil.charAt(i)) * (11 - i);	
+            rev = 11 - (add % 11);	
+            if (rev == 10 || rev == 11)	
+                rev = 0;	
+            if (rev != parseInt(cpfCivil.charAt(10))){
+                $("input[name=txtCpfCivil]").removeClass("is-valid");
+                $("input[name=txtCpfCivil]").addClass("is-invalid");
+                $("input[name=txtCpfCivil]").focus();
+                $(".invalid-cpf").html("CPF Inválido!");
+                return false;
+                
+            }else{
+                $("input[name=txtCpfCivil]").removeClass("is-invalid");
+                $("input[name=txtCpfCivil]").addClass("is-valid");
+                cpfCivilOk=1;
+                return false;
+            }    
+        } 
+        else if(identidadeCivil == ''){
             $("input[name=txtIdentidadeCivil]").removeClass("is-valid");
             $("input[name=txtIdentidadeCivil]").addClass("is-invalid");
             $("input[name=txtIdentidadeCivil]").focus();

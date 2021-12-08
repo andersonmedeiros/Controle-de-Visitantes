@@ -1,6 +1,7 @@
 //CB Anderson de Paula Andrade Medeiros
 //Técnico em Informática
 //21.08.2020
+var cpfOk = 0;
 
 function somenteNumero(campo) {
     // Somente números
@@ -45,6 +46,58 @@ function validSelect(campo){
         $(campo).removeClass("is-invalid");
         $(campo).addClass("is-valid");
     }
+};
+
+//CPF
+function validCPF(campo){
+    var cpf = $(campo).val().replace(".","").replace(".","").replace("-","");
+    
+    if(cpf == ''){
+        cpfOk = 0;
+    }
+    else if(cpf == '00000000000' || cpf == '11111111111' || cpf == '22222222222' || cpf == '33333333333' ||                 
+            cpf == '44444444444' || cpf == '55555555555' || cpf == '66666666666' || cpf == '77777777777' ||                 
+            cpf == '88888888888' || cpf == '99999999999'){
+        $(campo).removeClass("is-valid");
+        $(campo).addClass("is-invalid");
+        $(".invalid-cpf").html("CPF Inválido!");
+        cpfOk = 0;
+    }else{
+        // Valida 1o digito	
+        var add = 0;	
+        for (var i=0; i < 9; i ++)		
+            add += parseInt(cpf.charAt(i)) * (10 - i);	
+            var rev = 11 - (add % 11);	
+            if (rev == 10 || rev == 11)		
+                rev = 0;	
+            if (rev != parseInt(cpf.charAt(9))){
+                $(campo).removeClass("is-valid");
+                $(campo).addClass("is-invalid");
+                $(".invalid-cpf").html("CPF Inválido!");
+                cpfOk = 0;
+            }else{
+                $(campo).removeClass("is-invalid");
+                $(campo).addClass("is-valid");
+                cpfOk = 1;
+            }
+        // Valida 2o digito	
+        add = 0;	
+        for (var i = 0; i < 10; i ++)		
+            add += parseInt(cpf.charAt(i)) * (11 - i);	
+        rev = 11 - (add % 11);	
+        if (rev == 10 || rev == 11)	
+            rev = 0;	
+        if (rev != parseInt(cpf.charAt(10))){
+            $(campo).removeClass("is-valid");
+            $(campo).addClass("is-invalid");
+            $(".invalid-cpf").html("CPF Inválido!");
+            cpfOk = 0;
+        }else{
+            $(campo).removeClass("is-invalid");
+            $(campo).addClass("is-valid");
+            cpfOk = 1;
+        }    
+    } 
 };
 
 //IDENTIDADE MILITAR
@@ -184,6 +237,62 @@ function validIdentidadeMilitarTReal(campo){
             $(campo).removeClass("is-invalid");
             $(campo).addClass("is-valid");
         }
+    });
+};
+
+//CPF
+function validCPFTReal(campo){
+    $(campo).change(function(){
+        var cpf = $(campo).val().replace(".","").replace(".","").replace("-","");
+        if(cpf == ''){
+            $(campo).removeClass("is-valid");
+            $(campo).addClass("is-invalid");
+            $(".invalid-cpf").html("Campo Obrigatório!");
+            cpfOk = 0;
+        }
+        else if(cpf == '00000000000' || cpf == '11111111111' || cpf == '22222222222' || cpf == '33333333333' ||                 
+                cpf == '44444444444' || cpf == '55555555555' || cpf == '66666666666' || cpf == '77777777777' ||                 
+                cpf == '88888888888' || cpf == '99999999999'){
+            $(campo).removeClass("is-valid");
+            $(campo).addClass("is-invalid");
+            $(".invalid-cpf").html("CPF Inválido!");
+            cpfOk = 0;
+        }else{
+            // Valida 1o digito	
+            var add = 0;	
+            for (var i=0; i < 9; i ++)		
+                add += parseInt(cpf.charAt(i)) * (10 - i);	
+                var rev = 11 - (add % 11);	
+                if (rev == 10 || rev == 11)		
+                    rev = 0;	
+                if (rev != parseInt(cpf.charAt(9))){
+                    $(campo).removeClass("is-valid");
+                    $(campo).addClass("is-invalid");
+                    $(".invalid-cpf").html("CPF Inválido!");
+                    cpfOk = 0;
+                }else{
+                    $(campo).removeClass("is-invalid");
+                    $(campo).addClass("is-valid");
+                    cpfOk = 1;
+                }
+            // Valida 2o digito	
+            add = 0;	
+            for (var i = 0; i < 10; i ++)		
+                add += parseInt(cpf.charAt(i)) * (11 - i);	
+            rev = 11 - (add % 11);	
+            if (rev == 10 || rev == 11)	
+                rev = 0;	
+            if (rev != parseInt(cpf.charAt(10))){
+                $(campo).removeClass("is-valid");
+                $(campo).addClass("is-invalid");
+                $(".invalid-cpf").html("CPF Inválido!");
+                cpfOk = 0;
+            }else{
+                $(campo).removeClass("is-invalid");
+                $(campo).addClass("is-valid");
+                cpfOk = 1;
+            }    
+        }        
     });
 };
 

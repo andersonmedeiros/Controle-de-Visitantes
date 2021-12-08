@@ -23,6 +23,7 @@ public class VisitanteDAO {
     
     //Atributos
     String identidade = "identidade";
+    String cpf = "cpf";
     String tipo = "tipo";
     String nome = "nome";
     String sobrenome = "sobrenome";
@@ -33,16 +34,16 @@ public class VisitanteDAO {
     String idOrganizacaoMilitar = "idOrganizacaoMilitar";
     
     //Insert SQL
-    private final String INSERT = "INSERT INTO " + tabela + "(" + identidade + "," + tipo + "," + nome + "," + sobrenome +  "," + nomeguerra + ","  + email +  "," + fone + "," + idPostoGraduacao + "," +idOrganizacaoMilitar + ")" +
-                                  " VALUES(?,?,?,?,?,?,?,?,?);";
+    private final String INSERT = "INSERT INTO " + tabela + "(" + cpf + "," + identidade + ","+ tipo + "," + nome + "," + sobrenome +  "," + nomeguerra + ","  + email +  "," + fone + "," + idPostoGraduacao + "," +idOrganizacaoMilitar + ")" +
+                                  " VALUES(?,?,?,?,?,?,?,?,?,?);";
     
     //Update SQL
     private final String UPDATE = "UPDATE " + tabela +
-                                  " SET " + nome + "=?, " + sobrenome + "=?, " + nomeguerra + "=?, " + email + "=?, " + fone + "=?, " + idPostoGraduacao + "=?, " + idOrganizacaoMilitar + "=? " +
-                                  "WHERE " + identidade + "=?;";
+                                  " SET " + identidade + "=?, "+ nome + "=?, " + sobrenome + "=?, " + nomeguerra + "=?, " + email + "=?, " + fone + "=?, " + idPostoGraduacao + "=?, " + idOrganizacaoMilitar + "=? " +
+                                  "WHERE " + cpf + "=?;";
         
     //Delete SQL
-    private final String DELETE = "DELETE FROM " + tabela + " WHERE " + identidade + "=?;";
+    private final String DELETE = "DELETE FROM " + tabela + " WHERE " + cpf + "=?;";
     
     //Consultas SQL
     
@@ -58,24 +59,25 @@ public class VisitanteDAO {
                 
                 pstm = conn.prepareStatement(INSERT);
                 
-                pstm.setString(1, vis.getIdentidade());
-                pstm.setInt(2, vis.getTipo());
-                pstm.setString(3, vis.getNome());
-                pstm.setString(4, vis.getSobrenome());
-                pstm.setString(5, vis.getNomeguerra());
-                pstm.setString(6, vis.getEmail());
-                pstm.setString(7, vis.getFone());
+                pstm.setString(1, vis.getCpf());
+                pstm.setString(2, vis.getIdentidade());
+                pstm.setInt(3, vis.getTipo());
+                pstm.setString(4, vis.getNome());
+                pstm.setString(5, vis.getSobrenome());
+                pstm.setString(6, vis.getNomeguerra());
+                pstm.setString(7, vis.getEmail());
+                pstm.setString(8, vis.getFone());
                 
                 if(vis.getIdPostoGraduacao() == 0){
-                    pstm.setNull(8, java.sql.Types.INTEGER);
+                    pstm.setNull(9, java.sql.Types.INTEGER);
                 }else{
-                    pstm.setInt(8, vis.getIdPostoGraduacao());
+                    pstm.setInt(9, vis.getIdPostoGraduacao());
                 }
                 
                 if(vis.getIdOm() == 0){
-                    pstm.setNull(9, java.sql.Types.INTEGER);
+                    pstm.setNull(10, java.sql.Types.INTEGER);
                 }else{
-                    pstm.setInt(9, vis.getIdOm());
+                    pstm.setInt(10, vis.getIdOm());
                 }
                 
                 pstm.execute();
@@ -97,25 +99,26 @@ public class VisitanteDAO {
                 conn = ConnectionFactory.getConnection();
                 pstm = conn.prepareStatement(UPDATE); 
                 
-                pstm.setString(1, vis.getNome());
-                pstm.setString(2, vis.getSobrenome());
-                pstm.setString(3, vis.getNomeguerra());
-                pstm.setString(4, vis.getEmail());
-                pstm.setString(5, vis.getFone());
+                pstm.setString(1, vis.getIdentidade());
+                pstm.setString(2, vis.getNome());
+                pstm.setString(3, vis.getSobrenome());
+                pstm.setString(4, vis.getNomeguerra());
+                pstm.setString(5, vis.getEmail());
+                pstm.setString(6, vis.getFone());
                 
                 if(vis.getIdPostoGraduacao() == 0){
-                    pstm.setNull(6, java.sql.Types.INTEGER);
+                    pstm.setNull(7, java.sql.Types.INTEGER);
                 }else{
-                    pstm.setInt(6, vis.getIdPostoGraduacao());
+                    pstm.setInt(7, vis.getIdPostoGraduacao());
                 }
                 
                 if(vis.getIdOm() == 0){
-                    pstm.setNull(7, java.sql.Types.INTEGER);
+                    pstm.setNull(8, java.sql.Types.INTEGER);
                 }else{
-                    pstm.setInt(7, vis.getIdOm());
+                    pstm.setInt(8, vis.getIdOm());
                 }
                 
-                pstm.setString(8, vis.getIdentidade());
+                pstm.setString(9, vis.getCpf());
                 
                 pstm.execute();
                 ConnectionFactory.fechaConexao(conn, pstm);
@@ -129,12 +132,12 @@ public class VisitanteDAO {
     }
     
     //Delete SQL
-    public void delete(String identidade) {
-        if (!identidade.equals("")){
+    public void delete(String cpf) {
+        if (!cpf.equals("")){
             try {
                 conn = ConnectionFactory.getConnection();
                 pstm = conn.prepareStatement(DELETE);
-                pstm.setString(1, identidade);
+                pstm.setString(1, cpf);
             
                 pstm.execute();
                 ConnectionFactory.fechaConexao(conn, pstm);
@@ -147,21 +150,22 @@ public class VisitanteDAO {
         }
     }
     
-    private final String GETVISITANTEBYIDT = "SELECT * " +
+    private final String GETVISITANTEBYCPF = "SELECT * " +
                                             "FROM visitante " + 
-                                            "WHERE identidade = ?";
+                                            "WHERE cpf = ?";
        
-    public Visitante getVisitanteById(String identidade){
+    public Visitante getVisitanteByCpf(String cpf){
         Visitante vis = new Visitante();
         PostoGraduacaoDAO pgDAO = new PostoGraduacaoDAO();
         OmDAO omDAO = new OmDAO();
         try {
             conn = ConnectionFactory.getConnection();
-            pstm = conn.prepareStatement(GETVISITANTEBYIDT);
-            pstm.setString(1, identidade);
+            pstm = conn.prepareStatement(GETVISITANTEBYCPF);
+            pstm.setString(1, cpf);
            
             rs = pstm.executeQuery();
             while (rs.next()) {
+                vis.setCpf(rs.getString("cpf"));
                 vis.setIdentidade(rs.getString("identidade"));
                 vis.setTipo(rs.getInt("tipo"));
                 vis.setNome(rs.getString("nome"));
@@ -212,6 +216,7 @@ public class VisitanteDAO {
             while (rs.next()) {
                 Visitante vis = new Visitante();
                 
+                vis.setCpf(rs.getString("cpf"));
                 vis.setIdentidade(rs.getString("identidade"));
                 vis.setTipo(rs.getInt("tipo"));
                 vis.setNome(rs.getString("nome"));
@@ -265,6 +270,7 @@ public class VisitanteDAO {
             while (rs.next()) {
                 Visitante vis = new Visitante();
                 
+                vis.setCpf(rs.getString("cpf"));
                 vis.setIdentidade(rs.getString("identidade"));
                 vis.setTipo(rs.getInt("tipo"));
                 vis.setNome(rs.getString("nome"));
@@ -302,9 +308,9 @@ public class VisitanteDAO {
         return visitantes;
     }
     
-    private final static String GETVISITANTEBYIDTDWR = "SELECT * FROM visitante WHERE identidade = ?";
+    private final static String GETVISITANTEBYCPFDWR = "SELECT * FROM visitante WHERE cpf = ?";
        
-    public static Visitante getVisitanteByIdentidadeDWR(String identidade){
+    public static Visitante getVisitanteByCpfDWR(String cpf){
         PostoGraduacaoDAO pgDAO = new PostoGraduacaoDAO();
         OmDAO omDAO = new OmDAO();
         Visitante vis = new Visitante();
@@ -313,11 +319,12 @@ public class VisitanteDAO {
         ResultSet rs = null;
         try {
             conn = ConnectionFactory.getConnection();
-            pstm = conn.prepareStatement(GETVISITANTEBYIDTDWR);
-            pstm.setString(1, identidade);
+            pstm = conn.prepareStatement(GETVISITANTEBYCPFDWR);
+            pstm.setString(1, cpf);
            
             rs = pstm.executeQuery();
             while (rs.next()) {       
+                vis.setCpf(rs.getString("cpf"));
                 vis.setIdentidade(rs.getString("identidade"));
                 vis.setTipo(rs.getInt("tipo"));
                 vis.setNome(rs.getString("nome"));

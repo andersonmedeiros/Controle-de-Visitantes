@@ -17,7 +17,7 @@ import java.sql.SQLException;
 
 public class ConnectionFactory {
     //CIGS
-   /* private static final String USER="cigs-admin";
+    /*private static final String USER="cigs-admin";
     private static final String SENHA="*p1nt4d4#P4rD4@2021";
     private static final String DATABASE = "controlevisitantes";
     private static final String DRIVER_CONEXAO = "com.mysql.jdbc.Driver";
@@ -30,7 +30,6 @@ public class ConnectionFactory {
     private static final String STR_CONEXAO = "jdbc:mysql://localhost:3306/";
     
     public static Connection getConnection() {
-
         Connection conn = null;
         
         try {

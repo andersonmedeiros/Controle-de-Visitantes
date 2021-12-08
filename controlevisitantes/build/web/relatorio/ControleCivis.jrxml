@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.14.0.final using JasperReports Library version 6.14.0-2ab0d8625be255bf609c78e1181801213e51db8f  -->
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ControleCivis" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d9e1aa48-c062-4378-8c98-8cc87eb09e42">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="BDControleVisitantes.xml"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="localhost ctvis"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<queryString>
-		<![CDATA[SELECT vis.nome, vis.sobrenome, v.idtVisitante, v.dataEntrada, v.horaEntrada, v.dataSaida, v.horaSaida, s.abreviatura as destino, 
+		<![CDATA[SELECT vis.nome, vis.sobrenome, v.cpfVisitante, v.dataEntrada, v.horaEntrada, v.dataSaida, v.horaSaida, s.abreviatura as destino, 
 ifnull(veiculo.marca, '-') as marca, ifnull(veiculo.modelo, '-') as modelo, ifnull(veiculo.cor, '-') as cor, ifnull(veiculo.placa, '-') as placa
 FROM visita as v
-INNER JOIN visitante as vis on v.idtVisitante = vis.identidade
+INNER JOIN visitante as vis on v.cpfVisitante = vis.cpf
 INNER JOIN setor as s on v.idSetor = s.id
 LEFT JOIN veiculo as veiculo on v.idVeiculo = veiculo.id
 WHERE vis.tipo = 2 and v.dataSaida is not null and v.horaSaida is not null;]]>
@@ -15,49 +15,49 @@ WHERE vis.tipo = 2 and v.dataSaida is not null and v.horaSaida is not null;]]>
 	<field name="nome" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="nome"/>
 		<property name="com.jaspersoft.studio.field.label" value="nome"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="Visitante"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="visitante"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="sobrenome" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="sobrenome"/>
 		<property name="com.jaspersoft.studio.field.label" value="sobrenome"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="Visitante"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="visitante"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="idtVisitante" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="idtVisitante"/>
-		<property name="com.jaspersoft.studio.field.label" value="idtVisitante"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="Visita"/>
+	<field name="cpfVisitante" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="cpfVisitante"/>
+		<property name="com.jaspersoft.studio.field.label" value="cpfVisitante"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="visita"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="dataEntrada" class="java.sql.Date">
 		<property name="com.jaspersoft.studio.field.name" value="dataEntrada"/>
 		<property name="com.jaspersoft.studio.field.label" value="dataEntrada"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="Visita"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="visita"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="horaEntrada" class="java.sql.Time">
 		<property name="com.jaspersoft.studio.field.name" value="horaEntrada"/>
 		<property name="com.jaspersoft.studio.field.label" value="horaEntrada"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="Visita"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="visita"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="dataSaida" class="java.sql.Date">
 		<property name="com.jaspersoft.studio.field.name" value="dataSaida"/>
 		<property name="com.jaspersoft.studio.field.label" value="dataSaida"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="Visita"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="visita"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="horaSaida" class="java.sql.Time">
 		<property name="com.jaspersoft.studio.field.name" value="horaSaida"/>
 		<property name="com.jaspersoft.studio.field.label" value="horaSaida"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="Visita"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="visita"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="destino" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="abreviatura"/>
 		<property name="com.jaspersoft.studio.field.label" value="destino"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="Setor"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="setor"/>
 	</field>
 	<field name="marca" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="marca"/>
@@ -93,9 +93,8 @@ WHERE vis.tipo = 2 and v.dataSaida is not null and v.horaSaida is not null;]]>
 			</staticText>
 			<image>
 				<reportElement x="376" y="0" width="50" height="50" uuid="fb06e5b2-ee18-4afe-8b3a-380ef470ecb2"/>
-                                <imageExpression><![CDATA["C:/Users/User/Documents/git/controle-visitantes/controlevisitantes/web/relatorio/brasao.png"]]></imageExpression>
-                                <!--<imageExpression><![CDATA["/var/lib/tomcat9/webapps/ROOT/web/relatorio/brasao.png"]]></imageExpression>-->
-                        </image>
+				<imageExpression><![CDATA["/var/lib/tomcat9/webapps/ROOT/web/relatorio/brasao.png"]]></imageExpression>
+			</image>
 			<staticText>
 				<reportElement x="0" y="67" width="802" height="20" uuid="de07aec6-c650-43e7-b93b-41ef3be6a003">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -202,7 +201,7 @@ WHERE vis.tipo = 2 and v.dataSaida is not null and v.horaSaida is not null;]]>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="11" isBold="true"/>
 					</textElement>
-					<text><![CDATA[IDENTIDADE]]></text>
+					<text><![CDATA[CPF]]></text>
 				</staticText>
 				<staticText>
 					<reportElement x="280" y="0" width="71" height="50" uuid="bb5350ef-8a25-4e5f-8153-469cc00e8b9f">
@@ -374,7 +373,7 @@ WHERE vis.tipo = 2 and v.dataSaida is not null and v.horaSaida is not null;]]>
 						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<textFieldExpression><![CDATA[$F{idtVisitante}.toString()]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{cpfVisitante}.toString()]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight">
 					<reportElement stretchType="RelativeToTallestObject" x="280" y="0" width="71" height="35" uuid="e4b5476f-3583-4ef7-a4cb-3b85b940e6fd">

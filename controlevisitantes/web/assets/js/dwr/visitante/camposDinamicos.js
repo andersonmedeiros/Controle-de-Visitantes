@@ -137,10 +137,11 @@ $("select[name=txtForcaAtt").change(function(){
     alimentaSelectDependenteForcaAtt(this.value);
 });
 
-function alteraVisitanteMilitar(identidade){
-    FacadeAjax.getVisitanteByIdentidadeDWR(identidade, {
+function alteraVisitanteMilitar(cpf){
+    FacadeAjax.getVisitanteByCpfDWR(cpf, {
         callback: function(visitante){
             dwr.util.setValues({
+                txtCpfMilitarAtt: visitante.cpf,
                 txtIdentidadeMilitarAtt: visitante.identidade,
                 txtTipoVisitante: visitante.tipo,
                 //txtTipoForcaAtt: visitante.idTipoForcaPostoGraduacao,
@@ -157,10 +158,11 @@ function alteraVisitanteMilitar(identidade){
     });
 }
 
-function alteraVisitanteCivil(identidade){
-    FacadeAjax.getVisitanteByIdentidadeDWR(identidade, {
+function alteraVisitanteCivil(cpf){
+    FacadeAjax.getVisitanteByCpfDWR(cpf, {
         callback: function(visitante){
             dwr.util.setValues({
+                txtCpfCivilAtt: visitante.cpf,
                 txtIdentidadeCivilAtt: visitante.identidade,
                 txtTipoVisitante: visitante.tipo,
                 txtNomeCivilAtt: visitante.nome,

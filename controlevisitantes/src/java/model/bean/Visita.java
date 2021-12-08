@@ -70,6 +70,13 @@ public class Visita {
         this.finalidade = finalidade;
     }   
     
+    public String getCpfVisitante() {
+        return vis.getCpf();
+    }
+
+    public void setCpfVisitante(String cpf) {
+        vis.setCpf(cpf);
+    }
     public String getIdentidadeVisitante() {
         return vis.getIdentidade();
     }
